@@ -18,7 +18,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
     }
     if (window.StatusBar) {
       // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
+      //StatusBar.styleDefault();
     }
   });
 })
