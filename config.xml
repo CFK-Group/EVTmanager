@@ -39,7 +39,7 @@
 </platform>
 
 <platform name="android">
-    <icon src="images/icon.png"/>
+    <icon src="img/ionic.png"/>
     <splash src="images/splash.png"/>
     <preference name="SplashScreenDelay" value="2000" />
     <preference name="show-splash-screen-spinner" value="false" />
