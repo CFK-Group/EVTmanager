@@ -105,10 +105,18 @@ app.controller('VentasEstadoCtrl', function ($scope, $ionicNavBarDelegate) {
 
 app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate) {
   $ionicNavBarDelegate.showBackButton(true);
+  $scope.filtro = {
+    visacion: 'Todos',
+    meses: 'Todos'
+  }
 });
 
 app.controller('VentasPermanenciaCtrl', function ($scope, $ionicNavBarDelegate) {
   $ionicNavBarDelegate.showBackButton(true);
+  $scope.filtro = {
+    permanencias: 'Todos',
+    meses: 'Todos'
+  }
 });
 
 app.controller('VentasCobranzasCtrl', function ($scope, $ionicNavBarDelegate) {

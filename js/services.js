@@ -55,10 +55,25 @@ angular.module('evtManager.services', [])
   var apiConnection = {
 
     loginUser: function(username, password, deviceId, deviceModel) {
-
       var login = $resource(apiURL + "login", {username: username, pass: password, deviceId: deviceId, deviceModel: deviceModel}, {'query': {isArray: false}});
       return login;
-    }
+    },
+
+    getVentas: function (sessionToken) {
+      var ventas = $resource(apiURL + 'getVentas', {sessionToken: sessionToken}, {'query': {isArray: false}});
+      return ventas
+    },
+
+    getProspectos: function (sessionToken) {
+      var prospectos = $resource(apiURL + 'getProspectos', {sessionToken: sessionToken}, {'query': {isArray: false}});
+      return prospectos
+    },
+
+    getVendedor: function (sessionToken, username) {
+      var vendedor = $resource(apiURL + 'getVendedor', {sessionToken: sessionToken, tango: username}, {'query': {isArray: false}});
+      return vendedor
+    },
+
 
 
   };

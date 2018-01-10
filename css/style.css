@@ -15,6 +15,8 @@ ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.tab-item-active, ion-
   border: solid black 2px;
   background-color: white;
   border-radius: 5px;
+  width: 30%;
+  height: auto;
 }
 
 #loginButton{
