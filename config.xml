@@ -39,7 +39,7 @@
 </platform>
 
 <platform name="android">
-    <icon src="img/evtManagerlogo.png"/>
+    <icon src="img/evtManager-logo.png"/>
     <preference name="SplashScreenDelay" value="2000" />
     <preference name="show-splash-screen-spinner" value="false" />
     <preference name="auto-hide-splash-screen" value="true" />
