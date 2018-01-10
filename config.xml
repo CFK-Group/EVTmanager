@@ -39,8 +39,7 @@
 </platform>
 
 <platform name="android">
-    <icon src="img/ionic.png"/>
-    <splash src="img/ionic.png"/>
+    <icon src="img/evtManagerlogo.png"/>
     <preference name="SplashScreenDelay" value="2000" />
     <preference name="show-splash-screen-spinner" value="false" />
     <preference name="auto-hide-splash-screen" value="true" />
