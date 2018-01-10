@@ -73,7 +73,7 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
 
             $ionicLoading.hide();
             //$rootScope.loginShow = false;
-            $state.go('tab.ventas');
+            $state.go('tabs.ventas');
           } else {
             $ionicLoading.hide();
             $ionicPopup.alert({

@@ -17,9 +17,10 @@ ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.tab-item-active, ion-
   border-radius: 5px;
 }
 
-/*#loginButton{*/
-  /*margin: 0 10px;*/
-/*}*/
+#loginButton{
+  width: 95%;
+  margin: auto;
+}
 
 button.back-button{
   background-color: transparent;
