@@ -1,1 +1,30 @@
-/* Empty. Add your own CSS if you like */
+.evtManager{
+  background-color: rgb(0,42,66) !important;
+}
+
+ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.activated{
+  border-color: black;
+  color: black;
+}
+
+.tabs-striped .tabs{
+  background-color: #ffc107
+}
+
+.logo{
+  border: solid black 2px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+/*#loginButton{*/
+  /*margin: 0 10px;*/
+/*}*/
+
+button.back-button{
+  background-color: transparent;
+}
+
+.no-margin{
+  margin: 0;
+}

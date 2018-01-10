@@ -1,4 +1,4 @@
-angular.module('starter.services', [])
+angular.module('evtManager.services', [])
 
 .factory('Chats', function() {
   // Might use a resource here that returns a JSON array
@@ -47,4 +47,20 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+
+.constant("apiURL","http://vendedores.xpass.cl/web/vendedors/")
+
+.factory('apiConnection', function($resource, apiURL) {
+  var apiConnection = {
+
+    loginUser: function(username, password, deviceId, deviceModel) {
+
+      var login = $resource(apiURL + "login", {username: username, pass: password, deviceId: deviceId, deviceModel: deviceModel}, {'query': {isArray: false}});
+      return login;
+    }
+
+
+  };
+  return apiConnection
 });

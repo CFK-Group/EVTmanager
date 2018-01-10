@@ -17,6 +17,7 @@
     </script>-->
 
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/materialize-colors.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
@@ -31,15 +32,18 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
-    <script src="js/controllers.js"></script>
     <script src="js/services.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/ng-cordova.min.js"></script>
+    <script src="js/angular-resource.min.js"></script>
   </head>
-  <body ng-app="starter">
+  <body ng-app="evtManager">
     <!--
       The nav bar that will be updated as we navigate between views.
     -->
-    <ion-nav-bar class="bar-stable">
-      <ion-nav-back-button>
+    <ion-nav-bar class="bar-stable amber z-depth-1" align-title="center">
+      <ion-nav-back-button class="black-text">
+        <i class="ion-chevron-left"></i> Atrás
       </ion-nav-back-button>
     </ion-nav-bar>
     <!--

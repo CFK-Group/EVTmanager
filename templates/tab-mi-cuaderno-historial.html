@@ -1,0 +1,55 @@
+<ion-view class="no-scroll">
+  <ion-nav-title>Historial</ion-nav-title>
+  <ion-content class="grey lighten-4 has-header" overflow-scroll="false">
+    <div class="fixed">
+      <div class="list no-margin">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Comunas
+          </div>
+          <select ng-model="filtro.comunas">
+            <option ng-value="Todos">Todos</option>
+          </select>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Nodos
+          </div>
+          <select ng-model="filtro.nodos">
+            <option ng-value="Todos">Todos</option>
+          </select>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Cuadrantes
+          </div>
+          <select ng-model="filtro.cuadrantes">
+            <option ng-value="Todos">Todos</option>
+          </select>
+        </label>
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Deudas
+          </div>
+          <select ng-model="filtro.deudas">
+            <option ng-value="Todos">Todos</option>
+          </select>
+        </label>
+      </div>
+      <div class="row amber">
+        <div class="col">Rut</div>
+        <div class="col">Servicio</div>
+        <div class="col">Mes</div>
+        <div class="col">Estado</div>
+      </div>
+    </div>
+    <div class="scroll">
+      <div class="row">
+        <div class="col">18463690-5</div>
+        <div class="col">2WAY</div>
+        <div class="col">11</div>
+        <div class="col">TERMINADA</div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

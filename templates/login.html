@@ -1,0 +1,31 @@
+<ion-view>
+  <ion-nav-title>Login</ion-nav-title>
+  <ion-content class="lighten-4 has-header">
+    <section class="text-center">
+      <!--<img src="../img/evt-manager-logo.png" class="logo">-->
+      <br>
+      <div class="logo col col-33 col-offset-33 z-depth-1">
+        <h1 class="black-text">EVT</h1>
+        <h4 class="black-text">Manager</h4>
+      </div>
+      <form ng-submit="login()">
+        <div class="list list-inset">
+          <label class="item item-input">
+            <input type="text" placeholder="Usuario" ng-model="user.username" autofocus ng-required="true">
+          </label>
+          <label class="item item-input ">
+            <input type="password" placeholder="Contraseña" ng-model="user.password" ng-required="true">
+          </label>
+        </div>
+        <input id="loginButton" type="submit" class="button button-block z-depth-1 amber" ng-class="{ disabled: (user.username == '' || user.password == '') || (user.username == undefined || user.password == undefined)}" value="Entrar">
+      </form>
+      <br>
+      <br>
+      <br>
+      <h5 class="center">Versión 1.0.0</h5>
+    </section>
+    <section class="servicorp col text-center">
+      <h5 class="white-text">{{version}}</h5>
+    </section>
+  </ion-content>
+</ion-view>
