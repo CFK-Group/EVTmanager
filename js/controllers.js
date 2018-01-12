@@ -161,7 +161,19 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
 });
 
 app.controller('MiCuadernoNuevoProspectoCtrl', function ($scope, $ionicNavBarDelegate) {
-  $ionicNavBarDelegate.showBackButton(true);
+  $ionicNavBarDelegate.showBackButton(false);
+  $scope.step = 'inicio';
+
+  $scope.stepForward = function(nextStep, id){
+    $scope.step = nextStep;
+    console.log($scope.step);
+  };
+
+  $scope.cancel = function () {
+    console.log('cancelando');
+    $scope.step = 'inicio';
+    window.history.back();
+  };
 });
 
 app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate) {
