@@ -92,8 +92,12 @@ app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistor
       });
     };
   }, 100);
-  $rootScope.ventas = apiConnection.getVentas($rootScope.userToken).query();
-  alert($rootScope.ventas);
+  apiConnection.getVentas($rootScope.userToken).query().$promise.then(
+    function (response) {
+      $rootScope.ventas = JSON.parse(JSON.stringify(response));
+      console.log($rootScope.ventas);
+    }
+  );
 });
 
 app.controller('VentasEstadoCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
