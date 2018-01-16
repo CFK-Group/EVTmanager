@@ -93,6 +93,7 @@ app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistor
     };
   }, 100);
   $rootScope.ventas = apiConnection.getVentas($rootScope.userToken);
+  alert($rootScope.ventas);
 });
 
 app.controller('VentasEstadoCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
