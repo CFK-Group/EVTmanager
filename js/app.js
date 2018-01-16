@@ -31,13 +31,13 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
   // Each state's controller can be found in controllers.js
   $stateProvider
 
-  // setup an abstract state for the tabs directive
   .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
   })
 
+  // setup an abstract state for the tabs directive
   .state('tabs', {
     url: '/tabs',
     abstract: true,
@@ -167,10 +167,10 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('tabs/ventas');
+  $urlRouterProvider.otherwise('login');
 
 })
 
-.run(function ($state, $ionicConfig) {
+.run(function ($state, $ionicConfig, apiConnection) {
   $ionicConfig.tabs.position('bottom');
 });

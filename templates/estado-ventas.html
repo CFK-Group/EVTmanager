@@ -42,11 +42,11 @@
       </div>
     </div>
     <div class="scroll">
-      <div class="row">
-        <div class="col">18463690-5</div>
-        <div class="col">2WAY</div>
-        <div class="col">11</div>
-        <div class="col">TERMINADA</div>
+      <div class="row" collection-repeat="venta in ventas" ng-click="openModal(1)">
+        <div class="col">{{venta.rut_cliente}}</div>
+        <div class="col">{{venta.servicio}}</div>
+        <div class="col">{{venta.mes_venta}}</div>
+        <div class="col">{{venta.estado_tango}}</div>
       </div>
     </div>
   </ion-content>

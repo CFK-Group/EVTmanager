@@ -1,28 +1,5 @@
 'use.strict';
-var app = angular.module('evtManager.controllers', [])
-
-app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup) {
-  console.log('ventasctrl');
-  $ionicNavBarDelegate.showBackButton(false);
-  $ionicHistory.clearHistory();
-  $ionicPlatform.registerBackButtonAction(function () {
-    // A confirm dialog
-    $scope.showConfirm = function() {
-      var confirmPopup = $ionicPopup.confirm({
-        title: 'Salir',
-        template: '¿Desea salir de la aplicación?'
-      });
-
-      confirmPopup.then(function(res) {
-        if(res) {
-          navigator.app.exitApp();
-        } else {
-          //cancel action
-        }
-      });
-    };
-  }, 100)
-});
+var app = angular.module('evtManager.controllers', []);
 
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
   console.log('loginCtrl');
@@ -68,7 +45,7 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
 
             sessionStorage.userSession = angular.toJson($scope.loginInfo);
 
-            var userToken = JSON.parse(sessionStorage.userSession).sessionToken;
+            $rootScope.userToken = JSON.parse(sessionStorage.userSession).sessionToken;
 
 
             $ionicLoading.hide();
@@ -94,13 +71,62 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
   });
 });
 
-app.controller('VentasEstadoCtrl', function ($scope, $ionicNavBarDelegate) {
+app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup, $rootScope, apiConnection) {
+  console.log('ventasctrl');
+  $ionicNavBarDelegate.showBackButton(false);
+  $ionicHistory.clearHistory();
+  $ionicPlatform.registerBackButtonAction(function () {
+    // A confirm dialog
+    $scope.showConfirm = function() {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Salir',
+        template: '¿Desea salir de la aplicación?'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          navigator.app.exitApp();
+        } else {
+          //cancel action
+        }
+      });
+    };
+  }, 100);
+  $rootScope.ventas = apiConnection.getVentas($rootScope.userToken);
+});
+
+app.controller('VentasEstadoCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
   $ionicNavBarDelegate.showBackButton(true);
   console.log('ventasEstado');
   $scope.filtro = {
     estados: 'Todos',
     meses: 'Todos'
-  }
+  };
+
+  //Template del modal 1 (Ventas Estado)
+  $ionicModal.fromTemplateUrl('templates/modal-ventas-estado.html',{
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_1 = modal;
+  });
+
+  $scope.openModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.show();
+    }else{
+      $scope.modal_2.show();
+    }
+  };
+
+  $scope.closeModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.hide();
+    }else{
+      $scope.modal_2.hide();
+    }
+  };
 });
 
 app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate) {
