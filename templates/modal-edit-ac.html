@@ -1,52 +1,44 @@
 <ion-modal-view>
-  <ion-header-bar>
+  <ion-header-bar class="amber" align-title="center">
     <h1 class="title">Editar Acción Comercial</h1>
-    <button class="button button-small" ng-click="closeModal(2)">X</button>
+    <button class="button icon ion-close" ng-click="closeModal(2)"></button>
   </ion-header-bar>
   <ion-content>
-    <form>
-      <div>
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Acción Comercial
-          </div>
-          <select name="action_id" disabled>
-            <option ng-repeat="data in tac" value="{{data.id}}" ng-selected="data.id === model.accion_id">{{data.tipo_accion}}</option>
-          </select>
-        </label>
-
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Resultado
-          </div>
-          <select name="action_id" ng-model="model.resultado">
-            <option value="">Selecciona</option>
-            <option value="Ejecutado">Ejecutado</option>
-            <option value="Volver a Ejecutar">Volver a Ejecutar</option>
-            <option value="Pendiente">Pendiente</option>
-            <option value="Desiste">Desiste</option>
-            <option value="Aceptado">Aceptado</option>
-          </select>
-        </label>
-
-        <label class="item item-input item-stacked-label row">
-          <div class="col" style="padding-left: 11px">
-            <h2 class="input-label">Observación</h2>
-          </div>
-          <div class="col">
-            <input type="text" placeholder="Escriba aquí el resultado" ng-model="model.observacion" style="text-align: right; padding-right: 35px;">
-          </div>
-        </label>
-
-        <div class="row">
-          <div class="col padding-horizontal">
-            <button class="button button-assertive" ng-click="closeModal()">Anular</button>
-          </div>
-          <div class="col padding-horizontal">
-            <button class="button button-metrogas" ng-class="{disabled: (model.resultado == '' || model.resultado== undefined || model.observacion == undefined || model.observacion == '')}" ng-click="editar()">Enviar</button>
-          </div>
+    <div class="list no-margin">
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Acción Comercial
         </div>
-      </div>
-    </form>
+        <select ng-model="ac.accion">
+          <option>Seleccionar Acción</option>
+          <option>Contactar Telefónicamente</option>
+          <option>Agendar Visita</option>
+          <option>Reagendar Visita</option>
+          <option>Generar Presupuesto</option>
+          <option>Enviar Correo</option>
+        </select>
+      </label>
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Resultado
+        </div>
+        <select ng-model="ac.resultado">
+          <option>Seleccionar Resultado</option>
+          <option>Ejecutado</option>
+          <option>Volver a Ejecutar</option>
+          <option>Pendiente</option>
+          <option>Desiste</option>
+          <option>Aceptado</option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Observaciones</span>
+        <input class="text-right" type="text" placeholder="Escriba Aquí" ng-model="ac.observaciones">
+      </label>
+    </div>
+    <div class="button-bar">
+      <button class="button button-assertive z-depth-1" ng-click="cancel()"><strong>Cancelar</strong></button>
+      <button id="card1NextButton" class="button white siguiente z-depth-1" ng-class="{disabled: (ac.accion == 'Seleccionar Acción' || ac.resultado == 'Seleccionar Resultado')}" ng-click="guardar(ac)"><strong>Guardar</strong></button>
+    </div>
   </ion-content>
 </ion-modal-view>

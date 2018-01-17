@@ -241,6 +241,13 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     deudas: 'Todos'
   };
 
+  $scope.step = 'inicio';
+
+  $scope.stepForward = function(nextStep, id){
+    $scope.step = nextStep;
+    console.log($scope.step);
+  };
+
   //Template del modal 1 (Ventas Estado)
   $ionicModal.fromTemplateUrl('templates/modal-direcciones-asignadas.html',{
     id: 1,
@@ -261,6 +268,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
   $scope.closeModal = function(index) {
     if (index === 1){
       $scope.modal_1.hide();
+      $scope.step = 'inicio';
     }else{
       $scope.modal_2.hide();
     }
@@ -318,10 +326,22 @@ app.controller('MiCuadernoAccionesComercialesCtrl', function ($scope, $ionicNavB
 
   console.log('MiCuadernoAccionesComercialesCtrl');
 
+  $scope.accionesComerciales = [];
+
   $scope.ac = {
     accion: 'Seleccionar Acción',
     resultado: 'Seleccionar Resultado',
     observaciones: ''
+  };
+
+  $scope.guardar = function () {
+    $scope.accionesComerciales.push(this.ac);
+    $scope.closeModal(1);
+    $scope.ac = {
+      accion: 'Seleccionar Acción',
+      resultado: 'Seleccionar Resultado',
+      observaciones: ''
+    };
   };
 
   $scope.cancel = function () {
@@ -331,6 +351,7 @@ app.controller('MiCuadernoAccionesComercialesCtrl', function ($scope, $ionicNavB
       observaciones: ''
     };
     $scope.closeModal(1);
+    $scope.closeModal(2);
   };
 
   $ionicModal.fromTemplateUrl('templates/modal-nueva-ac.html',{
@@ -371,16 +392,14 @@ app.controller('MiCuadernoAccionesComercialesCtrl', function ($scope, $ionicNavB
     $scope.modal_2.remove();
   });
 
-  $scope.chooseModal= function (index, model){
-    model = model || null;
-    if (model !== null){
-      $scope.model = {
-        id: model.id,
-        accion_id: model.tipo_accion_comercial_id,
-        resultado: model.resultado,
-        observacion: model.observacion
+  $scope.chooseModal = function (index, ac){
+    ac = ac || null;
+    if (ac !== null){
+      $scope.ac = {
+        accion: ac.accion,
+        resultado: ac.resultado,
+        observaciones: ac.observaciones
       };
-      //console.log($scope.model);
     }else{
       // $scope.model = {
       //   accion_id: null,
