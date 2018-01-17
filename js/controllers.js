@@ -1,4 +1,5 @@
 'use.strict';
+
 var app = angular.module('evtManager.controllers', []);
 
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
@@ -315,7 +316,24 @@ app.controller('ChatsCtrl', function($scope, Chats) {
 
 app.controller('MiCuadernoAccionesComercialesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
 
-  $ionicModal.fromTemplateUrl('views/modal-nueva-ac.html',{
+  console.log('MiCuadernoAccionesComercialesCtrl');
+
+  $scope.ac = {
+    accion: 'Seleccionar Acción',
+    resultado: 'Seleccionar Resultado',
+    observaciones: ''
+  };
+
+  $scope.cancel = function () {
+    $scope.ac = {
+      accion: 'Seleccionar Acción',
+      resultado: 'Seleccionar Resultado',
+      observaciones: ''
+    };
+    $scope.closeModal(1);
+  };
+
+  $ionicModal.fromTemplateUrl('templates/modal-nueva-ac.html',{
     id: 1,
     scope: $scope,
     animation: 'slide-in-up'
@@ -323,7 +341,7 @@ app.controller('MiCuadernoAccionesComercialesCtrl', function ($scope, $ionicNavB
     $scope.modal_1 = modal;
   });
 
-  $ionicModal.fromTemplateUrl('views/modal-edit-ac.html',{
+  $ionicModal.fromTemplateUrl('templates/modal-edit-ac.html',{
     id: 2,
     scope: $scope,
     animation: 'slide-in-up'
