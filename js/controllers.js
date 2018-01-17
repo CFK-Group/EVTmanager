@@ -46,8 +46,7 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
 
             sessionStorage.userSession = angular.toJson($scope.loginInfo);
 
-            $rootScope.userToken = JSON.parse(sessionStorage.userSession).sessionToken;
-
+            sessionStorage.userToken = JSON.parse(sessionStorage.userSession).sessionToken;
 
             $ionicLoading.hide();
             //$rootScope.loginShow = false;
@@ -72,7 +71,7 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
   });
 });
 
-app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup, $rootScope, apiConnection) {
+app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup, $rootScope, apiConnection, $ionicLoading) {
   console.log('ventasctrl');
   $ionicNavBarDelegate.showBackButton(false);
   $ionicHistory.clearHistory();
@@ -93,10 +92,15 @@ app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistor
       });
     };
   }, 100);
-  apiConnection.getVentas($rootScope.userToken).query().$promise.then(
+  $ionicLoading.show({
+    template: 'Cargando datos...',
+    animation: 'fade-in',
+    showBackdrop: true
+  });
+  apiConnection.getVentas(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.ventas = JSON.parse(JSON.stringify(response));
-      console.log($rootScope.ventas);
+      $ionicLoading.hide();
     }
   );
 });
