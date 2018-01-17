@@ -146,6 +146,16 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
     }
   })
 
+  .state('tabs.cuaderno-ac', {
+    url: '/mi-cuaderno/acciones-comerciales',
+    views: {
+      'tab-mi-cuaderno': {
+        templateUrl: 'templates/acciones-comerciales.html',
+        controller: 'MiCuadernoAccionesComercialesCtrl'
+      }
+    }
+  })
+
   .state('tabs.chats', {
     url: '/chats',
     views: {
@@ -167,7 +177,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('login');
+  $urlRouterProvider.otherwise('tabs/ventas');
 
 })
 

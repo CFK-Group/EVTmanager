@@ -31,3 +31,7 @@ button.back-button{
 .no-margin{
   margin: 0;
 }
+
+div.pane{
+  background-color: #f5f5f5;
+}

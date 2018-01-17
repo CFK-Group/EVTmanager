@@ -1,0 +1,66 @@
+<ion-modal-view>
+  <ion-header-bar class="amber" align-title="center">
+    <h1 class="title center">Contacto</h1>
+    <button class="button icon ion-close" ng-click="closeModal(1)"></button>
+  </ion-header-bar>
+  <ion-content>
+
+    <!--step == inicio-->
+    <div id="card1" class="card z-depth-1" ng-if="step === 'inicio'">
+      <ion-list>
+        <ion-item>
+          <p class="text-center"><strong>¿Cómo se contactó al nuevo prospecto?</strong></p>
+        </ion-item>
+        <ion-radio ng-model="model.tipoContacto" ng-value="'final'" name="tipoContacto">No toca puerta y deja volante</ion-radio>
+        <ion-radio ng-model="model.tipoContacto" ng-value="'2'" name="tipoContacto">No toca puerta y NO deja volante</ion-radio>
+        <ion-radio ng-model="model.tipoContacto" ng-value="'3'" name="tipoContacto">Toca puerta y NO hizo contacto</ion-radio>
+        <ion-radio ng-model="model.tipoContacto" ng-value="'finalCompleto'" name="tipoContacto">Toca puerta y SI hizo contacto</ion-radio>
+      </ion-list>
+      <div class="button-bar">
+        <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
+        <button id="card1NextButton" class="button white siguiente" ng-class="{disabled: (model.tipoContacto == '' || model.tipoContacto == undefined || model.tipoContacto == 0)}" ng-click="stepForward(model.tipoContacto, 'card1')"><strong>Siguiente</strong></button>
+      </div>
+    </div>
+
+    <!--step == 2 //  No toca puerta y NO deja volante-->
+    <div id="card2" class="card z-depth-1" ng-if="step === '2'">
+      <ion-list>
+        <ion-item>
+          <p class="text-center"><strong>Motivo</strong></p>
+        </ion-item>
+        <ion-radio ng-model="model.motivo" ng-value="'1'" name="motivo">Sin Moradores</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'2'" name="motivo">Abandonada</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'3'" name="motivo">En Construcción</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'4'" name="motivo">No tengo volante</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'5'" name="motivo">Otra razón</ion-radio>
+      </ion-list>
+      <div class="button-bar">
+        <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
+        <button id="card2NextButton" class="button white" ng-class="{disabled: (model.motivo == '' || model.motivo == undefined || model.motivo == 0)}" ng-click="stepForward('final', 'card2')"><strong>Siguiente</strong></button>
+      </div>
+    </div>
+
+    <!--step == 3 // Toca puerta y NO hizo contacto-->
+    <div id="card3" class="card z-depth-1" ng-if="step === '3'">
+      <ion-list>
+        <ion-item>
+          <p class="text-center"><strong>Motivo</strong></p>
+        </ion-item>
+        <ion-radio ng-model="model.motivo" ng-value="'1'" name="motivo">Sin Moradores</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'2'" name="motivo">Abandonada</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'3'" name="motivo">En Construcción</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'4'" name="motivo">No le interesa</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'5'" name="motivo">No dejó volante</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'6'" name="motivo">Si dejó volante</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'7'" name="motivo">Tiene competencia (CLARO)</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'8'" name="motivo">Tiene competencia (MOVISTAR)</ion-radio>
+        <ion-radio ng-model="model.motivo" ng-value="'9'" name="motivo">Tiene competencia (OTRO)</ion-radio>
+      </ion-list>
+      <div class="button-bar">
+        <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
+        <button id="card3NextButton" class="button white" ng-class="{disabled: (model.tipoContacto.motivo == '' || model.tipoContacto.motivo == undefined || model.tipoContacto.motivo == 0)}" ng-click="stepForward('final', 'card3')"><strong>Siguiente</strong></button>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-modal-view>

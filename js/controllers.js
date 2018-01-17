@@ -134,7 +134,7 @@ app.controller('VentasEstadoCtrl', function ($scope, $ionicNavBarDelegate, $ioni
   };
 });
 
-app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate) {
+app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
   $ionicNavBarDelegate.showBackButton(true);
   $scope.filtro = {
     visacion: 'Todos',
@@ -142,7 +142,7 @@ app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate) {
   }
 });
 
-app.controller('VentasPermanenciaCtrl', function ($scope, $ionicNavBarDelegate) {
+app.controller('VentasPermanenciaCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
   $ionicNavBarDelegate.showBackButton(true);
   $scope.filtro = {
     permanencias: 'Todos',
@@ -150,12 +150,62 @@ app.controller('VentasPermanenciaCtrl', function ($scope, $ionicNavBarDelegate) 
   }
 });
 
-app.controller('VentasCobranzasCtrl', function ($scope, $ionicNavBarDelegate) {
+app.controller('VentasCobranzasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
   $ionicNavBarDelegate.showBackButton(true);
+
+  //Template del modal 1 (Ventas Estado)
+  $ionicModal.fromTemplateUrl('templates/modal-ventas-cobranzas.html',{
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_1 = modal;
+  });
+
+  $scope.openModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.show();
+    }else{
+      $scope.modal_2.show();
+    }
+  };
+
+  $scope.closeModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.hide();
+    }else{
+      $scope.modal_2.hide();
+    }
+  };
 });
 
-app.controller('VentasPendientesCtrl', function ($scope, $ionicNavBarDelegate) {
+app.controller('VentasPendientesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
   $ionicNavBarDelegate.showBackButton(true);
+
+  //Template del modal 1 (Ventas Estado)
+  $ionicModal.fromTemplateUrl('templates/modal-ventas-pendiente.html',{
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_1 = modal;
+  });
+
+  $scope.openModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.show();
+    }else{
+      $scope.modal_2.show();
+    }
+  };
+
+  $scope.closeModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.hide();
+    }else{
+      $scope.modal_2.hide();
+    }
+  };
 });
 
 app.controller('MiCuadernoCtrl', function($scope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup) {
@@ -181,14 +231,39 @@ app.controller('MiCuadernoCtrl', function($scope, $ionicNavBarDelegate, $ionicHi
   }, 100)
 });
 
-app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate) {
+app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
   $ionicNavBarDelegate.showBackButton(true);
   $scope.filtro = {
     comunas: 'Todos',
     nodos: 'Todos',
     cuadrantes: 'Todos',
     deudas: 'Todos'
-  }
+  };
+
+  //Template del modal 1 (Ventas Estado)
+  $ionicModal.fromTemplateUrl('templates/modal-direcciones-asignadas.html',{
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_1 = modal;
+  });
+
+  $scope.openModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.show();
+    }else{
+      $scope.modal_2.show();
+    }
+  };
+
+  $scope.closeModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.hide();
+    }else{
+      $scope.modal_2.hide();
+    }
+  };
 });
 
 app.controller('MiCuadernoNuevoProspectoCtrl', function ($scope, $ionicNavBarDelegate) {
@@ -235,5 +310,68 @@ app.controller('ChatsCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
     Chats.remove(chat);
+  };
+});
+
+app.controller('MiCuadernoAccionesComercialesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
+
+  $ionicModal.fromTemplateUrl('views/modal-nueva-ac.html',{
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_1 = modal;
+  });
+
+  $ionicModal.fromTemplateUrl('views/modal-edit-ac.html',{
+    id: 2,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_2 = modal;
+  });
+
+  $scope.openModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.show();
+    }else{
+      $scope.modal_2.show();
+    }
+  };
+
+  $scope.closeModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.hide();
+    }else{
+      $scope.modal_2.hide();
+    }
+  };
+
+  // Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal_1.remove();
+    $scope.modal_2.remove();
+  });
+
+  $scope.chooseModal= function (index, model){
+    model = model || null;
+    if (model !== null){
+      $scope.model = {
+        id: model.id,
+        accion_id: model.tipo_accion_comercial_id,
+        resultado: model.resultado,
+        observacion: model.observacion
+      };
+      //console.log($scope.model);
+    }else{
+      // $scope.model = {
+      //   accion_id: null,
+      //   resultado: "",
+      //   idVenta: idVenta,
+      //   idCarga: idCarga,
+      //   observacion : ""
+      // };
+    }
+    $scope.openModal(index);
   };
 });

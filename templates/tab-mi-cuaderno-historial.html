@@ -37,18 +37,24 @@
         </label>
       </div>
       <div class="row amber">
-        <div class="col">Rut</div>
-        <div class="col">Servicio</div>
-        <div class="col">Mes</div>
-        <div class="col">Estado</div>
+        <div class="col">Comuna</div>
+        <div class="col">Calle</div>
+        <div class="col">Número</div>
       </div>
     </div>
-    <div class="scroll">
+    <div class="scroll" ui-sref="tabs.cuaderno-ac">
       <div class="row">
         <div class="col">18463690-5</div>
         <div class="col">2WAY</div>
         <div class="col">11</div>
         <div class="col">TERMINADA</div>
+      </div>
+    </div>
+    <div class="scroll">
+      <div class="row" collection-repeat="dir in direcciones">
+        <div class="col">{{dir.comuna}}</div>
+        <div class="col">{{dir.calle}}</div>
+        <div class="col">{{dir.numero}}</div>
       </div>
     </div>
   </ion-content>
