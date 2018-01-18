@@ -17,6 +17,9 @@
 <preference name="disable-push-notifications" value="1" />
 <!-- splash screen preferences -->
 <preference name="SplashScreen" value="none"/>
+<preference name="show-splash-screen-spinner" value="false" />
+<preference name="auto-hide-splash-screen" value="true" />
+<preference name="FadeSplashScreen" value="false" />
 
 <!-- Orientacion -->
 <preference name="orientation" value="portrait"/>
@@ -38,6 +41,9 @@
 <platform name="android">
     <icon src="img/evtManager-logo.png"/>
     <preference name="SplashScreen" value="none"/>
+    <preference name="show-splash-screen-spinner" value="false" />
+    <preference name="auto-hide-splash-screen" value="true" />
+    <preference name="FadeSplashScreen" value="false" />
     <!-- establece la posibilidad de mover la app a la sd-->
     <preference name="android-installLocation" value="auto" />
 </platform>
