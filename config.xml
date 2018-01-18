@@ -16,10 +16,7 @@
 <!-- Define a specific version of PhoneGap to build into your app. -->
 <preference name="disable-push-notifications" value="1" />
 <!-- splash screen preferences -->
-<preference name="SplashScreenDelay" value="5000" />
-<preference name="show-splash-screen-spinner" value="false" />
-<preference name="auto-hide-splash-screen" value="true" />
-<preference name="FadeSplashScreen" value="false" />
+<preference name="SplashScreen" value="none"/>
 
 <!-- Orientacion -->
 <preference name="orientation" value="portrait"/>
@@ -40,10 +37,7 @@
 
 <platform name="android">
     <icon src="img/evtManager-logo.png"/>
-    <preference name="SplashScreenDelay" value="2000" />
-    <preference name="show-splash-screen-spinner" value="false" />
-    <preference name="auto-hide-splash-screen" value="true" />
-    <preference name="FadeSplashScreen" value="false" />
+    <preference name="SplashScreen" value="none"/>
     <!-- establece la posibilidad de mover la app a la sd-->
     <preference name="android-installLocation" value="auto" />
 </platform>
