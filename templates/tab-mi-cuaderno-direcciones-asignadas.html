@@ -43,12 +43,12 @@
         <div class="col">Estado</div>
       </div>
     </div>
-    <div class="scroll" ng-click="openModal(1)">
-      <div class="row">
-        <div class="col">18463690-5</div>
-        <div class="col">2WAY</div>
-        <div class="col">11</div>
-        <div class="col">TERMINADA</div>
+    <div class="scroll">
+      <div class="row" collection-repeat="prospecto in prospectos" ng-click="chooseModal(1, prospecto)">
+        <div class="col">{{prospecto.rut_prospecto}}</div>
+        <div class="col">{{prospecto.servicio}}</div>
+        <div class="col">{{prospecto.mes_venta}}</div>
+        <div class="col">{{prospecto.estado_tango}}</div>
       </div>
     </div>
   </ion-content>

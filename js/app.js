@@ -37,11 +37,39 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
     controller: 'LoginCtrl'
   })
 
+  .state('loading', {
+    url: '/loading',
+    abstract: true,
+    templateUrl: 'templates/loading.html'
+  })
+
+  .state('loading.prospectos', {
+    url: '/prospectos',
+    views: {
+      'loading': {
+        templateUrl: 'templates/loading-prospectos.html',
+        controller: 'LoadingProspectosCtrl'
+      }
+    }
+  })
+
+  .state('loading.ventas', {
+    url: '/ventas',
+    views: {
+      'loading': {
+        templateUrl: 'templates/loading-ventas.html',
+        controller: 'LoadingVentasCtrl',
+        animation: 'slide-in-right'
+      }
+    }
+  })
+
   // setup an abstract state for the tabs directive
   .state('tabs', {
     url: '/tabs',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/tabs.html',
+    animation: 'slide-in-up'
   })
 
   // Each tab has its own nav history stack:
@@ -53,7 +81,8 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
         templateUrl: 'templates/tab-ventas.html',
         controller: 'VentasCtrl'
       }
-    }
+    },
+    animation: 'slide-in-left'
   })
 
   .state('tabs.ventas-estado', {
@@ -113,7 +142,8 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
         templateUrl: 'templates/tab-mi-cuaderno.html',
         controller: 'MiCuadernoCtrl'
       }
-    }
+    },
+    animation: 'slide-in-right'
   })
 
   .state('tabs.cuaderno-direcciones-asignadas', {

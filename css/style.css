@@ -35,3 +35,12 @@ button.back-button{
 div.pane{
   background-color: #f5f5f5;
 }
+
+div.loading.pane{
+  height: 100vh;
+}
+
+.spinner svg{
+  width: 70px;
+  height: 70px;
+}

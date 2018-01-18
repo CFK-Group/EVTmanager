@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="scroll">
-      <div class="row">
-        <div class="col">18463690-5</div>
-        <div class="col">2WAY</div>
-        <div class="col">11</div>
+      <div class="row" collection-repeat="venta in ventas | filter: { tipo_carga:2}">
+        <div class="col">{{venta.rut_cliente}}</div>
+        <div class="col">{{venta.servicio}}</div>
+        <div class="col">{{venta.mes_venta}}</div>
       </div>
     </div>
   </ion-content>

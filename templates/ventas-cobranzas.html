@@ -9,10 +9,10 @@
       </div>
     </div>
     <div class="scroll">
-      <div class="row" collection-repeat="cobranza in cobranzas" ng-click="openModal(1)">
-        <div class="col">{{cobranza.rut_cliente}}</div>
-        <div class="col">{{cobranza.servicio}}</div>
-        <div class="col">{{cobranza.mes_venta}}</div>
+      <div class="row" collection-repeat="venta in ventas | filter: { tipo_carga:3}" ng-click="chooseModal(1, venta)">
+        <div class="col">{{venta.rut_cliente}}</div>
+        <div class="col">{{venta.servicio}}</div>
+        <div class="col">{{venta.mes_venta}}</div>
       </div>
     </div>
   </ion-content>

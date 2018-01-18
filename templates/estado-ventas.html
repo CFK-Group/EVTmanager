@@ -5,32 +5,22 @@
       <div class="list no-margin">
         <label class="item item-input item-select">
           <div class="input-label">
-            Estados
-          </div>
-          <select ng-model="filtro.estados">
-            <option ng-value="Todos">Todos</option>
-            <option ng-value="TERMINDA">TERMINDA</option>
-            <option ng-value="INS">INS</option>
-          </select>
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">
             Meses
           </div>
           <select ng-model="filtro.meses">
-            <option ng-value="Todos">Todos</option>
-            <option ng-value="Enero">Enero</option>
-            <option ng-value="Febrero">Febrero</option>
-            <option ng-value="Marzo">Marzo</option>
-            <option ng-value="Abril">Abril</option>
-            <option ng-value="Mayo">Mayo</option>
-            <option ng-value="Junio">Junio</option>
-            <option ng-value="Julio">Julio</option>
-            <option ng-value="Agosto">Agosto</option>
-            <option ng-value="Septiembre">Septiembre</option>
-            <option ng-value="Octubre">Octubre</option>
-            <option ng-value="Noviembre">Noviembre</option>
-            <option ng-value="Diciembre">Diciembre</option>
+            <option ng-value="">Todos</option>
+            <option ng-value="1">Enero</option>
+            <option ng-value="2">Febrero</option>
+            <option ng-value="3">Marzo</option>
+            <option ng-value="4">Abril</option>
+            <option ng-value="5">Mayo</option>
+            <option ng-value="6">Junio</option>
+            <option ng-value="7">Julio</option>
+            <option ng-value="8">Agosto</option>
+            <option ng-value="9">Septiembre</option>
+            <option ng-value="10">Octubre</option>
+            <option ng-value="11">Noviembre</option>
+            <option ng-value="12">Diciembre</option>
           </select>
         </label>
       </div>
@@ -38,15 +28,13 @@
         <div class="col">Rut</div>
         <div class="col">Servicio</div>
         <div class="col">Mes</div>
-        <div class="col">Estado</div>
       </div>
     </div>
     <div class="scroll">
-      <div class="row" collection-repeat="venta in ventas" ng-click="openModal(1)">
+      <div class="row" collection-repeat="venta in ventas | filter: filtro.meses" ng-click="chooseModal(1, venta)">
         <div class="col">{{venta.rut_cliente}}</div>
         <div class="col">{{venta.servicio}}</div>
         <div class="col">{{venta.mes_venta}}</div>
-        <div class="col">{{venta.estado_tango}}</div>
       </div>
     </div>
   </ion-content>

@@ -60,18 +60,15 @@ angular.module('evtManager.services', [])
     },
 
     getVentas: function (sessionToken) {
-      var ventas = $resource(apiURL + 'getVentas', {sessionToken: sessionToken}, {'query': {isArray: false}});
-      return ventas
+      return $resource(apiURL + "getVentas", {sessionToken: sessionToken});
     },
 
     getProspectos: function (sessionToken) {
-      var prospectos = $resource(apiURL + 'getProspectos', {sessionToken: sessionToken}, {'query': {isArray: false}});
-      return prospectos
+      return $resource(apiURL + "getProspectos", {sessionToken: sessionToken});
     },
 
     getVendedor: function (sessionToken, username) {
-      var vendedor = $resource(apiURL + 'getVendedor', {sessionToken: sessionToken, tango: username}, {'query': {isArray: false}});
-      return vendedor
+      return $resource(apiURL + "getVendedor", {sessionToken: sessionToken});
     },
 
 
