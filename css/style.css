@@ -36,8 +36,8 @@ div.pane{
   background-color: #f5f5f5;
 }
 
-div.loading.pane{
-  height: 100vh;
+div.loading.row{
+  height: 100vh !important;
 }
 
 .spinner svg{

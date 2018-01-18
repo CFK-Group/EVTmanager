@@ -464,8 +464,9 @@ app.controller('MiCuadernoAccionesComercialesCtrl', function ($scope, $ionicNavB
   };
 });
 
-app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootScope, $ionicPopup) {
+app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootScope, $ionicPopup, $ionicNavBarDelegate) {
   console.log('LoadingProspectosCtrl');
+  $ionicNavBarDelegate.showBackButton(false);
   apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.prospectos = JSON.parse(JSON.stringify(response));
@@ -481,8 +482,9 @@ app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootSc
   );
 });
 
-app.controller('LoadingVentasCtrl', function ($state, apiConnection, $rootScope, $ionicPopup) {
+app.controller('LoadingVentasCtrl', function ($state, apiConnection, $rootScope, $ionicPopup, $ionicNavBarDelegate) {
   console.log('LoadingVentasCtrl');
+  $ionicNavBarDelegate.showBackButton(false);
   apiConnection.getVentas(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.ventas = JSON.parse(JSON.stringify(response));
