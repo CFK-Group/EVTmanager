@@ -207,7 +207,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('tabs/ventas');
+  $urlRouterProvider.otherwise('login');
 
 })
 
