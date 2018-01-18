@@ -44,3 +44,7 @@ div.loading.pane{
   width: 70px;
   height: 70px;
 }
+
+.item-note{
+  color: inherit;
+}
