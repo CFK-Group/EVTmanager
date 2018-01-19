@@ -1,55 +1,21 @@
 <ion-view class="no-scroll">
   <ion-nav-title>Direcciones Asignadas</ion-nav-title>
   <ion-content class="grey lighten-4 has-header" overflow-scroll="false">
-    <div class="fixed">
-      <div class="list no-margin">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Comunas
-          </div>
-          <select ng-model="filtro.comunas">
-            <option ng-value="Todos">Todos</option>
-          </select>
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Nodos
-          </div>
-          <select ng-model="filtro.nodos">
-            <option ng-value="Todos">Todos</option>
-          </select>
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Cuadrantes
-          </div>
-          <select ng-model="filtro.cuadrantes">
-            <option ng-value="Todos">Todos</option>
-          </select>
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Deudas
-          </div>
-          <select ng-model="filtro.deudas">
-            <option ng-value="Todos">Todos</option>
-          </select>
-        </label>
-      </div>
-      <div class="row amber">
-        <div class="col">Rut</div>
-        <div class="col">Servicio</div>
-        <div class="col">Mes</div>
-        <div class="col">Estado</div>
-      </div>
-    </div>
-    <div class="scroll">
-      <div class="row" collection-repeat="prospecto in prospectos" ng-click="chooseModal(1, prospecto)">
-        <div class="col">{{prospecto.rut_prospecto}}</div>
-        <div class="col">{{prospecto.servicio}}</div>
-        <div class="col">{{prospecto.mes_venta}}</div>
-        <div class="col">{{prospecto.estado_tango}}</div>
-      </div>
+    <div class="list no-margin">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Búsqueda: comuna, nodo, cuadrante, deuda, etc." ng-model="filter.search">
+      </label>
+      <label class="item row amber">
+        <div class="col">Comuna</div>
+        <div class="col">Calle</div>
+        <div class="col">Número</div>
+      </label>
+      <label class="item row" collection-repeat="prospecto in prospectosDirAsig | filter: filter.search" ng-click="chooseModal(1, prospecto)">
+        <div class="col">{{prospecto.comuna}}</div>
+        <div class="col">{{prospecto.calle}}</div>
+        <div class="col">{{prospecto.numero}}</div>
+      </label>
     </div>
   </ion-content>
 </ion-view>

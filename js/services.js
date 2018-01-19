@@ -67,9 +67,21 @@ angular.module('evtManager.services', [])
       return $resource(apiURL + "getProspectos", {sessionToken: sessionToken});
     },
 
-    getVendedor: function (sessionToken, username) {
+    getVendedor: function (sessionToken) {
       return $resource(apiURL + "getVendedor", {sessionToken: sessionToken});
     },
+
+    saveAC: function (sessionToken, id_prospecto, accion_comercial) {
+      return $resource(apiURL + "addAccionComercial", {api_token: sessionToken, id_prospecto :id_prospecto, accion_comercial: accion_comercial});
+    },
+
+    newProspecto: function (sessionToken, prospecto, accion_comercial) {
+      return $resource(apiURL + "addAccionComercial", {api_token: sessionToken, prospecto :prospecto, accion_comercial: accion_comercial});
+    },
+
+    updateProspecto: function (sessionToken, prospecto, accion_comercial) {
+      return $resource(apiURL + "addAccionComercial", {api_token: sessionToken, prospecto :prospecto, accion_comercial: accion_comercial});
+    }
 
 
 

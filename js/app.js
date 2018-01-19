@@ -180,7 +180,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
     url: '/mi-cuaderno/acciones-comerciales',
     views: {
       'tab-mi-cuaderno': {
-        templateUrl: 'templates/acciones-comerciales.html',
+        templateUrl: 'templates/modal-acciones-comerciales.html',
         controller: 'MiCuadernoAccionesComercialesCtrl'
       }
     }

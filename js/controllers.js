@@ -93,26 +93,6 @@ app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistor
       });
     };
   }, 100);
-
-  // console.log('VentasCtrl');
-  // $ionicLoading.show({
-  //   template: 'Cargando datos...',
-  //   animation: 'fade-in',
-  //   showBackdrop: true
-  // });
-  // apiConnection.getVentas(sessionStorage.userToken).query().$promise.then(
-  //   function (response) {
-  //     $rootScope.ventas = JSON.parse(JSON.stringify(response));
-  //     console.log($rootScope.ventas);
-  //     $ionicLoading.hide();
-  //   }, function (err) {
-  //     $ionicLoading.hide();
-  //     $ionicPopup.alert({
-  //       title: 'Ups!',
-  //       template: 'Algo ha pasado, vuelve a intentar más tarde'
-  //     });
-  //   }
-  // );
 });
 
 app.controller('VentasEstadoCtrl', function ($scope, $ionicPopup, $ionicNavBarDelegate, $ionicModal, apiConnection, $ionicLoading, $rootScope) {
@@ -261,29 +241,9 @@ app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelega
       });
     };
   }, 100);
-
-  // console.log('MiCuadernoCtrl');
-  // $ionicLoading.show({
-  //   template: 'Cargando datos...',
-  //   animation: 'fade-in',
-  //   showBackdrop: true
-  // });
-  // apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
-  //   function (response) {
-  //     $rootScope.prospectos = JSON.parse(JSON.stringify(response));
-  //     console.log($rootScope.prospectos);
-  //     $ionicLoading.hide();
-  //   }, function (err) {
-  //     $ionicLoading.hide();
-  //     $ionicPopup.alert({
-  //       title: 'Ups!',
-  //       template: 'Algo ha pasado, vuelve a intentar más tarde'
-  //     });
-  //   }
-  // );
 });
 
-app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
+app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
   $scope.filtro = {
     comunas: 'Todos',
@@ -291,6 +251,10 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     cuadrantes: 'Todos',
     deudas: 'Todos'
   };
+
+  $rootScope.prospectosDirAsig = $rootScope.prospectos.filter(function (element) {
+    return element.tipo_contacto !== 'Toca puerta y si hizo contacto'
+  });
 
   $scope.step = 'inicio';
 
@@ -352,14 +316,100 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($scope, $ionicNavBarDel
   };
 });
 
-app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate) {
+app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, apiConnection, $ionicPopup, $ionicLoading) {
   $ionicNavBarDelegate.showBackButton(true);
-  $scope.filtro = {
-    comunas: 'Todos',
-    nodos: 'Todos',
-    cuadrantes: 'Todos',
-    deudas: 'Todos'
-  }
+  $scope.guardar = function (ac) {
+    console.log($scope.prospecto.id);
+    apiConnection.saveAC(sessionStorage.userToken, $scope.prospecto.id, ac.accion).save().$promise.then(
+      function (response) {
+        $ionicLoading.hide();
+        var alert = $ionicPopup.alert({
+          title: 'Guardado',
+          template: 'Accion añadida correctamente'
+        });
+        alert.then(function () {
+          var fecha = Math.round((new Date()).getTime() / 1000);
+          ac.timestamp = fecha;
+          $scope.prospecto.accion_comercial.push(ac);
+          $scope.closeModal(2);
+          $scope.closeModal(3);
+          $scope.ac = {
+            accion: ''
+          };
+        });
+      },
+      function (err) {
+        console.log("ERROR: ", err);
+        $ionicLoading.hide();
+        var alert = $ionicPopup.alert({
+          title: 'Ups!',
+          template: 'Algo ha pasado, intenta de nuevo más tarde.'
+        });
+      }
+    );
+  };
+
+  $scope.cancel = function () {
+    $scope.ac = {
+      accion: ''
+    };
+    $scope.closeModal(2);
+  };
+
+  $ionicModal.fromTemplateUrl('templates/modal-acciones-comerciales.html',{
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_1 = modal;
+  });
+
+  $ionicModal.fromTemplateUrl('templates/modal-nueva-ac.html',{
+    id: 2,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_2 = modal;
+  });
+
+  $ionicModal.fromTemplateUrl('templates/modal-edit-ac.html',{
+    id: 3,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_3 = modal;
+  });
+
+  $scope.openModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.show();
+    }else if(index === 2){
+      $scope.modal_2.show();
+    }else {
+      $scope.modal_3.show();
+    }
+  };
+
+  $scope.closeModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.hide();
+      $scope.step = 'inicio';
+    }else if(index === 2){
+      $scope.modal_2.hide();
+    }else {
+      $scope.modal_3.hide();
+    }
+  };
+
+  $scope.chooseModal = function (index, prospecto){
+    prospecto = prospecto || null;
+    if (prospecto !== null){
+      $scope.prospecto = prospecto;
+    }else{
+      $scope.prospecto = prospecto;
+    }
+    $scope.openModal(index);
+  };
 });
 
 app.controller('AccountCtrl', function($scope) {
@@ -383,93 +433,13 @@ app.controller('ChatsCtrl', function($scope, Chats) {
   };
 });
 
-app.controller('MiCuadernoAccionesComercialesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
-
-  console.log('MiCuadernoAccionesComercialesCtrl');
-
-  $scope.accionesComerciales = [];
-
-  $scope.ac = {
-    accion: 'Seleccionar Acción',
-    resultado: 'Seleccionar Resultado',
-    observaciones: ''
-  };
-
-  $scope.guardar = function () {
-    $scope.accionesComerciales.push(this.ac);
-    $scope.closeModal(1);
-    $scope.ac = {
-      accion: 'Seleccionar Acción',
-      resultado: 'Seleccionar Resultado',
-      observaciones: ''
-    };
-  };
-
-  $scope.cancel = function () {
-    $scope.ac = {
-      accion: 'Seleccionar Acción',
-      resultado: 'Seleccionar Resultado',
-      observaciones: ''
-    };
-    $scope.closeModal(1);
-    $scope.closeModal(2);
-  };
-
-  $ionicModal.fromTemplateUrl('templates/modal-nueva-ac.html',{
-    id: 1,
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal){
-    $scope.modal_1 = modal;
-  });
-
-  $ionicModal.fromTemplateUrl('templates/modal-edit-ac.html',{
-    id: 2,
-    scope: $scope,
-    animation: 'slide-in-up'
-  }).then(function(modal){
-    $scope.modal_2 = modal;
-  });
-
-  $scope.openModal = function(index) {
-    if (index === 1){
-      $scope.modal_1.show();
-    }else{
-      $scope.modal_2.show();
-    }
-  };
-
-  $scope.closeModal = function(index) {
-    if (index === 1){
-      $scope.modal_1.hide();
-    }else{
-      $scope.modal_2.hide();
-    }
-  };
-
-  // Cleanup the modal when we're done with it!
-  $scope.$on('$destroy', function() {
-    $scope.modal_1.remove();
-    $scope.modal_2.remove();
-  });
-
-  $scope.chooseModal = function (index, venta){
-    venta = venta || null;
-    if (venta !== null){
-      $scope.venta = venta;
-    }else{
-      $scope.venta = venta;
-    }
-    $scope.openModal(index);
-  };
-});
-
 app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootScope, $ionicPopup, $ionicNavBarDelegate) {
   console.log('LoadingProspectosCtrl');
   $ionicNavBarDelegate.showBackButton(false);
   apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.prospectos = JSON.parse(JSON.stringify(response));
+      console.log($rootScope.prospectos);
       $state.go('tabs.ventas');
     }, function (err) {
       $ionicLoading.hide();
