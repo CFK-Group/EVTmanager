@@ -320,7 +320,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
   $ionicNavBarDelegate.showBackButton(true);
   $scope.guardar = function (ac) {
     console.log($scope.prospecto.id);
-    apiConnection.saveAC(sessionStorage.userToken, $scope.prospecto.id, ac.accion).save().$promise.then(
+    apiConnection.saveAC().save({token: sessionStorage.userToken, idProspecto: $scope.prospecto.id, accionComercial: ac.accion}).$promise.then(
       function (response) {
         $ionicLoading.hide();
         var alert = $ionicPopup.alert({

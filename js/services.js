@@ -55,8 +55,7 @@ angular.module('evtManager.services', [])
   var apiConnection = {
 
     loginUser: function(username, password, deviceId, deviceModel) {
-      var login = $resource(apiURL + "login", {username: username, pass: password, deviceId: deviceId, deviceModel: deviceModel}, {'query': {isArray: false}});
-      return login;
+     return $resource(apiURL + "login", {username: username, pass: password, deviceId: deviceId, deviceModel: deviceModel}, {'query': {isArray: false}});
     },
 
     getVentas: function (sessionToken) {
@@ -71,16 +70,16 @@ angular.module('evtManager.services', [])
       return $resource(apiURL + "getVendedor", {sessionToken: sessionToken});
     },
 
-    saveAC: function (sessionToken, id_prospecto, accion_comercial) {
-      return $resource(apiURL + "addAccionComercial", {api_token: sessionToken, id_prospecto :id_prospecto, accion_comercial: accion_comercial});
+    saveAC: function () {
+      return $resource(apiURL + "addAccionComercial");
     },
 
     newProspecto: function (sessionToken, prospecto, accion_comercial) {
-      return $resource(apiURL + "addAccionComercial", {api_token: sessionToken, prospecto :prospecto, accion_comercial: accion_comercial});
+      return $resource(apiURL + "createProspecto", {token: sessionToken, prospecto: prospecto, accionComercial: accion_comercial},{'save': {method: 'POST'}});
     },
 
     updateProspecto: function (sessionToken, prospecto, accion_comercial) {
-      return $resource(apiURL + "addAccionComercial", {api_token: sessionToken, prospecto :prospecto, accion_comercial: accion_comercial});
+      return $resource(apiURL + "updateProspecto", {token: sessionToken, prospecto: prospecto, accionComercial: accion_comercial},{'save': {method: 'POST'}});
     }
 
 
