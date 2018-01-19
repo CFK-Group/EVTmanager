@@ -320,7 +320,12 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
   $ionicNavBarDelegate.showBackButton(true);
   $scope.guardar = function (ac) {
     console.log($scope.prospecto.id);
-    apiConnection.saveAC().save({token: sessionStorage.userToken, idProspecto: $scope.prospecto.id, accionComercial: ac.accion}).$promise.then(
+    var params = {
+        token: sessionStorage.userToken,
+        idProspecto: $scope.prospecto.id,
+        accionComercial: ac.accion
+    };
+    apiConnection.saveAC().save(params).$promise.then(
       function (response) {
         $ionicLoading.hide();
         var alert = $ionicPopup.alert({
@@ -337,6 +342,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
             accion: ''
           };
         });
+        console.log(response);
       },
       function (err) {
         console.log("ERROR: ", err);
