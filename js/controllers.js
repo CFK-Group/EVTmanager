@@ -386,13 +386,23 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
     $scope.modal_3 = modal;
   });
 
+  $ionicModal.fromTemplateUrl('templates/modal-detalle-historial.html',{
+    id: 4,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_4 = modal;
+  });
+
   $scope.openModal = function(index) {
     if (index === 1){
       $scope.modal_1.show();
     }else if(index === 2){
       $scope.modal_2.show();
-    }else {
+    }else if(index === 3){
       $scope.modal_3.show();
+    }else {
+      $scope.modal_4.show();
     }
   };
 

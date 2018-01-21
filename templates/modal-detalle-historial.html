@@ -1,0 +1,160 @@
+<ion-modal-view>
+  <ion-header-bar class="amber" align-title="center">
+    <h1 class="title center">Detalle</h1>
+    <button class="button icon ion-close" ng-click="closeModal(4)"></button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list no-margin">
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Comuna
+        </div>
+        <select>
+          <option ng-value="">{{prospecto.comuna}}</option>
+        </select>
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Calle</span>
+        <input class="text-right" type="text" ng-model="prospecto.calle">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Número</span>
+        <input class="text-right" type="number" ng-model="prospecto.numero">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Nodo</span>
+        <input class="text-right" type="number" ng-model="prospecto.nodo">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Cuadrante</span>
+        <input class="text-right" type="number" ng-model="prospecto.cuadrante">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Fono</span>
+        <input class="text-right" type="number" ng-model="prospecto.fono">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Cable</span>
+        <input class="text-right" type="text" ng-model="prospecto.cable">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Inet</span>
+        <input class="text-right" type="text" ng-model="prospecto.inet">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Prem</span>
+        <input class="text-right" type="text" ng-model="prospecto.prem">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Rut</span>
+        <input class="text-right" type="text" ng-model="prospecto.rut_comprador">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Nombre</span>
+        <input class="text-right" type="text" ng-model="prospecto.nombre">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Deuda</span>
+        <input class="text-right" type="text" ng-model="prospecto.deuda">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Rut comprador</span>
+        <input class="text-right" type="text" ng-model="prospecto.rut_comprador">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Nombre comprador</span>
+        <input class="text-right" type="text" ng-model="prospecto.nombre_comprador">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Fono contacto 1</span>
+        <input class="text-right" type="number" ng-model="prospecto.fono_contacto_1">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Fono contacto 2</span>
+        <input class="text-right" type="number" ng-model="prospecto.fono_contacto_2">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Email</span>
+        <input class="text-right" type="email" ng-model="prospecto.fono_contacto_2">
+      </label>
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Servicio a contratar TV
+        </div>
+        <select>
+          <option ng-value="">NINGUNO</option>
+          <option ng-value="">TV HOGAR HD</option>
+          <option ng-value="">TV FULL HD</option>
+        </select>
+      </label>
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Servicio a contratar FONO
+        </div>
+        <select>
+          <option ng-value="">NINGUNO</option>
+          <option ng-value="">FONO LIMITADO</option>
+          <option ng-value="">PORTABILIDAD</option>
+        </select>
+      </label>
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Servicio a contratar INTERNET
+        </div>
+        <select>
+          <option ng-value="">NINGUNO</option>
+          <option ng-value="">MEGA 30</option>
+          <option ng-value="">MEGA 120</option>
+          <option ng-value="">MEGA 200</option>
+        </select>
+      </label>
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Empresa servicio actual
+        </div>
+        <select>
+          <option ng-value="">NINGUNO</option>
+          <option ng-value="">VTR</option>
+          <option ng-value="">Movistar Fibra</option>
+          <option ng-value="">Movistar ADSL</option>
+          <option ng-value="">Claro</option>
+          <option ng-value="">DirecTV</option>
+          <option ng-value="">GTD</option>
+          <option ng-value="">Otro</option>
+          <option ng-value="">No sabe/No contesta</option>
+        </select>
+      </label>
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Productos que tiene
+        </div>
+        <select>
+          <option ng-value="">NINGUNO</option>
+          <option ng-value="">3 PLAY</option>
+          <option ng-value="">CABLE + INTERNET</option>
+          <option ng-value="">CABLE + FONO</option>
+          <option ng-value="">CABLE</option>
+          <option ng-value="">INTERNET</option>
+          <option ng-value="">FONO</option>
+          <option ng-value="">No sabe/No contesta</option>
+        </select>
+      </label>
+      <label class="item item-input item-select white">
+        <div class="input-label">
+          Tiene promoción
+        </div>
+        <select>
+          <option ng-value="">No sabe/No contesta</option>
+          <option ng-value="">SI</option>
+          <option ng-value="">NO</option>
+        </select>
+      </label>
+    </div>
+  </ion-content>
+  <div class="bar bar-footer row white">
+    <div class="button-bar">
+      <button class="button white button-outline button-dark z-depth-1 icon-left ion-plus-circled" ng-click="chooseModal(1, prospecto)"><strong>Acciones Comerciales</strong></button>
+      <button class="button white button-outline button-dark z-depth-1 icon-left ion-checkmark-round" ng-click=""><strong>Guardar</strong></button>
+    </div>
+  </div>
+</ion-modal-view>
