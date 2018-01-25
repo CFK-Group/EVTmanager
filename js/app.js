@@ -208,10 +208,6 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('login');
-  // $httpProvider.defaults.headers.put = {};
-  // $httpProvider.defaults.headers.patch = {};
-  // $httpProvider.defaults.headers.common = {};
-  $httpProvider.defaults.headers.post = {'Content-Type': 'application/x-www-form-urlencoded'};
 })
 
 .run(function ($state, $ionicConfig) {
