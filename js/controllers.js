@@ -219,6 +219,16 @@ app.controller('VentasPendientesCtrl', function ($scope, $ionicNavBarDelegate, $
       $scope.modal_2.hide();
     }
   };
+
+  $scope.chooseModal = function (index, venta){
+    venta = venta || null;
+    if (venta !== null){
+      $scope.venta = venta;
+    }else{
+      $scope.venta = venta;
+    }
+    $scope.openModal(index);
+  };
 });
 
 app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup, apiConnection, $ionicLoading) {
@@ -258,7 +268,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
 
   $scope.step = 'inicio';
 
-  $scope.stepForward = function(nextStep, id){
+  $scope.stepForward = function(nextStep){
     $scope.step = nextStep;
     console.log($scope.step);
   };
@@ -280,6 +290,10 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     }
   };
 
+  $scope.cancel = function () {
+    $scope.closeModal(1);
+  };
+
   $scope.closeModal = function(index) {
     if (index === 1){
       $scope.modal_1.hide();
@@ -297,6 +311,10 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       $scope.prospecto = prospecto;
     }
     $scope.openModal(index);
+  };
+
+  $scope.actualizarProspecto = function () {
+    $scope.closeModal(1);
   };
 });
 
@@ -321,9 +339,9 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
   $scope.guardar = function (ac) {
     console.log($scope.prospecto.id);
     var params = {
-        token: sessionStorage.userToken,
-        idProspecto: $scope.prospecto.id,
-        accionComercial: ac.accion
+        token: sessionStorage.userToken.toString(),
+        idProspecto: $scope.prospecto.id.toString(),
+        accionComercial: ac.accion.toString()
     };
     apiConnection.saveAC().save(params).$promise.then(
       function (response) {
@@ -412,8 +430,10 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       $scope.step = 'inicio';
     }else if(index === 2){
       $scope.modal_2.hide();
-    }else {
+    }else if(index === 3){
       $scope.modal_3.hide();
+    }else {
+      $scope.modal_4.hide();
     }
   };
 

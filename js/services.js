@@ -72,15 +72,15 @@ angular.module('evtManager.services', [])
     },
 
     saveAC: function () {
-      return $resource(apiURL + "addAccionComercial");
+      return $resource(apiURL + "addAccionComercial2");
     },
 
     newProspecto: function (sessionToken, prospecto, accion_comercial) {
-      return $resource(apiURL + "createProspecto", {token: sessionToken, prospecto: prospecto, accionComercial: accion_comercial},{'save': {method: 'POST'}});
+      return $resource(apiURL + "createProspecto2");
     },
 
     updateProspecto: function (sessionToken, prospecto, accion_comercial) {
-      return $resource(apiURL + "updateProspecto", {token: sessionToken, prospecto: prospecto, accionComercial: accion_comercial},{'save': {method: 'POST'}});
+      return $resource(apiURL + "updateProspecto2");
     }
 
 

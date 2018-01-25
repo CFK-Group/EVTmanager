@@ -2,12 +2,16 @@
   <ion-nav-title>Cobranzas</ion-nav-title>
   <ion-content class="grey lighten-4 has-header" overflow-scroll="false">
     <div class="list no-margin">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Búsqueda: rut, servicio, mes, etc." ng-model="filter.search">
+      </label>
       <div class="item row amber">
         <div class="col">Rut</div>
         <div class="col">Servicio</div>
         <div class="col">Mes</div>
       </div>
-      <div class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:3}" ng-click="chooseModal(1, venta)">
+      <div class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:3} | filter: filter.search" ng-click="chooseModal(1, venta)">
         <div class="col">{{venta.rut_cliente}}</div>
         <div class="col">{{venta.servicio}}</div>
         <div class="col">{{venta.mes_venta}}</div>

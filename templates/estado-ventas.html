@@ -3,38 +3,24 @@
   <ion-content class="grey lighten-4 has-header" overflow-scroll="false">
     <div class="fixed">
       <div class="list no-margin">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Meses
-          </div>
-          <select ng-model="filtro.meses">
-            <option ng-value="">Todos</option>
-            <option ng-value="1">Enero</option>
-            <option ng-value="2">Febrero</option>
-            <option ng-value="3">Marzo</option>
-            <option ng-value="4">Abril</option>
-            <option ng-value="5">Mayo</option>
-            <option ng-value="6">Junio</option>
-            <option ng-value="7">Julio</option>
-            <option ng-value="8">Agosto</option>
-            <option ng-value="9">Septiembre</option>
-            <option ng-value="10">Octubre</option>
-            <option ng-value="11">Noviembre</option>
-            <option ng-value="12">Diciembre</option>
-          </select>
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input type="text" placeholder="Búsqueda: rut, servicio, mes, estado, etc." ng-model="filter.search">
         </label>
       </div>
       <div class="row amber">
         <div class="col">Rut</div>
         <div class="col">Servicio</div>
         <div class="col">Mes</div>
+        <div class="col">Estado</div>
       </div>
     </div>
     <div class="scroll">
-      <div class="row" collection-repeat="venta in ventas | filter: filtro.meses" ng-click="chooseModal(1, venta)">
+      <div class="row" collection-repeat="venta in ventas | filter: filter.search" ng-click="chooseModal(1, venta)">
         <div class="col">{{venta.rut_cliente}}</div>
         <div class="col">{{venta.servicio}}</div>
         <div class="col">{{venta.mes_venta}}</div>
+        <div class="col">{{venta.estado_tango}}</div>
       </div>
     </div>
   </ion-content>
