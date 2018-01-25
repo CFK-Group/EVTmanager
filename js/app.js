@@ -214,6 +214,6 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
   $httpProvider.defaults.headers.post = {'Content-Type': 'application/x-www-form-urlencoded'};
 })
 
-.run(function ($state, $ionicConfig, apiConnection) {
+.run(function ($state, $ionicConfig) {
   $ionicConfig.tabs.position('bottom');
 });

@@ -4,18 +4,19 @@
     <div class="list no-margin">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Búsqueda: visación, mes, rut, servicio, tipo carga, etc." ng-model="filter.search">
+        <input type="text" placeholder="Búsqueda: visación, mes, rut, servicio, estado, etc." ng-model="filter.search">
       </label>
       <label class="item row amber">
-        <div class="col">Rut</div>
-        <div class="col">Servicio</div>
-        <div class="col">Mes</div>
-        <div class="col">Tipo carga</div>
+        <div class="col col-25">Rut</div>
+        <div class="col col-20">Servicios</div>
+        <div class="col col-10">Mes</div>
+        <div class="col">Estado</div>
       </label>
-      <label class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:5} | filter: filter.search">
-        <div class="col">{{venta.rut_cliente}}</div>
-        <div class="col">{{venta.servicio}}</div>
-        <div class="col">{{venta.mes_venta}}</div>
+      <label class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:5} | filter: filter.search" ng-click="chooseModal(1, venta)">
+        <div class="col col-25">{{venta.rut_cliente}}</div>
+        <div class="col col-20">{{venta.n_servicio}}</div>
+        <div class="col col-10">{{venta.mes_venta}}</div>
+        <div class="col col-25">{{venta.visacion}}</div>
       </label>
     </div>
   </ion-content>

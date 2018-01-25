@@ -97,9 +97,6 @@ app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistor
 
 app.controller('VentasEstadoCtrl', function ($scope, $ionicPopup, $ionicNavBarDelegate, $ionicModal, apiConnection, $ionicLoading, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
-  $scope.filtro = {
-    meses: ''
-  };
 
   //Template del modal 1 (Ventas Estado)
   $ionicModal.fromTemplateUrl('templates/modal-ventas-estado.html',{
@@ -139,18 +136,78 @@ app.controller('VentasEstadoCtrl', function ($scope, $ionicPopup, $ionicNavBarDe
 
 app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
   $ionicNavBarDelegate.showBackButton(true);
-  $scope.filtro = {
-    visacion: 'Todos',
-    meses: 'Todos'
-  }
+
+  $ionicModal.fromTemplateUrl('templates/modal-ventas-visaciones.html',{
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_1 = modal;
+  });
+
+  $scope.openModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.show();
+    }else{
+      $scope.modal_2.show();
+    }
+  };
+
+  $scope.closeModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.hide();
+    }else{
+      $scope.modal_2.hide();
+    }
+  };
+
+  $scope.chooseModal = function (index, venta){
+    venta = venta || null;
+    if (venta !== null){
+      $scope.venta = venta;
+    }else{
+      $scope.venta = venta;
+    }
+    $scope.openModal(index);
+  };
 });
 
 app.controller('VentasPermanenciaCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
   $ionicNavBarDelegate.showBackButton(true);
-  $scope.filtro = {
-    permanencias: 'Todos',
-    meses: 'Todos'
-  }
+
+  $ionicModal.fromTemplateUrl('templates/modal-ventas-permanencia.html',{
+    id: 1,
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal){
+    $scope.modal_1 = modal;
+  });
+
+  $scope.openModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.show();
+    }else{
+      $scope.modal_2.show();
+    }
+  };
+
+  $scope.closeModal = function(index) {
+    if (index === 1){
+      $scope.modal_1.hide();
+    }else{
+      $scope.modal_2.hide();
+    }
+  };
+
+  $scope.chooseModal = function (index, venta){
+    venta = venta || null;
+    if (venta !== null){
+      $scope.venta = venta;
+    }else{
+      $scope.venta = venta;
+    }
+    $scope.openModal(index);
+  };
 });
 
 app.controller('VentasCobranzasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
@@ -255,12 +312,6 @@ app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelega
 
 app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
-  $scope.filtro = {
-    comunas: 'Todos',
-    nodos: 'Todos',
-    cuadrantes: 'Todos',
-    deudas: 'Todos'
-  };
 
   $rootScope.prospectosDirAsig = $rootScope.prospectos.filter(function (element) {
     return element.tipo_contacto !== 'Toca puerta y si hizo contacto'
@@ -339,10 +390,11 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
   $scope.guardar = function (ac) {
     console.log($scope.prospecto.id);
     var params = {
-        token: sessionStorage.userToken.toString(),
-        idProspecto: $scope.prospecto.id.toString(),
-        accionComercial: ac.accion.toString()
+        accionComercial: ac.accion,
+        idProspecto: $scope.prospecto.id,
+        token: sessionStorage.userToken
     };
+    console.log(params);
     apiConnection.saveAC().save(params).$promise.then(
       function (response) {
         $ionicLoading.hide();
