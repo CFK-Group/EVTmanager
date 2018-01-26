@@ -74,11 +74,11 @@ angular.module('evtManager.services', [])
       return $resource(apiURL + "addAccionComercial2");
     },
 
-    newProspecto: function (sessionToken, prospecto, accion_comercial) {
+    newProspecto: function () {
       return $resource(apiURL + "createProspecto2");
     },
 
-    updateProspecto: function (sessionToken, prospecto, accion_comercial) {
+    updateProspecto: function () {
       return $resource(apiURL + "updateProspecto2");
     }
 

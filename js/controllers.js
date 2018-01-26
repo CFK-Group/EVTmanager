@@ -310,7 +310,7 @@ app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelega
   }, 100);
 });
 
-app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope) {
+app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope, apiConnection, $ionicLoading, $ionicPopup) {
   $ionicNavBarDelegate.showBackButton(true);
 
   $rootScope.prospectosDirAsig = $rootScope.prospectos.filter(function (element) {
@@ -322,6 +322,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
   $scope.stepForward = function(nextStep){
     $scope.step = nextStep;
     console.log($scope.step);
+    $scope.cambiarTipoContacto();
   };
 
   //Template del modal 1 (Ventas Estado)
@@ -364,8 +365,77 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     $scope.openModal(index);
   };
 
+  $scope.cambiarTipoContacto = function () {
+    console.log($scope.prospecto.tipo_contacto);
+    if($scope.model.tipoContacto === 'final'){
+      $scope.prospecto.tipo_contacto = 'No toca puerta y deja volante'
+    }else if($scope.model.tipoContacto === '2'){
+      $scope.prospecto.tipo_contacto = 'No toca puerta y NO deja volante'
+    }else if($scope.model.tipoContacto === '3'){
+      $scope.prospecto.tipo_contacto = 'Toca puerta y NO hizo contacto'
+    }else if($scope.model.tipoContacto === 'finalCompleto'){
+      $scope.prospecto.tipo_contacto = 'Toca puerta y SI hizo contacto'
+    }
+    console.log($scope.prospecto.tipo_contacto);
+  };
+
   $scope.actualizarProspecto = function () {
-    $scope.closeModal(1);
+    var prospectoActualizado = {
+      'id': $scope.prospecto.id,
+      'nombre': $scope.prospecto.nombre,
+      'rut_prospecto': $scope.prospecto.rut_prospecto,
+      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'calle': $scope.prospecto.calle,
+      'numero': $scope.prospecto.numero,
+      'comuna' : $scope.prospecto.comuna,
+      'nodo': $scope.prospecto.nodo,
+      'cuadrante': $scope.prospecto.cuadrante,
+      'fono' : $scope.prospecto.fono,
+      'cable': $scope.prospecto.cable,
+      'inet': $scope.prospecto.inet,
+      'premium': $scope.prospecto.premium,
+      'deuda': $scope.prospecto.deuda,
+      'rut_comprador': $scope.prospecto.rut_comprador,
+      'dv_comprador': $scope.prospecto.dv_comprador,
+      'nombre_comprador': $scope.prospecto.nombre_comprador,
+      'fono_contacto_1': $scope.prospecto.fono_contacto_1,
+      'fono_contacto_2': $scope.prospecto.fono_contacto_2,
+      'email': $scope.prospecto.email,
+      'tipo_tv': $scope.prospecto.tipo_tv,
+      'tipo_fono': $scope.prospecto.tipo_fono,
+      'tipo_inet': $scope.prospecto.tipo_inet,
+      'accion_comercial': $scope.prospecto.accionComercial,
+      'estado': $scope.prospecto.estado,
+      'id_vendedor': $scope.prospecto.id_vendedor,
+      'tipo_creacion': $scope.prospecto.tipo_creacion,
+      'tipo_accion': $scope.prospecto.tipo_accion,
+      'tipo_contacto': $scope.prospecto.tipo_contacto,
+      'create_time': $scope.prospecto.create_time,
+      'update_time': $scope.prospecto.update_time
+    };
+    var data = {
+      token: sessionStorage.userToken,
+      prospecto: prospectoActualizado,
+      accionComercial: $scope.prospecto.accionComercial
+    };
+    apiConnection.updateProspecto().save(data).$promise.then(function (response) {
+      $ionicLoading.hide();
+      var alert = $ionicPopup.alert({
+        title: 'Actualizado',
+        template: 'Prospecto actualizado correctamente'
+      });
+      alert.then(function () {
+        $scope.closeModal(1);
+      });
+      console.log(response);
+    }, function (err) {
+      console.log("ERROR: ", err);
+      $ionicLoading.hide();
+      var alert = $ionicPopup.alert({
+        title: 'Ups!',
+        template: 'Algo ha pasado, intenta de nuevo más tarde.'
+      });
+    });
   };
 });
 
