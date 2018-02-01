@@ -48,3 +48,11 @@ div.loading.row{
 .item-note{
   color: inherit;
 }
+
+.padding-for-footer{
+  padding-bottom: 44px;
+}
+
+.tab-item {
+  max-width: 100%;
+}

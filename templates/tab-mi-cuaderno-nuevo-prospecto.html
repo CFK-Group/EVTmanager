@@ -59,186 +59,167 @@
       </div>
     </div>
 
-    <!--step == final // step == finalCompleto-->
-    <section id="card4" class="card z-depth-1" ng-if="step === 'final' || step === 'finalCompleto'">
+    <!--step == finalCompleto-->
+    <section id="card4" class="card z-depth-1" ng-if="step === 'finalCompleto'">
       <article class="list no-margin">
         <div class="item item-divider">
           Datos cliente:
         </div>
-        <label class="item item-input item-select white">
-          <div class="input-label">
-            Comuna
-          </div>
-          <select>
-            <option ng-value="Todas">Seleccionar Comuna</option>
-            <option ng-value="Todas">Buin</option>
-            <option ng-value="Todas">Cerrillos</option>
-            <option ng-value="Todas">Cerro Navia</option>
-            <option ng-value="Todas">Colina</option>
-            <option ng-value="Todas">Conchalí</option>
-            <option ng-value="Todas">El Bosque</option>
-            <option ng-value="Todas">Estacion Central</option>
-            <option ng-value="Todas">Huechuraba</option>
-            <option ng-value="Todas">Independencia</option>
-            <option ng-value="Todas">La Cisterna</option>
-            <option ng-value="Todas">La Florida</option>
-            <option ng-value="Todas">La Granja</option>
-            <option ng-value="Todas">La Pintana</option>
-            <option ng-value="Todas">La Reina</option>
-            <option ng-value="Todas">Lampa</option>
-            <option ng-value="Todas">Las Condes</option>
-            <option ng-value="Todas">Lo Barnechea</option>
-            <option ng-value="Todas">Lo Espejo</option>
-            <option ng-value="Todas">Lo Prado</option>
-            <option ng-value="Todas">Macul</option>
-            <option ng-value="Todas">Maipú</option>
-            <option ng-value="Todas">Melipilla</option>
-            <option ng-value="Todas">Paine</option>
-            <option ng-value="Todas">Pedro Aguirre Cerda</option>
-            <option ng-value="Todas">Peñaflor</option>
-            <option ng-value="Todas">Peñalolen</option>
-            <option ng-value="Todas">Providencia</option>
-            <option ng-value="Todas">Pudahuel</option>
-            <option ng-value="Todas">Puente Alto</option>
-            <option ng-value="Todas">Quilicura</option>
-            <option ng-value="Todas">Quinta Normal</option>
-            <option ng-value="Todas">Recoleta</option>
-            <option ng-value="Todas">Renca</option>
-            <option ng-value="Todas">San Bernardo</option>
-            <option ng-value="Todas">San Joaquín</option>
-            <option ng-value="Todas">San Miguel</option>
-            <option ng-value="Todas">San Ramón</option>
-            <option ng-value="Todas">Santiago</option>
-            <option ng-value="Todas">Vitacura</option>
-            <option ng-value="Todas">Ñuñoa</option>
-          </select>
+        <label class="item item-input">
+          <span class="input-label">Comuna</span>
+          <input class="text-right" type="text" ng-model="prospecto.comuna">
         </label>
         <label class="item item-input">
           <span class="input-label">Calle</span>
-          <input class="text-right" type="text">
+          <input class="text-right" type="text" ng-model="prospecto.calle">
         </label>
         <label class="item item-input">
           <span class="input-label">Número</span>
-          <input class="text-right" type="number">
+          <input class="text-right" type="number" ng-model="prospecto.numero">
         </label>
-        <!--formulario completo-->
-        <div ng-show="step === 'finalCompleto'">
-          <label class="item item-input">
-            <span class="input-label">Nodo</span>
-            <input class="text-right" type="number">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Cuadrante</span>
-            <input class="text-right" type="number">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Rut Comprador</span>
-            <input class="text-right" type="text">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Nombre Comprador</span>
-            <input class="text-right" type="text">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Fono comtacto 1</span>
-            <input class="text-right" type="number">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Fono comtacto 2</span>
-            <input class="text-right" type="number">
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Email</span>
-            <input class="text-right" type="email">
-          </label>
-          <div class="item item-divider">
-            Servicios a contratar:
-          </div>
-          <label class="item item-input item-select white">
-            <div class="input-label">
-              TV
-            </div>
-            <select>
-              <option ng-value="Ninguno">Ninguno</option>
-              <option ng-value="">TV HOGAR HD</option>
-              <option ng-value="">TV FULL HD</option>
-            </select>
-          </label>
-          <label class="item item-input item-select white">
-            <div class="input-label">
-              Fono
-            </div>
-            <select>
-              <option ng-value="Ninguno">Ninguno</option>
-              <option ng-value="">FONO ILIMITADO</option>
-              <option ng-value="">PORTABILIDAD</option>
-            </select>
-          </label>
-          <label class="item item-input item-select white">
-            <div class="input-label">
-              Internet
-            </div>
-            <select>
-              <option ng-value="Ninguno">Ninguno</option>
-              <option ng-value="">MEGA 30</option>
-              <option ng-value="">MEGA 120</option>
-              <option ng-value="">MEGA 200</option>
-            </select>
-          </label>
-          <div class="item item-divider">
-            Estado actual cliente:
-          </div>
-          <label class="item item-input item-select white">
-            <div class="input-label">
-              Empresa
-            </div>
-            <select>
-              <option ng-value="Ninguno">Ninguno</option>
-              <option ng-value="">VTR</option>
-              <option ng-value="">Movistar Fibra</option>
-              <option ng-value="">Movistar ADSL</option>
-              <option ng-value="">Claro</option>
-              <option ng-value="">DirecTV</option>
-              <option ng-value="">GTD</option>
-              <option ng-value="">Otro</option>
-              <option ng-value="">No sabe/No responde</option>
-            </select>
-          </label>
-          <label class="item item-input item-select white">
-            <div class="input-label">
-              Productos que tiene
-            </div>
-            <select>
-              <option ng-value="Ninguno">Ninguno</option>
-              <option ng-value="">3 PLAY</option>
-              <option ng-value="">CABLE + INTERNET</option>
-              <option ng-value="">CABLE + FONO</option>
-              <option ng-value="">CABLE</option>
-              <option ng-value="">INTERNET</option>
-              <option ng-value="">FONO</option>
-              <option ng-value="">No sabe/No responde</option>
-            </select>
-          </label>
-          <label class="item item-input item-select white">
-            <div class="input-label">
-              Tiene promoción
-            </div>
-            <select>
-              <option ng-value="">No sabe/No responde</option>
-              <option ng-value="">Si</option>
-              <option ng-value="">No</option>
-            </select>
-          </label>
-          <label class="item item-input">
-            <span class="input-label">Acción comercial</span>
-            <input class="text-right" type="text">
-          </label>
+        <label class="item item-input">
+          <span class="input-label">Nodo</span>
+          <input class="text-right" type="number" ng-model="prospecto.nodo">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cuadrante</span>
+          <input class="text-right" type="number" ng-model="prospecto.cuadrante">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Fono</span>
+          <input class="text-right" type="text" ng-model="prospecto.fono">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Cable</span>
+          <input class="text-right" type="text" ng-model="prospecto.cable">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Inet</span>
+          <input class="text-right" type="text" ng-model="prospecto.inet">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Prem</span>
+          <input class="text-right" type="text" ng-model="prospecto.prem">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Rut</span>
+          <input class="text-right" type="text" ng-model="prospecto.rut">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Nombre</span>
+          <input class="text-right" type="text" ng-model="prospecto.nombre">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Deuda</span>
+          <input class="text-right" type="text" ng-model="prospecto.deuda">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Rut comprador</span>
+          <input class="text-right" type="text" ng-model="prospecto.rut_comprador">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Nombre comprador</span>
+          <input class="text-right" type="text" ng-model="prospecto.nombre_comprador">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Fono contacto 1</span>
+          <input class="text-right" type="tel" ng-model="prospecto.fono_contacto_1">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Fono contacto 2</span>
+          <input class="text-right" type="tel" ng-model="prospecto.fono_contacto_2">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input class="text-right" type="email" ng-model="prospecto.email">
+        </label>
+        <div class="item item-divider">
+          Servicios a contratar:
         </div>
+        <label class="item item-input item-select white">
+          <div class="input-label">
+            TV
+          </div>
+          <select>
+            <option ng-model="prospecto.tipo_tv" ng-value="'NINGUNO'">NINGUNO</option>
+            <option ng-model="prospecto.tipo_tv" ng-value="'TV HOGAR HD'">TV HOGAR HD</option>
+            <option ng-model="prospecto.tipo_tv" ng-value="'TV FULL HD'">TV FULL HD</option>
+          </select>
+        </label>
+        <label class="item item-input item-select white">
+          <div class="input-label">
+            Fono
+          </div>
+          <select>
+            <option ng-model="prospecto.tipo_fono" ng-value="'NINGUNO'">NINGUNO</option>
+            <option ng-model="prospecto.tipo_fono" ng-value="'FONO LIMITADO'">FONO LIMITADO</option>
+            <option ng-model="prospecto.tipo_fono" ng-value="'PORTABILIDAD'">PORTABILIDAD</option>
+          </select>
+        </label>
+        <label class="item item-input item-select white">
+          <div class="input-label">
+            Internet
+          </div>
+          <select>
+            <option ng-model="prospecto.tipo_inet" ng-value="'NINGUNO'">NINGUNO</option>
+            <option ng-model="prospecto.tipo_inet" ng-value="'MEGA 30'">MEGA 30</option>
+            <option ng-model="prospecto.tipo_inet" ng-value="'MEGA 120'">MEGA 120</option>
+            <option ng-model="prospecto.tipo_inet" ng-value="'MEGA 200'">MEGA 200</option>
+          </select>
+        </label>
+        <div class="item item-divider">
+          Estado actual cliente:
+        </div>
+        <label class="item item-input item-select white">
+          <div class="input-label">
+            Empresa
+          </div>
+          <select>
+            <option ng-model="prospecto.empresaServicios" ng-value="'NINGUNO'">NINGUNO</option>
+            <option ng-model="prospecto.empresaServicios" ng-value="'VTR'">VTR</option>
+            <option ng-model="prospecto.empresaServicios" ng-value="'Movistar Fibra'">Movistar Fibra</option>
+            <option ng-model="prospecto.empresaServicios" ng-value="'Movistar ADSL'">Movistar ADSL</option>
+            <option ng-model="prospecto.empresaServicios" ng-value="'Claro'">Claro</option>
+            <option ng-model="prospecto.empresaServicios" ng-value="'DirecTV'">DirecTV</option>
+            <option ng-model="prospecto.empresaServicios" ng-value="'GTD'">GTD</option>
+            <option ng-model="prospecto.empresaServicios" ng-value="'Otro'">Otro</option>
+            <option ng-model="prospecto.empresaServicios" ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
+          </select>
+        </label>
+        <label class="item item-input item-select white">
+          <div class="input-label">
+            Productos que tiene
+          </div>
+          <select>
+            <option ng-model="prospecto.productosContratados" ng-value="'NINGUNO'">NINGUNO</option>
+            <option ng-model="prospecto.productosContratados" ng-value="'3 PLAY'">3 PLAY</option>
+            <option ng-model="prospecto.productosContratados" ng-value="'CABLE + INTERNET'">CABLE + INTERNET</option>
+            <option ng-model="prospecto.productosContratados" ng-value="'CABLE + FONO'">CABLE + FONO</option>
+            <option ng-model="prospecto.productosContratados" ng-value="'CABLE'">CABLE</option>
+            <option ng-model="prospecto.productosContratados" ng-value="'INTERNET'">INTERNET</option>
+            <option ng-model="prospecto.productosContratados" ng-value="'FONO'">FONO</option>
+            <option ng-model="prospecto.productosContratados" ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
+          </select>
+        </label>
+        <label class="item item-input item-select white">
+          <div class="input-label">
+            Tiene promoción
+          </div>
+          <select>
+            <option ng-model="prospecto.tienePromocion" ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
+            <option ng-model="prospecto.tienePromocion" ng-value="'SI'">SI</option>
+            <option ng-model="prospecto.tienePromocion" ng-value="'NO'">NO</option>
+          </select>
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Acción comercial</span>
+          <input class="text-right" type="text" ng-model="prospecto.accionComercial">
+        </label>
       </article>
       <article class="list no-margin">
         <div class="button-bar">
           <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-          <button id="card4SendButton" class="button white" ng-class="{disabled: (model.tipoContacto.motivo == '' || model.tipoContacto.motivo == undefined || model.tipoContacto.motivo == 0)}" ng-click=""><strong>Enviar</strong></button>
+          <button id="card4SendButton" class="button white" ng-class="{disabled: (prospecto.nombre == '' || prospecto.email == '' || prospecto.accionComercial == '')}" ng-click="enviarProspecto()"><strong>Guardar</strong></button>
         </div>
       </article>
     </section>

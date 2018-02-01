@@ -317,12 +317,19 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     return element.tipo_contacto !== 'Toca puerta y si hizo contacto'
   });
 
+  $rootScope.prospectosDirAsig = $rootScope.prospectosDirAsig.filter(function (element) {
+    return element.tipo_contacto !== 'Toca puerta y SI hizo contacto'
+  });
+
   $scope.step = 'inicio';
 
   $scope.stepForward = function(nextStep){
     $scope.step = nextStep;
-    console.log($scope.step);
-    $scope.cambiarTipoContacto();
+  };
+
+  $scope.stepForward = function(nextStep, tipo_contacto){
+    $scope.cambiarTipoContacto(tipo_contacto);
+    $scope.step = nextStep;
   };
 
   //Template del modal 1 (Ventas Estado)
@@ -365,18 +372,17 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     $scope.openModal(index);
   };
 
-  $scope.cambiarTipoContacto = function () {
-    console.log($scope.prospecto.tipo_contacto);
-    if($scope.model.tipoContacto === 'final'){
+  $scope.cambiarTipoContacto = function (tipo_contacto) {
+    if(tipo_contacto === 'final'){
       $scope.prospecto.tipo_contacto = 'No toca puerta y deja volante'
-    }else if($scope.model.tipoContacto === '2'){
+    }else if(tipo_contacto === '2'){
       $scope.prospecto.tipo_contacto = 'No toca puerta y NO deja volante'
-    }else if($scope.model.tipoContacto === '3'){
+    }else if(tipo_contacto === '3'){
       $scope.prospecto.tipo_contacto = 'Toca puerta y NO hizo contacto'
-    }else if($scope.model.tipoContacto === 'finalCompleto'){
+    }else if(tipo_contacto === 'finalCompleto'){
       $scope.prospecto.tipo_contacto = 'Toca puerta y SI hizo contacto'
     }
-    console.log($scope.prospecto.tipo_contacto);
+    return $scope.prospecto.tipo_contacto
   };
 
   $scope.actualizarProspecto = function () {
@@ -411,14 +417,19 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       'tipo_accion': $scope.prospecto.tipo_accion,
       'tipo_contacto': $scope.prospecto.tipo_contacto,
       'create_time': $scope.prospecto.create_time,
-      'update_time': $scope.prospecto.update_time
+      'update_time': $scope.prospecto.update_time,
+      'tienePromocion': $scope.prospecto.tienePromocion,
+      'productosContratados': $scope.prospecto.productosContratados,
+      'empresaServicios': $scope.prospecto.empresaServicios
     };
     var data = {
       token: sessionStorage.userToken,
       prospecto: prospectoActualizado,
       accionComercial: $scope.prospecto.accionComercial
     };
-    apiConnection.updateProspecto().save(data).$promise.then(function (response) {
+    console.log(data);
+    apiConnection.updateProspecto().save(data).$promise.then(
+      function (response) {
       $ionicLoading.hide();
       var alert = $ionicPopup.alert({
         title: 'Actualizado',
@@ -439,13 +450,108 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
   };
 });
 
-app.controller('MiCuadernoNuevoProspectoCtrl', function ($scope, $ionicNavBarDelegate) {
+app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $scope, $ionicNavBarDelegate, apiConnection, $ionicLoading, $ionicPopup) {
   $ionicNavBarDelegate.showBackButton(false);
   $scope.step = 'inicio';
 
-  $scope.stepForward = function(nextStep, id){
+  $scope.stepForward = function(nextStep){
+    $scope.cambiarTipoContacto(nextStep);
     $scope.step = nextStep;
-    console.log($scope.step);
+  };
+
+  $scope.cambiarTipoContacto = function (tipo_contacto) {
+    if(tipo_contacto === 'final'){
+      $scope.prospecto.tipo_contacto = 'No toca puerta y deja volante'
+    }else if(tipo_contacto === '2'){
+      $scope.prospecto.tipo_contacto = 'No toca puerta y NO deja volante'
+    }else if(tipo_contacto === '3'){
+      $scope.prospecto.tipo_contacto = 'Toca puerta y NO hizo contacto'
+    }else if(tipo_contacto === 'finalCompleto'){
+      $scope.prospecto.tipo_contacto = 'Toca puerta y SI hizo contacto'
+    }
+    return $scope.prospecto.tipo_contacto
+  };
+
+  $scope.prospecto = {
+    accionComercial: '',
+    email: '',
+    nombre: ''
+  };
+
+  $scope.enviarProspecto = function () {
+    var nuevoProspecto = {
+      'nombre': $scope.prospecto.nombre,
+      'rut': $scope.prospecto.rut_prospecto,
+      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'calle': $scope.prospecto.calle,
+      'numero': $scope.prospecto.numero,
+      'comuna' : $scope.prospecto.comuna,
+      'nodo': $scope.prospecto.nodo,
+      'cuadrante': $scope.prospecto.cuadrante,
+      'fono' : $scope.prospecto.fono,
+      'cable': $scope.prospecto.cable,
+      'inet': $scope.prospecto.inet,
+      'premium': $scope.prospecto.premium,
+      'deuda': $scope.prospecto.deuda,
+      'rut_comprador': $scope.prospecto.rut_comprador,
+      'dv_comprador': $scope.prospecto.dv_comprador,
+      'nombre_comprador': $scope.prospecto.nombre_comprador,
+      'fono_contacto_1': $scope.prospecto.fono_contacto_1,
+      'fono_contacto_2': $scope.prospecto.fono_contacto_2,
+      'email': $scope.prospecto.email,
+      'tipo_tv': $scope.prospecto.tipo_tv,
+      'tipo_fono': $scope.prospecto.tipo_fono,
+      'tipo_inet': $scope.prospecto.tipo_inet,
+      'accion_comercial': $scope.prospecto.accionComercial,
+      'estado': $scope.prospecto.estado,
+      'id_vendedor': $scope.prospecto.id_vendedor,
+      'tipo_creacion': $scope.prospecto.tipo_creacion,
+      'tipo_accion': $scope.prospecto.tipo_accion,
+      'tipo_contacto': $scope.prospecto.tipo_contacto,
+      'create_time': $scope.prospecto.create_time,
+      'update_time': $scope.prospecto.update_time,
+      'tienePromocion': $scope.prospecto.tienePromocion,
+      'productosContratados': $scope.prospecto.productosContratados,
+      'empresaServicios': $scope.prospecto.empresaServicios
+    };
+    var data = {
+      token: sessionStorage.userToken,
+      prospecto: nuevoProspecto,
+      accionComercial: $scope.prospecto.accionComercial
+    };
+    apiConnection.newProspecto().save(data).$promise.then(
+      function (response) {
+        $ionicLoading.hide();
+        console.log(data.prospecto);
+        var alert = $ionicPopup.alert({
+          title: 'Guardado',
+          template: 'Prospecto guardado correctamente'
+        });
+        alert.then(function () {
+          apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
+            function (response) {
+              $rootScope.prospectos = JSON.parse(JSON.stringify(response));
+              console.log($rootScope.prospectos);
+            }, function (err) {
+              $ionicLoading.hide();
+              $ionicPopup.alert({
+                title: 'Ups!',
+                template: 'Algo ha pasado, intente cargar prospectos de forma manual.'
+              });
+            }
+          );
+          $state.go('tabs.cuaderno')
+        });
+        console.log(response);
+      }, function (err) {
+        console.log("ERROR: ", err);
+        $ionicLoading.hide();
+        var alert = $ionicPopup.alert({
+          title: 'Ups!',
+          template: 'Algo ha pasado, intenta de nuevo.'
+        });
+      }
+    );
   };
 
   $scope.cancel = function () {
@@ -457,7 +563,7 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($scope, $ionicNavBarDel
 
 app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, apiConnection, $ionicPopup, $ionicLoading) {
   $ionicNavBarDelegate.showBackButton(true);
-  $scope.guardar = function (ac) {
+  $scope.guardarAC = function (ac) {
     console.log($scope.prospecto.id);
     var params = {
         accionComercial: ac.accion,
@@ -493,6 +599,70 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
         });
       }
     );
+  };
+
+  $scope.actualizarProspecto = function () {
+    var prospectoActualizado = {
+      'id': $scope.prospecto.id,
+      'nombre': $scope.prospecto.nombre,
+      'rut_prospecto': $scope.prospecto.rut_prospecto,
+      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'calle': $scope.prospecto.calle,
+      'numero': $scope.prospecto.numero,
+      'comuna' : $scope.prospecto.comuna,
+      'nodo': $scope.prospecto.nodo,
+      'cuadrante': $scope.prospecto.cuadrante,
+      'fono' : $scope.prospecto.fono,
+      'cable': $scope.prospecto.cable,
+      'inet': $scope.prospecto.inet,
+      'premium': $scope.prospecto.premium,
+      'deuda': $scope.prospecto.deuda,
+      'rut_comprador': $scope.prospecto.rut_comprador,
+      'dv_comprador': $scope.prospecto.dv_comprador,
+      'nombre_comprador': $scope.prospecto.nombre_comprador,
+      'fono_contacto_1': $scope.prospecto.fono_contacto_1,
+      'fono_contacto_2': $scope.prospecto.fono_contacto_2,
+      'email': $scope.prospecto.email,
+      'tipo_tv': $scope.prospecto.tipo_tv,
+      'tipo_fono': $scope.prospecto.tipo_fono,
+      'tipo_inet': $scope.prospecto.tipo_inet,
+      'accion_comercial': $scope.prospecto.accionComercial,
+      'estado': $scope.prospecto.estado,
+      'id_vendedor': $scope.prospecto.id_vendedor,
+      'tipo_creacion': $scope.prospecto.tipo_creacion,
+      'tipo_accion': $scope.prospecto.tipo_accion,
+      'tipo_contacto': $scope.prospecto.tipo_contacto,
+      'create_time': $scope.prospecto.create_time,
+      'update_time': $scope.prospecto.update_time,
+      'tienePromocion': $scope.prospecto.tienePromocion,
+      'productosContratados': $scope.prospecto.productosContratados,
+      'empresaServicios': $scope.prospecto.empresaServicios
+    };
+    var data = {
+      token: sessionStorage.userToken,
+      prospecto: prospectoActualizado,
+      accionComercial: $scope.prospecto.accionComercial
+    };
+    console.log(data);
+    apiConnection.updateProspecto().save(data).$promise.then(
+      function (response) {
+        $ionicLoading.hide();
+        var alert = $ionicPopup.alert({
+          title: 'Actualizado',
+          template: 'Prospecto actualizado correctamente'
+        });
+        alert.then(function () {
+          $scope.closeModal(4);
+        });
+        console.log(response);
+      }, function (err) {
+        console.log("ERROR: ", err);
+        $ionicLoading.hide();
+        var alert = $ionicPopup.alert({
+          title: 'Ups!',
+          template: 'Algo ha pasado, intenta de nuevo más tarde.'
+        });
+      });
   };
 
   $scope.cancel = function () {
