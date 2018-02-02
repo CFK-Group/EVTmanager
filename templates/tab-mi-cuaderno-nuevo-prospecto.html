@@ -15,7 +15,7 @@
       </ion-list>
       <div class="button-bar">
         <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-        <button id="card1NextButton" class="button white siguiente" ng-class="{disabled: (model.tipoContacto == '' || model.tipoContacto == undefined || model.tipoContacto == 0)}" ng-click="stepForward(model.tipoContacto, 'card1')"><strong>Siguiente</strong></button>
+        <button class="button white siguiente" ng-class="{disabled: (model.tipoContacto == '' || model.tipoContacto == undefined || model.tipoContacto == 0)}" ng-click="stepForward(model.tipoContacto, model.tipoContacto)"><strong>Siguiente</strong></button>
       </div>
     </div>
 
@@ -25,15 +25,15 @@
         <ion-item>
           <p class="text-center"><strong>Motivo</strong></p>
         </ion-item>
-        <ion-radio ng-model="model.motivo" ng-value="'1'" name="motivo">Sin Moradores</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'2'" name="motivo">Abandonada</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'3'" name="motivo">En Construcción</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'4'" name="motivo">No tengo volante</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'5'" name="motivo">Otra razón</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Sin Moradores'" name="motivo">Sin Moradores</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Abandonada'" name="motivo">Abandonada</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'En Construcción'" name="motivo">En Construcción</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'No tengo volante'" name="motivo">No tengo volante</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Otra razón'" name="motivo">Otra razón</ion-radio>
       </ion-list>
       <div class="button-bar">
         <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-        <button id="card2NextButton" class="button white" ng-class="{disabled: (model.motivo == '' || model.motivo == undefined || model.motivo == 0)}" ng-click="stepForward('final', 'card2')"><strong>Siguiente</strong></button>
+        <button id="card2NextButton" class="button white" ng-class="{disabled: (prospecto.tipo_accion == '' || prospecto.tipo_accion == undefined || prospecto.tipo_accion == 0)}" ng-click="stepForward('final')"><strong>Siguiente</strong></button>
       </div>
     </div>
 
@@ -43,24 +43,24 @@
         <ion-item>
           <p class="text-center"><strong>Motivo</strong></p>
         </ion-item>
-        <ion-radio ng-model="model.motivo" ng-value="'1'" name="motivo">Sin Moradores</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'2'" name="motivo">Abandonada</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'3'" name="motivo">En Construcción</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'4'" name="motivo">No le interesa</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'5'" name="motivo">No dejó volante</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'6'" name="motivo">Si dejó volante</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'7'" name="motivo">Tiene competencia (CLARO)</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'8'" name="motivo">Tiene competencia (MOVISTAR)</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'9'" name="motivo">Tiene competencia (OTRO)</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Sin Moradores'" name="motivo">Sin Moradores</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Abandonada'" name="motivo">Abandonada</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'En Construcción'" name="motivo">En Construcción</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'No le interesa'" name="motivo">No le interesa</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'No dejó volante'" name="motivo">No dejó volante</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Si dejó volante'" name="motivo">Si dejó volante</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Tiene competencia (CLARO)'" name="motivo">Tiene competencia (CLARO)</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Tiene competencia (MOVISTAR)'" name="motivo">Tiene competencia (MOVISTAR)</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Tiene competencia (OTRO)'" name="motivo">Tiene competencia (OTRO)</ion-radio>
       </ion-list>
       <div class="button-bar">
         <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-        <button id="card3NextButton" class="button white" ng-class="{disabled: (model.tipoContacto.motivo == '' || model.tipoContacto.motivo == undefined || model.tipoContacto.motivo == 0)}" ng-click="stepForward('final', 'card3')"><strong>Siguiente</strong></button>
+        <button id="card3NextButton" class="button white" ng-class="{disabled: (model.tipoContacto.motivo == '' || model.tipoContacto.motivo == undefined || model.tipoContacto.motivo == 0)}" ng-click="stepForward('final')"><strong>Siguiente</strong></button>
       </div>
     </div>
 
     <!--step == finalCompleto-->
-    <section id="card4" class="card z-depth-1" ng-if="step === 'finalCompleto'">
+    <section id="card4" class="card z-depth-1" ng-if="step === 'finalCompleto' || step === 'final'">
       <article class="list no-margin">
         <div class="item item-divider">
           Datos cliente:
@@ -68,6 +68,14 @@
         <label class="item item-input">
           <span class="input-label">Comuna</span>
           <input class="text-right" type="text" ng-model="prospecto.comuna">
+        </label>
+        <label class="item item-input item-select white">
+          <div class="input-label">
+            Comuna
+          </div>
+          <select ng-model="prospecto.comuna" collection-repeat="comuna in comunas">
+            <option ng-value="comuna">{{comuna}}</option>
+          </select>
         </label>
         <label class="item item-input">
           <span class="input-label">Calle</span>
@@ -77,149 +85,149 @@
           <span class="input-label">Número</span>
           <input class="text-right" type="number" ng-model="prospecto.numero">
         </label>
-        <label class="item item-input">
-          <span class="input-label">Nodo</span>
-          <input class="text-right" type="number" ng-model="prospecto.nodo">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Cuadrante</span>
-          <input class="text-right" type="number" ng-model="prospecto.cuadrante">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Fono</span>
-          <input class="text-right" type="text" ng-model="prospecto.fono">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Cable</span>
-          <input class="text-right" type="text" ng-model="prospecto.cable">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Inet</span>
-          <input class="text-right" type="text" ng-model="prospecto.inet">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Prem</span>
-          <input class="text-right" type="text" ng-model="prospecto.premium">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Rut</span>
-          <input class="text-right" type="text" ng-model="prospecto.rut">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Nombre</span>
-          <input class="text-right" type="text" ng-model="prospecto.nombre">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Deuda</span>
-          <input class="text-right" type="text" ng-model="prospecto.deuda">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Rut comprador</span>
-          <input class="text-right" type="text" ng-model="prospecto.rut_comprador">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Nombre comprador</span>
-          <input class="text-right" type="text" ng-model="prospecto.nombre_comprador">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Fono contacto 1</span>
-          <input class="text-right" type="tel" ng-model="prospecto.fono_contacto_1">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Fono contacto 2</span>
-          <input class="text-right" type="tel" ng-model="prospecto.fono_contacto_2">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Email</span>
-          <input class="text-right" type="email" ng-model="prospecto.email">
-        </label>
-        <div class="item item-divider">
-          Servicios a contratar:
+        <div ng-if="step === 'finalCompleto'">
+          <label class="item item-input">
+            <span class="input-label">Nodo</span>
+            <input class="text-right" type="number" ng-model="prospecto.nodo">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Cuadrante</span>
+            <input class="text-right" type="number" ng-model="prospecto.cuadrante">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Fono</span>
+            <input class="text-right" type="text" ng-model="prospecto.fono">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Cable</span>
+            <input class="text-right" type="text" ng-model="prospecto.cable">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Inet</span>
+            <input class="text-right" type="text" ng-model="prospecto.inet">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Prem</span>
+            <input class="text-right" type="text" ng-model="prospecto.premium">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Rut</span>
+            <input class="text-right" type="text" ng-model="prospecto.rut">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Nombre</span>
+            <input class="text-right" type="text" ng-model="prospecto.nombre">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Deuda</span>
+            <input class="text-right" type="text" ng-model="prospecto.deuda">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Rut comprador</span>
+            <input class="text-right" type="text" ng-model="prospecto.rut_comprador">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Nombre comprador</span>
+            <input class="text-right" type="text" ng-model="prospecto.nombre_comprador">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Fono contacto 1</span>
+            <input class="text-right" type="tel" ng-model="prospecto.fono_contacto_1">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Fono contacto 2</span>
+            <input class="text-right" type="tel" ng-model="prospecto.fono_contacto_2">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input class="text-right" type="email" ng-model="prospecto.email">
+          </label>
+          <div class="item item-divider">
+            Servicios a contratar:
+          </div>
+          <label class="item item-input item-select white">
+            <div class="input-label">
+              TV
+            </div>
+            <select ng-model="prospecto.tipo_tv">
+              <option ng-value="'NINGUNO'">NINGUNO</option>
+              <option ng-value="'TV HOGAR HD'">TV HOGAR HD</option>
+              <option ng-value="'TV FULL HD'">TV FULL HD</option>
+            </select>
+          </label>
+          <label class="item item-input item-select white">
+            <div class="input-label">
+              Fono
+            </div>
+            <select ng-model="prospecto.tipo_fono">
+              <option ng-value="'NINGUNO'">NINGUNO</option>
+              <option ng-value="'FONO LIMITADO'">FONO LIMITADO</option>
+              <option ng-value="'PORTABILIDAD'">PORTABILIDAD</option>
+            </select>
+          </label>
+          <label class="item item-input item-select white">
+            <div class="input-label">
+              Internet
+            </div>
+            <select ng-model="prospecto.tipo_inet">
+              <option ng-value="'NINGUNO'">NINGUNO</option>
+              <option ng-value="'MEGA 30'">MEGA 30</option>
+              <option ng-value="'MEGA 120'">MEGA 120</option>
+              <option ng-value="'MEGA 200'">MEGA 200</option>
+            </select>
+          </label>
+          <div class="item item-divider">
+            Estado actual cliente:
+          </div>
+          <label class="item item-input item-select white">
+            <div class="input-label">
+              Empresa
+            </div>
+            <select ng-model="prospecto.empresaServicios">
+              <option ng-value="'NINGUNO'">NINGUNO</option>
+              <option ng-value="'VTR'">VTR</option>
+              <option ng-value="'Movistar Fibra'">Movistar Fibra</option>
+              <option ng-value="'Movistar ADSL'">Movistar ADSL</option>
+              <option ng-value="'Claro'">Claro</option>
+              <option ng-value="'DirecTV'">DirecTV</option>
+              <option ng-value="'GTD'">GTD</option>
+              <option ng-value="'Otro'">Otro</option>
+              <option ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
+            </select>
+          </label>
+          <label class="item item-input item-select white">
+            <div class="input-label">
+              Productos que tiene
+            </div>
+            <select ng-model="prospecto.productosContratados">
+              <option ng-value="'NINGUNO'">NINGUNO</option>
+              <option ng-value="'3 PLAY'">3 PLAY</option>
+              <option ng-value="'CABLE + INTERNET'">CABLE + INTERNET</option>
+              <option ng-value="'CABLE + FONO'">CABLE + FONO</option>
+              <option ng-value="'CABLE'">CABLE</option>
+              <option ng-value="'INTERNET'">INTERNET</option>
+              <option ng-value="'FONO'">FONO</option>
+              <option ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
+            </select>
+          </label>
+          <label class="item item-input item-select white">
+            <div class="input-label">
+              Tiene promoción
+            </div>
+            <select ng-model="prospecto.tienePromocion">
+              <option ng-value="'SI'">SI</option>
+              <option ng-value="'NO'">NO</option>
+              <option ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
+            </select>
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Acción comercial</span>
+            <input class="text-right" type="text" ng-model="prospecto.accionComercial">
+          </label>
         </div>
-        <label class="item item-input item-select white">
-          <div class="input-label">
-            TV
-          </div>
-          <select ng-model="prospecto.tipo_tv">
-            <option ng-value="'NINGUNO'">NINGUNO</option>
-            <option ng-value="'TV HOGAR HD'">TV HOGAR HD</option>
-            <option ng-value="'TV FULL HD'">TV FULL HD</option>
-          </select>
-        </label>
-        <label class="item item-input item-select white">
-          <div class="input-label">
-            Fono
-          </div>
-          <select ng-model="prospecto.tipo_fono">
-            <option ng-value="'NINGUNO'">NINGUNO</option>
-            <option ng-value="'FONO LIMITADO'">FONO LIMITADO</option>
-            <option ng-value="'PORTABILIDAD'">PORTABILIDAD</option>
-          </select>
-        </label>
-        <label class="item item-input item-select white">
-          <div class="input-label">
-            Internet
-          </div>
-          <select ng-model="prospecto.tipo_inet">
-            <option ng-value="'NINGUNO'">NINGUNO</option>
-            <option ng-value="'MEGA 30'">MEGA 30</option>
-            <option ng-value="'MEGA 120'">MEGA 120</option>
-            <option ng-value="'MEGA 200'">MEGA 200</option>
-          </select>
-        </label>
-        <div class="item item-divider">
-          Estado actual cliente:
-        </div>
-        <label class="item item-input item-select white">
-          <div class="input-label">
-            Empresa
-          </div>
-          <select ng-model="prospecto.empresaServicios">
-            <option ng-value="'NINGUNO'">NINGUNO</option>
-            <option ng-value="'VTR'">VTR</option>
-            <option ng-value="'Movistar Fibra'">Movistar Fibra</option>
-            <option ng-value="'Movistar ADSL'">Movistar ADSL</option>
-            <option ng-value="'Claro'">Claro</option>
-            <option ng-value="'DirecTV'">DirecTV</option>
-            <option ng-value="'GTD'">GTD</option>
-            <option ng-value="'Otro'">Otro</option>
-            <option ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
-          </select>
-        </label>
-        <label class="item item-input item-select white">
-          <div class="input-label">
-            Productos que tiene
-          </div>
-          <select ng-model="prospecto.productosContratados">
-            <option ng-value="'NINGUNO'">NINGUNO</option>
-            <option ng-value="'3 PLAY'">3 PLAY</option>
-            <option ng-value="'CABLE + INTERNET'">CABLE + INTERNET</option>
-            <option ng-value="'CABLE + FONO'">CABLE + FONO</option>
-            <option ng-value="'CABLE'">CABLE</option>
-            <option ng-value="'INTERNET'">INTERNET</option>
-            <option ng-value="'FONO'">FONO</option>
-            <option ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
-          </select>
-        </label>
-        <label class="item item-input item-select white">
-          <div class="input-label">
-            Tiene promoción
-          </div>
-          <select ng-model="prospecto.tienePromocion">
-            <option ng-value="'SI'">SI</option>
-            <option ng-value="'NO'">NO</option>
-            <option ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
-          </select>
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Acción comercial</span>
-          <input class="text-right" type="text" ng-model="prospecto.accionComercial">
-        </label>
-      </article>
-      <article class="list no-margin">
         <div class="button-bar">
           <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-          <button id="card4SendButton" class="button white" ng-class="{disabled: (prospecto.nombre == '' || prospecto.email == '' || prospecto.accionComercial == '')}" ng-click="enviarProspecto()"><strong>Guardar</strong></button>
+          <button id="card4SendButton" class="button white" ng-class="{disabled: (prospecto.calle == '' || prospecto.comuna == '' || prospecto.numero == '')}" ng-click="enviarProspecto()"><strong>Guardar</strong></button>
         </div>
       </article>
     </section>

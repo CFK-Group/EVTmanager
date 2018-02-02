@@ -2,7 +2,7 @@
 
 var app = angular.module('evtManager.controllers', []);
 
-app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
+app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection, apiGobConnection) {
   console.log('loginCtrl');
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
@@ -30,6 +30,14 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
         deviceModel: model
       };
     }
+    apiGobConnection.getComunas('rm').query(
+      function (response) {
+        $rootScope.comunas = response.nombre;
+      },
+      function (err) {
+        console.log('Error: ', err);
+      }
+    );
 
     $scope.login = function () {
       $ionicLoading.show({
@@ -39,6 +47,7 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
       });
       $scope.loginVar = apiConnection.loginUser($scope.user.username, $scope.user.password, $scope.user.deviceId, $scope.user.deviceModel).query(
         function (response) {
+          console.table(response);
 
           $scope.loginInfo = response;
 
@@ -313,13 +322,19 @@ app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelega
 app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope, apiConnection, $ionicLoading, $ionicPopup) {
   $ionicNavBarDelegate.showBackButton(true);
 
-  var prospecto = {
+  $scope.prospecto = {
     tipo_tv: 'NINGUNO',
     tipo_fono: 'NINGUNO',
     tipo_inet: 'NINGUNO',
-    empresa: 'NINGUNO',
+    empresaServicios: 'NINGUNO',
     productosContratados: 'NINGUNO',
-    tienePromocion: 'No sabe/No contesta'
+    tienePromocion: 'No sabe/No contesta',
+    accionComercial: '',
+    email: '',
+    nombre: '',
+    calle: '',
+    comuna:'',
+    numero: ''
   };
 
   $rootScope.prospectosDirAsig = $rootScope.prospectos.filter(function (element) {
@@ -503,13 +518,19 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
   $ionicNavBarDelegate.showBackButton(false);
   $scope.step = 'inicio';
 
-  var prospecto = {
+  $scope.prospecto = {
     tipo_tv: 'NINGUNO',
     tipo_fono: 'NINGUNO',
     tipo_inet: 'NINGUNO',
-    empresa: 'NINGUNO',
+    empresaServicios: 'NINGUNO',
     productosContratados: 'NINGUNO',
-    tienePromocion: 'No sabe/No contesta'
+    tienePromocion: 'No sabe/No contesta',
+    accionComercial: '',
+    email: '',
+    nombre: '',
+    calle: '',
+    comuna:'',
+    numero: ''
   };
 
   $scope.stepForward = function(nextStep){
@@ -530,16 +551,10 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
     return $scope.prospecto.tipo_contacto
   };
 
-  $scope.prospecto = {
-    accionComercial: '',
-    email: '',
-    nombre: ''
-  };
-
   $scope.enviarProspecto = function () {
     var nuevoProspecto = {
       'nombre': $scope.prospecto.nombre,
-      'rut': $scope.prospecto.rut_prospecto,
+      'rut_prospecto': $scope.prospecto.rut_prospecto,
       'dv_prospecto': $scope.prospecto.dv_prospecto,
       'calle': $scope.prospecto.calle,
       'numero': $scope.prospecto.numero,
@@ -694,13 +709,19 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
     );
   };
 
-  var prospecto = {
+  $scope.prospecto = {
     tipo_tv: 'NINGUNO',
     tipo_fono: 'NINGUNO',
     tipo_inet: 'NINGUNO',
-    empresa: 'NINGUNO',
+    empresaServicios: 'NINGUNO',
     productosContratados: 'NINGUNO',
-    tienePromocion: 'No sabe/No contesta'
+    tienePromocion: 'No sabe/No contesta',
+    accionComercial: '',
+    email: '',
+    nombre: '',
+    calle: '',
+    comuna:'',
+    numero: ''
   };
 
   $scope.actualizarProspecto = function () {
