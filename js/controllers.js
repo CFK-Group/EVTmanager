@@ -2,7 +2,7 @@
 
 var app = angular.module('evtManager.controllers', []);
 
-app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection, apiGobConnection) {
+app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
   console.log('loginCtrl');
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
@@ -30,14 +30,6 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
         deviceModel: model
       };
     }
-    apiGobConnection.getComunas('rm').query(
-      function (response) {
-        $rootScope.comunas = response.nombre;
-      },
-      function (err) {
-        console.log('Error: ', err);
-      }
-    );
 
     $scope.login = function () {
       $ionicLoading.show({

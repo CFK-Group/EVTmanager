@@ -90,28 +90,4 @@ angular.module('evtManager.services', [])
 
   };
   return apiConnection
-})
-
-.factory('apiGobConnection', function ($resource, apiGobURL) {
-  var apiGobConnection = {
-
-    getComunas: function (region) {
-      switch (region){
-        case 'rm':
-          var regionCode = 13;
-        break;
-
-        // case 'rm':
-        //   var regionCode = 13;
-        // break;
-        //
-        // case 'rm':
-        //   var regionCode = 13;
-        // break;
-      }
-      console.log(apiGobURL + regionCode + '/comunas');
-      return $resource(apiGobURL + regionCode + '/comunas')
-    }
-  };
-  return apiGobConnection
 });
