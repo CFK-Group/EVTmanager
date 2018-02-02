@@ -80,6 +80,10 @@ angular.module('evtManager.services', [])
 
     updateProspecto: function () {
       return $resource(apiURL + "updateProspecto2");
+    },
+
+    changeAction: function () {
+      return $resource(apiURL + "changeAction2");
     }
 
   };

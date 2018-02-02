@@ -18,7 +18,7 @@
       <div class="button-bar">
         <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
         <button ng-if="model.tipoContacto !== 'final'" class="button white siguiente" ng-class="{disabled: (model.tipoContacto == '' || model.tipoContacto == undefined || model.tipoContacto == 0)}" ng-click="stepForward(model.tipoContacto, model.tipoContacto)"><strong>Siguiente</strong></button>
-        <button ng-if="model.tipoContacto === 'final'" class="button white siguiente" ng-class="{disabled: (model.tipoContacto == '' || model.tipoContacto == undefined || model.tipoContacto == 0)}" ng-click="guardar()"><strong>Guardar</strong></button>
+        <button ng-if="model.tipoContacto === 'final'" class="button white siguiente" ng-class="{disabled: (model.tipoContacto == '' || model.tipoContacto == undefined || model.tipoContacto == 0)}" ng-click="actualizarProspecto()"><strong>Guardar</strong></button>
       </div>
     </div>
 
@@ -28,15 +28,15 @@
         <ion-item>
           <p class="text-center"><strong>Motivo</strong></p>
         </ion-item>
-        <ion-radio ng-model="model.motivo" ng-value="'1'" name="motivo">Sin Moradores</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'2'" name="motivo">Abandonada</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'3'" name="motivo">En Construcción</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'4'" name="motivo">No tengo volante</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'5'" name="motivo">Otra razón</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'1'" name="motivo">Sin Moradores</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'2'" name="motivo">Abandonada</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'3'" name="motivo">En Construcción</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'4'" name="motivo">No tengo volante</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'5'" name="motivo">Otra razón</ion-radio>
       </ion-list>
       <div class="button-bar">
         <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-        <button id="card2NextButton" class="button white" ng-class="{disabled: (model.motivo == '' || model.motivo == undefined || model.motivo == 0)}" ng-click="guardar()"><strong>Guardar</strong></button>
+        <button id="card2NextButton" class="button white" ng-class="{disabled: (prospecto.tipo_accion == '' || prospecto.tipo_accion == undefined || prospecto.tipo_accion == 0)}" ng-click="actualizarProspecto()"><strong>Guardar</strong></button>
       </div>
     </div>
 
@@ -46,19 +46,19 @@
         <ion-item>
           <p class="text-center"><strong>Motivo</strong></p>
         </ion-item>
-        <ion-radio ng-model="model.motivo" ng-value="'1'" name="motivo">Sin Moradores</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'2'" name="motivo">Abandonada</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'3'" name="motivo">En Construcción</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'4'" name="motivo">No le interesa</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'5'" name="motivo">No dejó volante</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'6'" name="motivo">Si dejó volante</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'7'" name="motivo">Tiene competencia (CLARO)</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'8'" name="motivo">Tiene competencia (MOVISTAR)</ion-radio>
-        <ion-radio ng-model="model.motivo" ng-value="'9'" name="motivo">Tiene competencia (OTRO)</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Sin Moradores'" name="motivo">Sin Moradores</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Abandonada'" name="motivo">Abandonada</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'En Construcción'" name="motivo">En Construcción</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'No le interesa'" name="motivo">No le interesa</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'No dejó volante'" name="motivo">No dejó volante</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Si dejó volante'" name="motivo">Si dejó volante</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Tiene competencia (CLARO)'" name="motivo">Tiene competencia (CLARO)</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Tiene competencia (MOVISTAR)'" name="motivo">Tiene competencia (MOVISTAR)</ion-radio>
+        <ion-radio ng-model="prospecto.tipo_accion" ng-value="'Tiene competencia (OTRO)'" name="motivo">Tiene competencia (OTRO)</ion-radio>
       </ion-list>
       <div class="button-bar">
         <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-        <button id="card3NextButton" class="button white" ng-class="{disabled: (model.tipoContacto.motivo == '' || model.tipoContacto.motivo == undefined || model.tipoContacto.motivo == 0)}" ng-click="guardar()"><strong>Guardar</strong></button>
+        <button id="card3NextButton" class="button white" ng-class="{disabled: (prospecto.tipo_accion == '' || prospecto.tipo_accion == undefined || prospecto.tipo_accion == 0)}" ng-click="actualizarProspecto()"><strong>Guardar</strong></button>
       </div>
     </div>
 
@@ -209,9 +209,9 @@
             Tiene promoción
           </div>
           <select>
-            <option ng-model="prospecto.tienePromocion" ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
             <option ng-model="prospecto.tienePromocion" ng-value="'SI'">SI</option>
             <option ng-model="prospecto.tienePromocion" ng-value="'NO'">NO</option>
+            <option ng-model="prospecto.tienePromocion" ng-value="'No sabe/No contesta'">No sabe/No contesta</option>
           </select>
         </label>
         <label class="item item-input">
