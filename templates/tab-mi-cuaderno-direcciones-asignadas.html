@@ -11,7 +11,7 @@
         <div class="col">Calle</div>
         <div class="col">Número</div>
       </label>
-      <label class="item row" collection-repeat="prospecto in prospectosDirAsig | filter: filter.search" ng-click="chooseModal(1, prospecto)">
+      <label class="item row" collection-repeat="prospecto in prospectosDirAsig | filter: filter.search | orderBy: 'comuna'" ng-click="chooseModal(1, prospecto)">
         <div class="col">{{prospecto.comuna}}</div>
         <div class="col">{{prospecto.calle}}</div>
         <div class="col">{{prospecto.numero}}</div>

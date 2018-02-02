@@ -6,7 +6,7 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
   console.log('loginCtrl');
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
-    var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
+    var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
     var model = "";
     var uuid = "";
 
@@ -605,15 +605,15 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
               });
             }
           );
-          $state.go('tabs.cuaderno');
         });
         console.log(response);
+        $state.go('tabs.cuaderno');
       }, function (err) {
         console.log("ERROR: ", err);
         $ionicLoading.hide();
         var alert = $ionicPopup.alert({
           title: 'Ups!',
-          template: 'Algo ha pasado, intenta de nuevo.'
+          template: 'Algo ha pasado, intente de nuevo.'
         });
       }
     );

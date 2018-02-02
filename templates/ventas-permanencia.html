@@ -11,7 +11,7 @@
         <div class="col">Servicio</div>
         <div class="col">Mes</div>
       </label>
-      <label class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:4} | filter: filter.search" ng-click="chooseModal(1, venta)">
+      <label class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:4} | filter: filter.search | orderBy: 'comuna'" ng-click="chooseModal(1, venta)">
         <div class="col">{{venta.rut_cliente}}</div>
         <div class="col">{{venta.servicio}}</div>
         <div class="col">{{venta.mes_venta}}</div>
