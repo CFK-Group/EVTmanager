@@ -3,10 +3,9 @@
 var app = angular.module('evtManager.controllers', []);
 
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
-  console.log('loginCtrl');
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
-    var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
+    var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
     var model = "";
     var uuid = "";
 
@@ -39,17 +38,14 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
       });
       $scope.loginVar = apiConnection.loginUser($scope.user.username, $scope.user.password, $scope.user.deviceId, $scope.user.deviceModel).query(
         function (response) {
-          console.table(response);
-
           $scope.loginInfo = response;
 
           if ($scope.loginInfo.statusCode === 0) {
 
             sessionStorage.userSession = angular.toJson($scope.loginInfo);
-
             sessionStorage.userToken = JSON.parse(sessionStorage.userSession).sessionToken;
 
-            console.log('token al loggear: ' + sessionStorage.userToken);
+            $rootScope.updateGeoPos('login');
 
             $ionicLoading.hide();
             //$rootScope.loginShow = false;
@@ -99,6 +95,8 @@ app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistor
 app.controller('VentasEstadoCtrl', function ($scope, $ionicPopup, $ionicNavBarDelegate, $ionicModal, apiConnection, $ionicLoading, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
 
+  $rootScope.updateGeoPos('Consulta ventas por estado');
+
   //Template del modal 1 (Ventas Estado)
   $ionicModal.fromTemplateUrl('templates/modal-ventas-estado.html',{
     id: 1,
@@ -135,8 +133,10 @@ app.controller('VentasEstadoCtrl', function ($scope, $ionicPopup, $ionicNavBarDe
   };
 });
 
-app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
+app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
+
+  $rootScope.updateGeoPos('Consulta ventas por visacion');
 
   $ionicModal.fromTemplateUrl('templates/modal-ventas-visaciones.html',{
     id: 1,
@@ -173,8 +173,10 @@ app.controller('VentasVisacionesCtrl', function ($scope, $ionicNavBarDelegate, $
   };
 });
 
-app.controller('VentasPermanenciaCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
+app.controller('VentasPermanenciaCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
+
+  $rootScope.updateGeoPos('Consulta ventas por permanencia');
 
   $ionicModal.fromTemplateUrl('templates/modal-ventas-permanencia.html',{
     id: 1,
@@ -211,8 +213,10 @@ app.controller('VentasPermanenciaCtrl', function ($scope, $ionicNavBarDelegate, 
   };
 });
 
-app.controller('VentasCobranzasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
+app.controller('VentasCobranzasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
+
+  $rootScope.updateGeoPos('Consulta ventas por cobranza');
 
   //Template del modal 1 (Ventas Estado)
   $ionicModal.fromTemplateUrl('templates/modal-ventas-cobranzas.html',{
@@ -250,8 +254,10 @@ app.controller('VentasCobranzasCtrl', function ($scope, $ionicNavBarDelegate, $i
   };
 });
 
-app.controller('VentasPendientesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal) {
+app.controller('VentasPendientesCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
+
+  $rootScope.updateGeoPos('Consulta ventas por pendiente comercial');
 
   //Template del modal 1 (Ventas Estado)
   $ionicModal.fromTemplateUrl('templates/modal-ventas-pendiente.html',{
@@ -313,6 +319,8 @@ app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelega
 
 app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, $rootScope, apiConnection, $ionicLoading, $ionicPopup) {
   $ionicNavBarDelegate.showBackButton(true);
+
+  $rootScope.updateGeoPos('consulta direciones asignadas');
 
   $scope.prospecto = {
     tipo_tv: 'NINGUNO',
@@ -452,6 +460,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     apiConnection.updateProspecto().save(data).$promise.then(
       function (response) {
       $ionicLoading.hide();
+      $rootScope.updateGeoPos('Actualiza prospecto ' + response.id);
       var alert = $ionicPopup.alert({
         title: 'Actualizado',
         template: 'Prospecto actualizado correctamente'
@@ -469,41 +478,6 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       });
     });
   };
-
-  $scope.actualizarAccion = function() {
-    $ionicLoading.show({
-      template: 'Guardando acción...',
-      animation: 'fade-in',
-      showBackdrop: true
-    });
-    var data = {
-      idProspecto: $scope.prospecto.id,
-      token: sessionStorage.userToken,
-      tipo_contacto: $scope.prospecto.tipo_contacto,
-      tipo_accion: $scope.prospecto.tipo_accion
-    };
-    apiConnection.changeAction().save(data).$promise.then(
-      function (response) {
-        $ionicLoading.hide();
-        var alert = $ionicPopup.alert({
-          title: 'Guardado',
-          template: 'Acción guardada correctamente'
-        });
-        alert.then(function () {
-          $scope.closeModal(1);
-        });
-        console.log(response);
-      },
-      function (err) {
-        console.log("ERROR: ", err);
-        $ionicLoading.hide();
-        var alert = $ionicPopup.alert({
-          title: 'Ups!',
-          template: 'Algo ha pasado, intenta de nuevo más tarde.'
-        });
-      }
-    )
-  }
 });
 
 app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $scope, $ionicNavBarDelegate, apiConnection, $ionicLoading, $ionicPopup) {
@@ -568,13 +542,10 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
       'tipo_fono': $scope.prospecto.tipo_fono,
       'tipo_inet': $scope.prospecto.tipo_inet,
       'accion_comercial': $scope.prospecto.accionComercial,
-      'estado': $scope.prospecto.estado,
       'id_vendedor': $scope.prospecto.id_vendedor,
       'tipo_creacion': $scope.prospecto.tipo_creacion,
       'tipo_accion': $scope.prospecto.tipo_accion,
       'tipo_contacto': $scope.prospecto.tipo_contacto,
-      'create_time': $scope.prospecto.create_time,
-      'update_time': $scope.prospecto.update_time,
       'tienePromocion': $scope.prospecto.tienePromocion,
       'productosContratados': $scope.prospecto.productosContratados,
       'empresaServicios': $scope.prospecto.empresaServicios
@@ -587,7 +558,9 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
     apiConnection.newProspecto().save(data).$promise.then(
       function (response) {
         $ionicLoading.hide();
-        console.log(data.prospecto);
+        console.table(data.prospecto);
+        $rootScope.updateGeoPos('Nuevo prospecto ' + response.id);
+        console.log(response.id);
         var alert = $ionicPopup.alert({
           title: 'Guardado',
           template: 'Prospecto guardado correctamente'
@@ -597,6 +570,7 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
             function (response) {
               $rootScope.prospectos = JSON.parse(JSON.stringify(response));
               console.log($rootScope.prospectos);
+              $rootScope.updateGeoPos('nuevo prospecto');
             }, function (err) {
               $ionicLoading.hide();
               $ionicPopup.alert({
@@ -608,7 +582,8 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
         });
         console.log(response);
         $state.go('tabs.cuaderno');
-      }, function (err) {
+      },
+      function (err) {
         console.log("ERROR: ", err);
         $ionicLoading.hide();
         var alert = $ionicPopup.alert({
@@ -661,7 +636,7 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
   }
 });
 
-app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, apiConnection, $ionicPopup, $ionicLoading) {
+app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, apiConnection, $ionicPopup, $ionicLoading, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
   $scope.guardarAC = function (ac) {
     console.log($scope.prospecto.id);
@@ -700,6 +675,8 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       }
     );
   };
+
+  $rootScope.updateGeoPos('consulta de historial');
 
   $scope.prospecto = {
     tipo_tv: 'NINGUNO',
@@ -761,6 +738,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
     console.log(data);
     apiConnection.updateProspecto().save(data).$promise.then(
       function (response) {
+        $rootScope.updateGeoPos('Actualiza prospecto ' + response.id);
         $ionicLoading.hide();
         var alert = $ionicPopup.alert({
           title: 'Actualizado',
@@ -868,6 +846,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
     };
     apiConnection.changeAction().save(data).$promise.then(
       function (response) {
+        $rootScope.updateGeoPos('Nueva acción ' + response.id);
         $ionicLoading.hide();
         var alert = $ionicPopup.alert({
           title: 'Guardado',
@@ -912,12 +891,10 @@ app.controller('ChatsCtrl', function($scope, Chats) {
 });
 
 app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootScope, $ionicPopup, $ionicNavBarDelegate) {
-  console.log('LoadingProspectosCtrl');
   $ionicNavBarDelegate.showBackButton(false);
   apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.prospectos = JSON.parse(JSON.stringify(response));
-      console.log($rootScope.prospectos);
       $state.go('tabs.ventas');
     }, function (err) {
       $ionicLoading.hide();
@@ -931,7 +908,6 @@ app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootSc
 });
 
 app.controller('LoadingVentasCtrl', function ($state, apiConnection, $rootScope, $ionicPopup, $ionicNavBarDelegate) {
-  console.log('LoadingVentasCtrl');
   $ionicNavBarDelegate.showBackButton(false);
   apiConnection.getVentas(sessionStorage.userToken).query().$promise.then(
     function (response) {

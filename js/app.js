@@ -210,7 +210,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
   $urlRouterProvider.otherwise('login');
 })
 
-.run(function ($state, $ionicConfig, $rootScope) {
+.run(function ($state, $ionicConfig, $rootScope, geoPos, $cordovaGeolocation, apiConnection) {
   $ionicConfig.tabs.position('bottom');
   $rootScope.comunas = [
     // comunas RM
@@ -683,5 +683,30 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
       "codigo_padre": "131"
     }
     // fin comunas RM
-  ]
+  ];
+  $rootScope.updateGeoPos = function (accion) {
+
+    var posOptions = {
+      timeout: 10000,
+      enableHighAccuracy: false
+    };
+    var model = {
+      latitud: '',
+      longitud: ''
+    };
+    $cordovaGeolocation.getCurrentPosition(posOptions).then(
+      function (position) {
+        model.latitud = (position.coords.latitude).toString();
+        model.longitud = (position.coords.longitude).toString();
+      }
+    );
+    apiConnection.sendGeoPos().save(sessionStorage.userToken, model.latitud, model.longitud, accion).$promise.then(
+      function (response) {
+        console.log('Updated GeoPos at ' + accion + ' succeed')
+      },
+      function (err) {
+        console.log('Error: ',err);
+      }
+    );
+  }
 });
