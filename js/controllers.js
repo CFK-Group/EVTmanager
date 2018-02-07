@@ -895,14 +895,14 @@ app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootSc
   apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.prospectos = JSON.parse(JSON.stringify(response));
-      $state.go('tabs.ventas');
+      $state.go('tabs.cuaderno');
     }, function (err) {
       $ionicLoading.hide();
       $ionicPopup.alert({
         title: 'Ups!',
         template: 'Algo ha pasado, intente cargar prospectos de forma manual.'
       });
-      $state.go('tabs.ventas');
+      $state.go('tabs.cuaderno');
     }
   );
 });
@@ -912,6 +912,7 @@ app.controller('LoadingVentasCtrl', function ($state, apiConnection, $rootScope,
   apiConnection.getVentas(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.ventas = JSON.parse(JSON.stringify(response));
+      console.log($rootScope.ventas);
       $state.go('loading.prospectos');
     }, function (err) {
       $ionicPopup.alert({

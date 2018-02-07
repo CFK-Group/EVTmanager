@@ -68,60 +68,27 @@
         <div class="item item-divider">
           Datos cliente:
         </div>
-        <label class="item item-input">
-          <span class="input-label">Comuna</span>
-          <input class="text-right" type="text" ng-model="prospecto.comuna">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Calle</span>
-          <input class="text-right" type="text" ng-model="prospecto.calle">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Número</span>
-          <input class="text-right" type="number" ng-model="prospecto.numero">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Nodo</span>
-          <input class="text-right" type="number" ng-model="prospecto.nodo">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Cuadrante</span>
-          <input class="text-right" type="number" ng-model="prospecto.cuadrante">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Fono</span>
-          <input class="text-right" type="text" ng-model="prospecto.fono">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Cable</span>
-          <input class="text-right" type="text" ng-model="prospecto.cable">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Inet</span>
-          <input class="text-right" type="text" ng-model="prospecto.inet">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Prem</span>
-          <input class="text-right" type="text" ng-model="prospecto.prem">
-        </label>
+        <a class="item">Comuna<span class="item-note">{{prospecto.comuna}}</span></a>
+        <a class="item">Calle<span class="item-note">{{prospecto.calle}}</span></a>
+        <a class="item">Número<span class="item-note">{{prospecto.numero}}</span></a>
+        <a class="item">Nodo<span class="item-note">{{prospecto.nodo}}</span></a>
+        <a class="item">Cuadrante<span class="item-note">{{prospecto.cuadrante}}</span></a>
+        <a class="item">Fono<span class="item-note">{{prospecto.fono}}</span></a>
+        <a class="item">Cable<span class="item-note">{{prospecto.cable}}</span></a>
+        <a class="item">Inet<span class="item-note">{{prospecto.inet}}</span></a>
+        <a class="item">Prem<span class="item-note">{{prospecto.prem}}</span></a>
+        <a class="item">Rut<span class="item-note">{{prospecto.rut_prospecto}}</span></a>
+        <a class="item">Nombre<span class="item-note">{{prospecto.nombre}}</span></a>
+        <a class="item">Deuda<span class="item-note">{{prospecto.deuda}}</span></a>
+        <div class="item item-divider">
+          Datos comprador:
+        </div>
         <label class="item item-input">
           <span class="input-label">Rut</span>
-          <input class="text-right" type="text" ng-model="prospecto.rut_prospecto">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Nombre</span>
-          <input class="text-right" type="text" ng-model="prospecto.nombre">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Deuda</span>
-          <input class="text-right" type="text" ng-model="prospecto.deuda">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Rut comprador</span>
           <input class="text-right" type="text" ng-model="prospecto.rut_comprador">
         </label>
         <label class="item item-input">
-          <span class="input-label">Nombre comprador</span>
+          <span class="input-label">Nombre <strong class="red-text">(**)</strong></span>
           <input class="text-right" type="text" ng-model="prospecto.nombre_comprador">
         </label>
         <label class="item item-input">
@@ -133,7 +100,7 @@
           <input class="text-right" type="tel" ng-model="prospecto.fono_contacto_2">
         </label>
         <label class="item item-input">
-          <span class="input-label">Email</span>
+          <span class="input-label">Email <strong class="red-text">(**)</strong></span>
           <input class="text-right" type="email" ng-model="prospecto.email">
         </label>
         <div class="item item-divider">
@@ -215,14 +182,14 @@
           </select>
         </label>
         <label class="item item-input">
-          <span class="input-label">Acción comercial</span>
+          <span class="input-label">Acción comercial <strong class="red-text">(**)</strong></span>
           <input class="text-right" type="text" ng-model="prospecto.accionComercial">
         </label>
       </article>
       <article class="list no-margin">
         <div class="button-bar">
           <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-          <button id="card4SendButton" class="button white" ng-class="{disabled: (prospecto.nombre == '' || prospecto.email == '')}" ng-click="actualizarProspecto()"><strong>Guardar</strong></button>
+          <button id="card4SendButton" class="button white" ng-class="{disabled: (prospecto.nombre_comprador == '' || prospecto.email == '' || prospecto.accionComercial == '')}" ng-click="actualizarProspecto()"><strong>Guardar</strong></button>
         </div>
       </article>
     </section>
