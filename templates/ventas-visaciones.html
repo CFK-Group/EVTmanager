@@ -10,13 +10,13 @@
         <div class="col col-25">Rut</div>
         <div class="col col-20">Servicios</div>
         <div class="col col-10">Mes</div>
-        <div class="col">Estado</div>
+        <div class="col col-25">Estado</div>
       </label>
       <label class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:5} | filter: filter.search | orderBy: 'comuna'" ng-click="chooseModal(1, venta)">
         <div class="col col-25">{{venta.rut_cliente}}</div>
         <div class="col col-20">{{venta.n_servicio}}</div>
         <div class="col col-10">{{venta.mes_venta}}</div>
-        <div class="col col-25">{{venta.visacion}}</div>
+        <div class="col col-25">{{decode(venta.visacion)}}</div>
       </label>
     </div>
   </ion-content>

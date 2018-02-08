@@ -684,6 +684,9 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
     }
     // fin comunas RM
   ];
+  $rootScope.decode = function(text) {
+    return decodeURIComponent(escape(text));
+  };
   $rootScope.updateGeoPos = function (accion) {
 
     var posOptions = {

@@ -5,7 +5,7 @@ var app = angular.module('evtManager.controllers', []);
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
-    var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
+    var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
     var model = "";
     var uuid = "";
 
@@ -912,7 +912,6 @@ app.controller('LoadingVentasCtrl', function ($state, apiConnection, $rootScope,
   apiConnection.getVentas(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.ventas = JSON.parse(JSON.stringify(response));
-      console.log($rootScope.ventas);
       $state.go('loading.prospectos');
     }, function (err) {
       $ionicPopup.alert({
