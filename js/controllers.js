@@ -332,6 +332,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     accionComercial: '',
     email: '',
     nombre: '',
+    nombre_comprador: '',
     calle: '',
     comuna:'',
     numero: ''
@@ -368,6 +369,13 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
   $scope.openModal = function(index) {
     if (index === 1){
       $scope.modal_1.show();
+      if($scope.prospecto.nombre_comprador == null){
+        $scope.prospecto.nombre_comprador = '';
+      }else if($scope.prospecto.email == null){
+        $scope.prospecto.email = '';
+      }else if($scope.prospecto.accionComercial == null || $scope.prospecto.accionComercial == undefined){
+        $scope.prospecto.accionComercial = '';
+      }
     }else{
       $scope.modal_2.show();
     }
@@ -456,7 +464,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       prospecto: prospectoActualizado,
       accionComercial: $scope.prospecto.accionComercial
     };
-    console.log(data);
+    console.table(data.prospecto);
     apiConnection.updateProspecto().save(data).$promise.then(
       function (response) {
       $ionicLoading.hide();
@@ -468,7 +476,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       alert.then(function () {
         $scope.closeModal(1);
       });
-      console.log(response);
+      console.table(response);
     }, function (err) {
       console.log("ERROR: ", err);
       $ionicLoading.hide();
@@ -542,7 +550,6 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
       'tipo_fono': $scope.prospecto.tipo_fono,
       'tipo_inet': $scope.prospecto.tipo_inet,
       'accion_comercial': $scope.prospecto.accionComercial,
-      'id_vendedor': $scope.prospecto.id_vendedor,
       'tipo_creacion': $scope.prospecto.tipo_creacion,
       'tipo_accion': $scope.prospecto.tipo_accion,
       'tipo_contacto': $scope.prospecto.tipo_contacto,
@@ -569,7 +576,6 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
           apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
             function (response) {
               $rootScope.prospectos = JSON.parse(JSON.stringify(response));
-              console.log($rootScope.prospectos);
               $rootScope.updateGeoPos('nuevo prospecto');
             }, function (err) {
               $ionicLoading.hide();
@@ -580,7 +586,7 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
             }
           );
         });
-        console.log(response);
+        console.table(response);
         $state.go('tabs.cuaderno');
       },
       function (err) {
