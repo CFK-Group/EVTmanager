@@ -335,7 +335,8 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     nombre_comprador: '',
     calle: '',
     comuna:'',
-    numero: ''
+    numero: '',
+    accioncomercial: ''
   };
 
   $rootScope.prospectosDirAsig = $rootScope.prospectos.filter(function (element) {
