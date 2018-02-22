@@ -1,53 +1,23 @@
 <ion-view class="no-scroll">
   <ion-nav-title>Visaciones</ion-nav-title>
   <ion-content class="grey lighten-4 has-header" overflow-scroll="false">
-    <div class="fixed">
-      <div class="list no-margin">
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Visación
-          </div>
-          <select ng-model="filtro.estados">
-            <option ng-value="Todos">Todos</option>
-            <option ng-value="TERMINDA">OK</option>
-            <option ng-value="INS">Sin Visación</option>
-          </select>
-        </label>
-        <label class="item item-input item-select">
-          <div class="input-label">
-            Meses
-          </div>
-          <select ng-model="filtro.meses">
-            <option ng-value="Todos">Todos</option>
-            <option ng-value="Enero">Enero</option>
-            <option ng-value="Febrero">Febrero</option>
-            <option ng-value="Marzo">Marzo</option>
-            <option ng-value="Abril">Abril</option>
-            <option ng-value="Mayo">Mayo</option>
-            <option ng-value="Junio">Junio</option>
-            <option ng-value="Julio">Julio</option>
-            <option ng-value="Agosto">Agosto</option>
-            <option ng-value="Septiembre">Septiembre</option>
-            <option ng-value="Octubre">Octubre</option>
-            <option ng-value="Noviembre">Noviembre</option>
-            <option ng-value="Diciembre">Diciembre</option>
-          </select>
-        </label>
-      </div>
-      <div class="row amber">
-        <div class="col">Rut</div>
-        <div class="col">Servicio</div>
-        <div class="col">Mes</div>
-        <div class="col">Estado</div>
-      </div>
-    </div>
-    <div class="scroll">
-      <div class="row">
-        <div class="col">18463690-5</div>
-        <div class="col">2WAY</div>
-        <div class="col">11</div>
-        <div class="col">TERMINADA</div>
-      </div>
+    <div class="list no-margin">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Búsqueda: visación, mes, rut, servicio, estado, etc." ng-model="filter.search">
+      </label>
+      <label class="item row amber">
+        <div class="col col-25">Rut</div>
+        <div class="col col-20">Servicios</div>
+        <div class="col col-10">Mes</div>
+        <div class="col col-25">Estado</div>
+      </label>
+      <label class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:5} | filter: filter.search | orderBy: 'comuna'" ng-click="chooseModal(1, venta)">
+        <div class="col col-25">{{venta.rut_cliente}}</div>
+        <div class="col col-20">{{venta.n_servicio}}</div>
+        <div class="col col-10">{{venta.mes_venta}}</div>
+        <div class="col col-25">{{decode(venta.visacion)}}</div>
+      </label>
     </div>
   </ion-content>
 </ion-view>

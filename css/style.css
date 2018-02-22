@@ -2,7 +2,7 @@
   background-color: rgb(0,42,66) !important;
 }
 
-ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.activated{
+ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.activated, ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated{
   border-color: black;
   color: black;
 }
@@ -15,11 +15,14 @@ ion-tabs.tabs-striped.tabs-color-active-positive .tab-item.tab-item-active, ion-
   border: solid black 2px;
   background-color: white;
   border-radius: 5px;
+  width: 30%;
+  height: auto;
 }
 
-/*#loginButton{*/
-  /*margin: 0 10px;*/
-/*}*/
+#loginButton{
+  width: 95%;
+  margin: auto;
+}
 
 button.back-button{
   background-color: transparent;
@@ -27,4 +30,29 @@ button.back-button{
 
 .no-margin{
   margin: 0;
+}
+
+div.pane{
+  background-color: #f5f5f5;
+}
+
+div.loading.row{
+  height: 100vh !important;
+}
+
+.spinner svg{
+  width: 70px;
+  height: 70px;
+}
+
+.item-note{
+  color: inherit;
+}
+
+.padding-for-footer{
+  padding-bottom: 44px;
+}
+
+.tab-item {
+  max-width: 100%;
 }

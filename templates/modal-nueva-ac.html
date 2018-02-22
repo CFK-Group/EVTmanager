@@ -1,0 +1,18 @@
+<ion-modal-view>
+  <ion-header-bar class="amber" align-title="center">
+    <h1 class="title">Agregar Acción Comercial</h1>
+    <button class="button icon ion-close" ng-click="closeModal(2)"></button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list no-margin">
+      <label class="item item-input">
+        <span class="input-label">Acción</span>
+        <input class="text-right" type="text" placeholder="Escriba Aquí" ng-model="ac.accion">
+      </label>
+    </div>
+    <div class="button-bar">
+      <button class="button button-assertive z-depth-1" ng-click="cancel()"><strong>Cancelar</strong></button>
+      <button id="card1NextButton" class="button white siguiente z-depth-1" ng-class="{disabled: (ac.accion == '')}" ng-click="guardarAC(ac)"><strong>Guardar</strong></button>
+    </div>
+  </ion-content>
+</ion-modal-view>

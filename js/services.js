@@ -51,16 +51,81 @@ angular.module('evtManager.services', [])
 
 .constant("apiURL","http://vendedores.xpass.cl/web/vendedors/")
 
+.constant("apiGobURL","https://apis.modernizacion.cl/dpa/regiones/")
+
 .factory('apiConnection', function($resource, apiURL) {
   var apiConnection = {
 
     loginUser: function(username, password, deviceId, deviceModel) {
+     return $resource(apiURL + "login", {username: username, pass: password, deviceId: deviceId, deviceModel: deviceModel}, {'query': {isArray: false}});
+    },
 
-      var login = $resource(apiURL + "login", {username: username, pass: password, deviceId: deviceId, deviceModel: deviceModel}, {'query': {isArray: false}});
-      return login;
+    getVentas: function (sessionToken) {
+      return $resource(apiURL + "getVentas", {sessionToken: sessionToken});
+    },
+
+    getProspectos: function (sessionToken) {
+      return $resource(apiURL + "getProspectos", {sessionToken: sessionToken});
+    },
+
+    getVendedor: function (sessionToken) {
+      return $resource(apiURL + "getVendedor", {sessionToken: sessionToken});
+    },
+
+    saveAC: function () {
+      return $resource(apiURL + "addAccionComercial2");
+    },
+
+    newProspecto: function () {
+      return $resource(apiURL + "createProspecto2");
+    },
+
+    updateProspecto: function () {
+      return $resource(apiURL + "updateProspecto2");
+    },
+
+    changeAction: function () {
+      return $resource(apiURL + "changeAction2");
+    },
+
+    sendGeoPos: function () {
+      return $resource(apiURL + 'pingLoc2')
     }
-
-
   };
   return apiConnection
+})
+
+.factory('geoPos', function($interval, apiConnection, $cordovaGeolocation) {
+
+  var geoPos = {
+    getGeoPos: $interval(function () {
+      var posOptions = {
+        timeout: 10000,
+        enableHighAccuracy: false
+      };
+      var model = {
+        latitud: '',
+        longitud: ''
+      };
+      $cordovaGeolocation.getCurrentPosition(posOptions).then(
+        function (position) {
+          model.latitud = (position.coords.latitude).toString();
+          model.longitud = (position.coords.longitude).toString();
+        }
+      );
+      apiConnection.sendGeoPos().save(sessionStorage.userToken, model.latitud, model.longitud, 'update ubicacion').$promise.then(
+        function (response) {
+          // console.log(response);
+        },
+        function (err) {
+          console.log('Error: ',err);
+        }
+      );
+    },
+    1000*3600
+    )
+  };
+
+  return geoPos
+
 });
