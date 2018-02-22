@@ -5,6 +5,7 @@ var app = angular.module('evtManager.controllers', []);
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
+    var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
     var model = "";
     var uuid = "";
 
