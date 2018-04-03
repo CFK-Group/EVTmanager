@@ -224,7 +224,8 @@
         </label>
         <div class="button-bar">
           <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-          <button id="card4SendButton" class="button white" ng-class="{disabled: (prospecto.calle == '' || prospecto.comuna == '' || prospecto.numero == '' || prospecto.nombre_comprador == '' || prospecto.email == '' || prospecto.accionComercial == '')}" ng-click="enviarProspecto()"><strong>Guardar</strong></button>
+          <button ng-if="step === 'final'" class="button white" ng-class="{disabled: (prospecto.calle == '' || prospecto.comuna == '' || prospecto.numero == '')}" ng-click="enviarProspecto()"><strong>Guardar</strong></button>
+          <button ng-if="step === 'finalCompleto'" class="button white" ng-class="{disabled: (prospecto.calle == '' || prospecto.comuna == '' || prospecto.numero == '' || prospecto.nombre_comprador == '' || prospecto.email == '' || prospecto.accionComercial == '')}" ng-click="enviarProspecto()"><strong>Guardar</strong></button>
         </div>
       </article>
     </section>

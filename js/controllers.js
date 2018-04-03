@@ -605,6 +605,20 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
     console.log('cancelando');
     $scope.step = 'inicio';
     window.history.back();
+    $scope.prospecto = {
+      tipo_tv: 'NINGUNO',
+      tipo_fono: 'NINGUNO',
+      tipo_inet: 'NINGUNO',
+      empresaServicios: 'NINGUNO',
+      productosContratados: 'NINGUNO',
+      tienePromocion: 'No sabe/No contesta',
+      accionComercial: '',
+      email: '',
+      nombre: '',
+      calle: '',
+      comuna:'',
+      numero: ''
+    };
   };
 
   $scope.actualizarAccion = function() {
@@ -645,6 +659,7 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
 
 app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate, $ionicModal, apiConnection, $ionicPopup, $ionicLoading, $rootScope) {
   $ionicNavBarDelegate.showBackButton(true);
+  $scope.ac = {};
   $scope.guardarAC = function (ac) {
     console.log($scope.prospecto.id);
     var params = {
@@ -664,11 +679,11 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
           var fecha = Math.round((new Date()).getTime() / 1000);
           ac.timestamp = fecha;
           $scope.prospecto.accion_comercial.push(ac);
+          console.log('push de la accion comercial: ' + ac);
           $scope.closeModal(2);
           $scope.closeModal(3);
-          $scope.ac = {
-            accion: ''
-          };
+          $scope.ac = {};
+          console.log('limpiando accion comercial');
         });
         console.log(response);
       },
@@ -892,7 +907,7 @@ app.controller('ChatsCtrl', function($scope, Chats) {
   //});
 
   $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
+$scope.remove = function(chat) {
     Chats.remove(chat);
   };
 });
