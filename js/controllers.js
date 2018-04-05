@@ -5,7 +5,7 @@ var app = angular.module('evtManager.controllers', []);
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
-    var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
+    var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
     var model = "";
     var uuid = "";
 
@@ -468,8 +468,8 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     console.table(data.prospecto);
     apiConnection.updateProspecto().save(data).$promise.then(
       function (response) {
-      $ionicLoading.hide();
       $rootScope.updateGeoPos('Actualiza prospecto ' + response.id);
+      $ionicLoading.hide();
       var alert = $ionicPopup.alert({
         title: 'Actualizado',
         template: 'Prospecto actualizado correctamente'
@@ -480,7 +480,6 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       console.table(response);
     }, function (err) {
       console.log("ERROR: ", err);
-      $ionicLoading.hide();
       var alert = $ionicPopup.alert({
         title: 'Ups!',
         template: 'Algo ha pasado, intenta de nuevo más tarde.'
@@ -917,6 +916,7 @@ app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootSc
   apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.prospectos = JSON.parse(JSON.stringify(response));
+      console.log($rootScope.prospectos[0]);
       $state.go('tabs.cuaderno');
     }, function (err) {
       $ionicLoading.hide();

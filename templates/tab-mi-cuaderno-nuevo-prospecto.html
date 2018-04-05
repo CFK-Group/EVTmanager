@@ -55,7 +55,7 @@
       </ion-list>
       <div class="button-bar">
         <button class="button button-assertive" ng-click="cancel()"><strong>Cancelar</strong></button>
-        <button id="card3NextButton" class="button white" ng-class="{disabled: (model.tipoContacto.motivo == '' || model.tipoContacto.motivo == undefined || model.tipoContacto.motivo == 0)}" ng-click="stepForward('final')"><strong>Siguiente</strong></button>
+        <button id="card3NextButton" class="button white" ng-class="{disabled: (prospecto.tipo_accion == '' || prospecto.tipo_accion == undefined || prospecto.tipo_accion == 0)}" ng-click="stepForward('final')"><strong>Siguiente</strong></button>
       </div>
     </div>
 
@@ -149,6 +149,7 @@
           </div>
           <select ng-model="prospecto.tipo_tv">
             <option ng-value="'NINGUNO'">NINGUNO</option>
+            <option ng-value="'TV HOGAR'">TV HOGAR</option>
             <option ng-value="'TV HOGAR HD'">TV HOGAR HD</option>
             <option ng-value="'TV FULL HD'">TV FULL HD</option>
           </select>
@@ -159,7 +160,7 @@
           </div>
           <select ng-model="prospecto.tipo_fono">
             <option ng-value="'NINGUNO'">NINGUNO</option>
-            <option ng-value="'FONO LIMITADO'">FONO LIMITADO</option>
+            <option ng-value="'FONO ILIMITADO'">FONO ILIMITADO</option>
             <option ng-value="'PORTABILIDAD'">PORTABILIDAD</option>
           </select>
         </label>
@@ -170,8 +171,8 @@
           <select ng-model="prospecto.tipo_inet">
             <option ng-value="'NINGUNO'">NINGUNO</option>
             <option ng-value="'MEGA 30'">MEGA 30</option>
-            <option ng-value="'MEGA 120'">MEGA 120</option>
-            <option ng-value="'MEGA 200'">MEGA 200</option>
+            <option ng-value="'MEGA 150'">MEGA 150</option>
+            <option ng-value="'MEGA 300'">MEGA 300</option>
           </select>
         </label>
         <div class="item item-divider" ng-if="step === 'finalCompleto'">
