@@ -1,21 +1,17 @@
 <ion-view class="no-scroll">
   <ion-nav-title>Direcciones Asignadas</ion-nav-title>
   <ion-content class="grey lighten-4 has-header" overflow-scroll="false">
-    <div class="list no-margin">
-      <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Búsqueda: comuna, nodo, cuadrante, deuda, etc." ng-model="filter.search">
-      </label>
-      <label class="item row amber">
+    <ion-list>
+      <ion-item class="row amber">
         <div class="col">Comuna</div>
         <div class="col">Calle</div>
         <div class="col">Número</div>
-      </label>
-      <label class="item row" collection-repeat="prospecto in prospectosDirAsig | filter: filter.search | orderBy: 'comuna'" ng-click="chooseModal(1, prospecto)">
+      </ion-item>
+      <ion-item class="row item-text-wrap" collection-repeat="prospecto in prospectosDirAsig"  ng-click="chooseModal(1, prospecto)">
         <div class="col">{{prospecto.comuna}}</div>
         <div class="col">{{prospecto.calle}}</div>
         <div class="col">{{prospecto.numero}}</div>
-      </label>
-    </div>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>

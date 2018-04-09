@@ -424,11 +424,16 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       animation: 'fade-in',
       showBackdrop: true
     });
+
+    var rut = "100316676";
+    var run = rut.slice(0, rut.length - 1);
+    var dv = rut.slice(-1);
+
     var prospectoActualizado = {
       'id': $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
-      'rut_prospecto': $scope.prospecto.rut_prospecto,
-      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'rut_prospecto': $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1),
+      'dv_prospecto': $scope.prospecto.rut_prospecto.slice(-1),
       'calle': $scope.prospecto.calle,
       'numero': $scope.prospecto.numero,
       'comuna' : $scope.prospecto.comuna,
@@ -528,8 +533,8 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
   $scope.enviarProspecto = function () {
     var nuevoProspecto = {
       'nombre': $scope.prospecto.nombre,
-      'rut_prospecto': $scope.prospecto.rut_prospecto,
-      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'rut_prospecto': $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1),
+      'dv_prospecto': $scope.prospecto.rut_prospecto.slice(-1),
       'calle': $scope.prospecto.calle,
       'numero': $scope.prospecto.numero,
       'comuna' : $scope.prospecto.comuna,
@@ -718,8 +723,8 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
     var prospectoActualizado = {
       'id': $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
-      'rut_prospecto': $scope.prospecto.rut_prospecto,
-      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'rut_prospecto': $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1),
+      'dv_prospecto': $scope.prospecto.rut_prospecto.slice(-1),
       'calle': $scope.prospecto.calle,
       'numero': $scope.prospecto.numero,
       'comuna' : $scope.prospecto.comuna,

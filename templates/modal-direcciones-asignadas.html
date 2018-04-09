@@ -71,15 +71,6 @@
         <a class="item">Comuna<span class="item-note">{{prospecto.comuna}}</span></a>
         <a class="item">Calle<span class="item-note">{{prospecto.calle}}</span></a>
         <a class="item">Número<span class="item-note">{{prospecto.numero}}</span></a>
-        <a class="item">Nodo<span class="item-note">{{prospecto.nodo}}</span></a>
-        <a class="item">Cuadrante<span class="item-note">{{prospecto.cuadrante}}</span></a>
-        <a class="item">Fono<span class="item-note">{{prospecto.fono}}</span></a>
-        <a class="item">Cable<span class="item-note">{{prospecto.cable}}</span></a>
-        <a class="item">Inet<span class="item-note">{{prospecto.inet}}</span></a>
-        <a class="item">Prem<span class="item-note">{{prospecto.prem}}</span></a>
-        <a class="item">Rut<span class="item-note">{{prospecto.rut_prospecto}}</span></a>
-        <a class="item">Nombre<span class="item-note">{{prospecto.nombre}}</span></a>
-        <a class="item">Deuda<span class="item-note">{{prospecto.deuda}}</span></a>
         <div class="item item-divider">
           Datos comprador:
         </div>
@@ -123,7 +114,7 @@
           </div>
           <select>
             <option ng-model="prospecto.tipo_fono" ng-value="'NINGUNO'">NINGUNO</option>
-            <option ng-model="prospecto.tipo_fono" ng-value="'FONO ILIMITADO'">FONO ILIMITADO</option>
+            <option ng-model="prospecto.tipo_fono" ng-value="'FONO ILIMITADO 600 MÓVIL'">FONO ILIMITADO 600 MÓVIL</option>
             <option ng-model="prospecto.tipo_fono" ng-value="'PORTABILIDAD'">PORTABILIDAD</option>
           </select>
         </label>
@@ -134,8 +125,8 @@
           <select>
             <option ng-model="prospecto.tipo_inet" ng-value="'NINGUNO'">NINGUNO</option>
             <option ng-model="prospecto.tipo_inet" ng-value="'MEGA 30'">MEGA 30</option>
-            <option ng-model="prospecto.tipo_inet" ng-value="'MEGA 150'">MEGA 150</option>
             <option ng-model="prospecto.tipo_inet" ng-value="'MEGA 300'">MEGA 300</option>
+            <option ng-model="prospecto.tipo_inet" ng-value="'MEGA 400'">MEGA 400</option>
           </select>
         </label>
         <div class="item item-divider">
