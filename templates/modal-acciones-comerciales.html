@@ -7,7 +7,7 @@
       <div class="item item-divider">
         Listado de Acciones Comerciales
       </div>
-      <ion-item ng-repeat="ac in prospecto.accion_comercial | orderBy: 'ac.timestamp'">
+      <ion-item collection-repeat="ac in prospecto.accion_comercial | orderBy:'-timestamp'">
         <div class="row">
           <div class="col">
             <p>Accion: {{ac.accion}}</p>
