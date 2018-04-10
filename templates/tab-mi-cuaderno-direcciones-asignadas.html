@@ -11,7 +11,7 @@
         <div class="col">Calle</div>
         <div class="col">Número</div>
       </ion-item>
-      <ion-item class="row item-text-wrap" collection-repeat="prospecto in prospectosDirAsig"  ng-click="chooseModal(1, prospecto)">
+      <ion-item class="row item-text-wrap" collection-repeat="prospecto in prospectosDirAsig | filter: {tipo_contacto: 'Toca puerta y si hizo contacto'}"  ng-click="chooseModal(1, prospecto)">
         <div class="col">{{prospecto.comuna}}</div>
         <div class="col">{{prospecto.calle}}</div>
         <div class="col">{{prospecto.numero}}</div>
