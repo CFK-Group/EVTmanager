@@ -428,6 +428,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     var prospectoActualizado = {};
     if($scope.prospecto.rut_prospecto !== null && $scope.prospecto.rut_prospecto !== undefined){
       prospectoActualizado = {
+        'id' : $scope.prospecto.id,
         'nombre': $scope.prospecto.nombre,
         'rut_prospecto': parseInt($scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1)),
         'dv_prospecto': $scope.prospecto.rut_prospecto.slice(-1),
@@ -460,6 +461,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       };
     }else{
       prospectoActualizado = {
+        'id' : $scope.prospecto.id,
         'nombre': $scope.prospecto.nombre,
         'rut_prospecto': $scope.prospecto.rut_prospecto,
         'dv_prospecto': $scope.prospecto.dv_prospecto,
@@ -785,6 +787,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
     var prospectoActualizado = {};
     if($scope.prospecto.rut_prospecto !== null && $scope.prospecto.rut_prospecto !== undefined){
       prospectoActualizado = {
+        'id' : $scope.prospecto.id,
         'nombre': $scope.prospecto.nombre,
         'rut_prospecto': parseInt($scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1)),
         'dv_prospecto': $scope.prospecto.rut_prospecto.slice(-1),
@@ -817,6 +820,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       };
     }else{
       prospectoActualizado = {
+        'id' : $scope.prospecto.id,
         'nombre': $scope.prospecto.nombre,
         'rut_prospecto': $scope.prospecto.rut_prospecto,
         'dv_prospecto': $scope.prospecto.dv_prospecto,
