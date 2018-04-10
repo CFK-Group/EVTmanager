@@ -1013,6 +1013,7 @@ app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootSc
   apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.prospectos = JSON.parse(JSON.stringify(response));
+      console.log($rootScope.prospectos);
       $state.go('tabs.cuaderno');
     }, function (err) {
       $ionicLoading.hide();
