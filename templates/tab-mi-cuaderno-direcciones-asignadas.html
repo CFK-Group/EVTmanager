@@ -1,6 +1,10 @@
 <ion-view class="no-scroll">
   <ion-nav-title>Direcciones Asignadas</ion-nav-title>
   <ion-content class="grey lighten-4 has-header" overflow-scroll="false">
+    <label class="item item-input">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="text" placeholder="Búsqueda: comuna, nodo, cuadrante, deuda, etc." ng-model="filter.search">
+    </label>
     <ion-list>
       <ion-item class="row amber">
         <div class="col">Comuna</div>
