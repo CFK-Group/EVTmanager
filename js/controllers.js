@@ -370,6 +370,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
   $scope.openModal = function(index) {
     if (index === 1){
       $scope.modal_1.show();
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador+$scope.prospecto.dv_comprador:null;
       if($scope.prospecto.nombre_comprador == null){
         $scope.prospecto.nombre_comprador = '';
       }else if($scope.prospecto.email == null){
@@ -388,6 +389,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
 
   $scope.closeModal = function(index) {
     if (index === 1){
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length-1):null;
       $scope.modal_1.hide();
       $scope.step = 'inicio';
     }else{
@@ -425,83 +427,53 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       showBackdrop: true
     });
 
-    var prospectoActualizado = {};
-    if($scope.prospecto.rut_prospecto !== null && $scope.prospecto.rut_prospecto !== undefined){
-      prospectoActualizado = {
-        'id' : $scope.prospecto.id,
-        'nombre': $scope.prospecto.nombre,
-        'rut_prospecto': parseInt($scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1)),
-        'dv_prospecto': $scope.prospecto.rut_prospecto.slice(-1),
-        'calle': $scope.prospecto.calle,
-        'numero': $scope.prospecto.numero,
-        'comuna' : $scope.prospecto.comuna,
-        'nodo': $scope.prospecto.nodo,
-        'cuadrante': $scope.prospecto.cuadrante,
-        'fono' : $scope.prospecto.fono,
-        'cable': $scope.prospecto.cable,
-        'inet': $scope.prospecto.inet,
-        'premium': $scope.prospecto.premium,
-        'deuda': $scope.prospecto.deuda,
-        'rut_comprador': $scope.prospecto.rut_comprador,
-        'dv_comprador': $scope.prospecto.dv_comprador,
-        'nombre_comprador': $scope.prospecto.nombre_comprador,
-        'fono_contacto_1': $scope.prospecto.fono_contacto_1,
-        'fono_contacto_2': $scope.prospecto.fono_contacto_2,
-        'email': $scope.prospecto.email,
-        'tipo_tv': $scope.prospecto.tipo_tv,
-        'tipo_fono': $scope.prospecto.tipo_fono,
-        'tipo_inet': $scope.prospecto.tipo_inet,
-        'accion_comercial': $scope.prospecto.accionComercial,
-        'tipo_creacion': $scope.prospecto.tipo_creacion,
-        'tipo_accion': $scope.prospecto.tipo_accion,
-        'tipo_contacto': $scope.prospecto.tipo_contacto,
-        'tienePromocion': $scope.prospecto.tienePromocion,
-        'productosContratados': $scope.prospecto.productosContratados,
-        'empresaServicios': $scope.prospecto.empresaServicios
-      };
-    }else{
-      prospectoActualizado = {
-        'id' : $scope.prospecto.id,
-        'nombre': $scope.prospecto.nombre,
-        'rut_prospecto': $scope.prospecto.rut_prospecto,
-        'dv_prospecto': $scope.prospecto.dv_prospecto,
-        'calle': $scope.prospecto.calle,
-        'numero': $scope.prospecto.numero,
-        'comuna' : $scope.prospecto.comuna,
-        'nodo': $scope.prospecto.nodo,
-        'cuadrante': $scope.prospecto.cuadrante,
-        'fono' : $scope.prospecto.fono,
-        'cable': $scope.prospecto.cable,
-        'inet': $scope.prospecto.inet,
-        'premium': $scope.prospecto.premium,
-        'deuda': $scope.prospecto.deuda,
-        'rut_comprador': $scope.prospecto.rut_comprador,
-        'dv_comprador': $scope.prospecto.dv_comprador,
-        'nombre_comprador': $scope.prospecto.nombre_comprador,
-        'fono_contacto_1': $scope.prospecto.fono_contacto_1,
-        'fono_contacto_2': $scope.prospecto.fono_contacto_2,
-        'email': $scope.prospecto.email,
-        'tipo_tv': $scope.prospecto.tipo_tv,
-        'tipo_fono': $scope.prospecto.tipo_fono,
-        'tipo_inet': $scope.prospecto.tipo_inet,
-        'accion_comercial': $scope.prospecto.accionComercial,
-        'tipo_creacion': $scope.prospecto.tipo_creacion,
-        'tipo_accion': $scope.prospecto.tipo_accion,
-        'tipo_contacto': $scope.prospecto.tipo_contacto,
-        'tienePromocion': $scope.prospecto.tienePromocion,
-        'productosContratados': $scope.prospecto.productosContratados,
-        'empresaServicios': $scope.prospecto.empresaServicios
-      };
-    }
+    var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== undefined) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.slice(-1):null;
+    var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.slice(-1):null;
+    var prospectoActualizado = {
+      'id' : $scope.prospecto.id,
+      'nombre': $scope.prospecto.nombre,
+      'rut_prospecto': rutProspecto,
+      'dv_prospecto': dvProspecto,
+      'rut_comprador': rutComprador,
+      'dv_comprador': dvComprador,
+      'calle': $scope.prospecto.calle,
+      'numero': $scope.prospecto.numero,
+      'comuna' : $scope.prospecto.comuna,
+      'nodo': $scope.prospecto.nodo,
+      'cuadrante': $scope.prospecto.cuadrante,
+      'fono' : $scope.prospecto.fono,
+      'cable': $scope.prospecto.cable,
+      'inet': $scope.prospecto.inet,
+      'premium': $scope.prospecto.premium,
+      'deuda': $scope.prospecto.deuda,
+      'nombre_comprador': $scope.prospecto.nombre_comprador,
+      'fono_contacto_1': $scope.prospecto.fono_contacto_1,
+      'fono_contacto_2': $scope.prospecto.fono_contacto_2,
+      'email': $scope.prospecto.email,
+      'tipo_tv': $scope.prospecto.tipo_tv,
+      'tipo_fono': $scope.prospecto.tipo_fono,
+      'tipo_inet': $scope.prospecto.tipo_inet,
+      'accion_comercial': $scope.prospecto.accionComercial,
+      'tipo_creacion': $scope.prospecto.tipo_creacion,
+      'tipo_accion': $scope.prospecto.tipo_accion,
+      'tipo_contacto': $scope.prospecto.tipo_contacto,
+      'tienePromocion': $scope.prospecto.tienePromocion,
+      'productosContratados': $scope.prospecto.productosContratados,
+      'empresaServicios': $scope.prospecto.empresaServicios
+    };
     var data = {
       token: sessionStorage.userToken,
       prospecto: prospectoActualizado,
       accionComercial: $scope.prospecto.accionComercial
     };
-    console.log(data.prospecto);
+    console.table(data.prospecto);
     apiConnection.updateProspecto().save(data).$promise.then(
       function (response) {
       $rootScope.updateGeoPos('Actualiza prospecto ' + response.id);
+      console.log($rootScope.prospectosDirAsig.indexOf($scope.prospecto));
+      $rootScope.prospectosDirAsig.splice($rootScope.prospectosDirAsig.indexOf($scope.prospecto), 1);
       $ionicLoading.hide();
       var alert = $ionicPopup.alert({
         title: 'Actualizado',
@@ -560,72 +532,43 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
   };
 
   $scope.enviarProspecto = function () {
-    var nuevoProspecto = {};
-    if($scope.prospecto.rut_prospecto !== null && $scope.prospecto.rut_prospecto !== undefined){
-      nuevoProspecto = {
-        'nombre': $scope.prospecto.nombre,
-        'rut_prospecto': parseInt($scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1)),
-        'dv_prospecto': $scope.prospecto.rut_prospecto.slice(-1),
-        'calle': $scope.prospecto.calle,
-        'numero': $scope.prospecto.numero,
-        'comuna' : $scope.prospecto.comuna,
-        'nodo': $scope.prospecto.nodo,
-        'cuadrante': $scope.prospecto.cuadrante,
-        'fono' : $scope.prospecto.fono,
-        'cable': $scope.prospecto.cable,
-        'inet': $scope.prospecto.inet,
-        'premium': $scope.prospecto.premium,
-        'deuda': $scope.prospecto.deuda,
-        'rut_comprador': $scope.prospecto.rut_comprador,
-        'dv_comprador': $scope.prospecto.dv_comprador,
-        'nombre_comprador': $scope.prospecto.nombre_comprador,
-        'fono_contacto_1': $scope.prospecto.fono_contacto_1,
-        'fono_contacto_2': $scope.prospecto.fono_contacto_2,
-        'email': $scope.prospecto.email,
-        'tipo_tv': $scope.prospecto.tipo_tv,
-        'tipo_fono': $scope.prospecto.tipo_fono,
-        'tipo_inet': $scope.prospecto.tipo_inet,
-        'accion_comercial': $scope.prospecto.accionComercial,
-        'tipo_creacion': $scope.prospecto.tipo_creacion,
-        'tipo_accion': $scope.prospecto.tipo_accion,
-        'tipo_contacto': $scope.prospecto.tipo_contacto,
-        'tienePromocion': $scope.prospecto.tienePromocion,
-        'productosContratados': $scope.prospecto.productosContratados,
-        'empresaServicios': $scope.prospecto.empresaServicios
-      };
-    }else{
-      nuevoProspecto = {
-        'nombre': $scope.prospecto.nombre,
-        'rut_prospecto': $scope.prospecto.rut_prospecto,
-        'dv_prospecto': $scope.prospecto.dv_prospecto,
-        'calle': $scope.prospecto.calle,
-        'numero': $scope.prospecto.numero,
-        'comuna' : $scope.prospecto.comuna,
-        'nodo': $scope.prospecto.nodo,
-        'cuadrante': $scope.prospecto.cuadrante,
-        'fono' : $scope.prospecto.fono,
-        'cable': $scope.prospecto.cable,
-        'inet': $scope.prospecto.inet,
-        'premium': $scope.prospecto.premium,
-        'deuda': $scope.prospecto.deuda,
-        'rut_comprador': $scope.prospecto.rut_comprador,
-        'dv_comprador': $scope.prospecto.dv_comprador,
-        'nombre_comprador': $scope.prospecto.nombre_comprador,
-        'fono_contacto_1': $scope.prospecto.fono_contacto_1,
-        'fono_contacto_2': $scope.prospecto.fono_contacto_2,
-        'email': $scope.prospecto.email,
-        'tipo_tv': $scope.prospecto.tipo_tv,
-        'tipo_fono': $scope.prospecto.tipo_fono,
-        'tipo_inet': $scope.prospecto.tipo_inet,
-        'accion_comercial': $scope.prospecto.accionComercial,
-        'tipo_creacion': $scope.prospecto.tipo_creacion,
-        'tipo_accion': $scope.prospecto.tipo_accion,
-        'tipo_contacto': $scope.prospecto.tipo_contacto,
-        'tienePromocion': $scope.prospecto.tienePromocion,
-        'productosContratados': $scope.prospecto.productosContratados,
-        'empresaServicios': $scope.prospecto.empresaServicios
-      };
-    }
+
+    var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== undefined) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.slice(-1):null;
+    var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.slice(-1):null;
+    var nuevoProspecto = {
+      'id' : $scope.prospecto.id,
+      'nombre': $scope.prospecto.nombre,
+      'rut_prospecto': rutProspecto,
+      'dv_prospecto': dvProspecto,
+      'rut_comprador': rutComprador,
+      'dv_comprador': dvComprador,
+      'calle': $scope.prospecto.calle,
+      'numero': $scope.prospecto.numero,
+      'comuna' : $scope.prospecto.comuna,
+      'nodo': $scope.prospecto.nodo,
+      'cuadrante': $scope.prospecto.cuadrante,
+      'fono' : $scope.prospecto.fono,
+      'cable': $scope.prospecto.cable,
+      'inet': $scope.prospecto.inet,
+      'premium': $scope.prospecto.premium,
+      'deuda': $scope.prospecto.deuda,
+      'nombre_comprador': $scope.prospecto.nombre_comprador,
+      'fono_contacto_1': $scope.prospecto.fono_contacto_1,
+      'fono_contacto_2': $scope.prospecto.fono_contacto_2,
+      'email': $scope.prospecto.email,
+      'tipo_tv': $scope.prospecto.tipo_tv,
+      'tipo_fono': $scope.prospecto.tipo_fono,
+      'tipo_inet': $scope.prospecto.tipo_inet,
+      'accion_comercial': $scope.prospecto.accionComercial,
+      'tipo_creacion': $scope.prospecto.tipo_creacion,
+      'tipo_accion': $scope.prospecto.tipo_accion,
+      'tipo_contacto': $scope.prospecto.tipo_contacto,
+      'tienePromocion': $scope.prospecto.tienePromocion,
+      'productosContratados': $scope.prospecto.productosContratados,
+      'empresaServicios': $scope.prospecto.empresaServicios
+    };
     var data = {
       token: sessionStorage.userToken,
       prospecto: nuevoProspecto,
@@ -784,74 +727,43 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
   };
 
   $scope.actualizarProspecto = function () {
-    var prospectoActualizado = {};
-    if($scope.prospecto.rut_prospecto !== null && $scope.prospecto.rut_prospecto !== undefined){
-      prospectoActualizado = {
-        'id' : $scope.prospecto.id,
-        'nombre': $scope.prospecto.nombre,
-        'rut_prospecto': parseInt($scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1)),
-        'dv_prospecto': $scope.prospecto.rut_prospecto.slice(-1),
-        'calle': $scope.prospecto.calle,
-        'numero': $scope.prospecto.numero,
-        'comuna' : $scope.prospecto.comuna,
-        'nodo': $scope.prospecto.nodo,
-        'cuadrante': $scope.prospecto.cuadrante,
-        'fono' : $scope.prospecto.fono,
-        'cable': $scope.prospecto.cable,
-        'inet': $scope.prospecto.inet,
-        'premium': $scope.prospecto.premium,
-        'deuda': $scope.prospecto.deuda,
-        'rut_comprador': $scope.prospecto.rut_comprador,
-        'dv_comprador': $scope.prospecto.dv_comprador,
-        'nombre_comprador': $scope.prospecto.nombre_comprador,
-        'fono_contacto_1': $scope.prospecto.fono_contacto_1,
-        'fono_contacto_2': $scope.prospecto.fono_contacto_2,
-        'email': $scope.prospecto.email,
-        'tipo_tv': $scope.prospecto.tipo_tv,
-        'tipo_fono': $scope.prospecto.tipo_fono,
-        'tipo_inet': $scope.prospecto.tipo_inet,
-        'accion_comercial': $scope.prospecto.accionComercial,
-        'tipo_creacion': $scope.prospecto.tipo_creacion,
-        'tipo_accion': $scope.prospecto.tipo_accion,
-        'tipo_contacto': $scope.prospecto.tipo_contacto,
-        'tienePromocion': $scope.prospecto.tienePromocion,
-        'productosContratados': $scope.prospecto.productosContratados,
-        'empresaServicios': $scope.prospecto.empresaServicios
-      };
-    }else{
-      prospectoActualizado = {
-        'id' : $scope.prospecto.id,
-        'nombre': $scope.prospecto.nombre,
-        'rut_prospecto': $scope.prospecto.rut_prospecto,
-        'dv_prospecto': $scope.prospecto.dv_prospecto,
-        'calle': $scope.prospecto.calle,
-        'numero': $scope.prospecto.numero,
-        'comuna' : $scope.prospecto.comuna,
-        'nodo': $scope.prospecto.nodo,
-        'cuadrante': $scope.prospecto.cuadrante,
-        'fono' : $scope.prospecto.fono,
-        'cable': $scope.prospecto.cable,
-        'inet': $scope.prospecto.inet,
-        'premium': $scope.prospecto.premium,
-        'deuda': $scope.prospecto.deuda,
-        'rut_comprador': $scope.prospecto.rut_comprador,
-        'dv_comprador': $scope.prospecto.dv_comprador,
-        'nombre_comprador': $scope.prospecto.nombre_comprador,
-        'fono_contacto_1': $scope.prospecto.fono_contacto_1,
-        'fono_contacto_2': $scope.prospecto.fono_contacto_2,
-        'email': $scope.prospecto.email,
-        'tipo_tv': $scope.prospecto.tipo_tv,
-        'tipo_fono': $scope.prospecto.tipo_fono,
-        'tipo_inet': $scope.prospecto.tipo_inet,
-        'accion_comercial': $scope.prospecto.accionComercial,
-        'tipo_creacion': $scope.prospecto.tipo_creacion,
-        'tipo_accion': $scope.prospecto.tipo_accion,
-        'tipo_contacto': $scope.prospecto.tipo_contacto,
-        'tienePromocion': $scope.prospecto.tienePromocion,
-        'productosContratados': $scope.prospecto.productosContratados,
-        'empresaServicios': $scope.prospecto.empresaServicios
-      };
-    }
+    var rutProspecto = ($scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var dvProspecto = (rutProspecto !== null) ? rutProspcto.slice(-1):null;
+    var dvComprador = (rutComprador !== null) ? rutComprador.slice(-1):null;
+    dvComprador = (dvComprador === k) ? 'k':dvComprador;
+    var prospectoActualizado = {
+      'id' : $scope.prospecto.id,
+      'nombre': $scope.prospecto.nombre,
+      'rut_prospecto': rutProspecto,
+      'dv_prospecto': dvProspecto,
+      'rut_comprador': rutComprador,
+      'dv_comprador': dvComprador,
+      'calle': $scope.prospecto.calle,
+      'numero': $scope.prospecto.numero,
+      'comuna' : $scope.prospecto.comuna,
+      'nodo': $scope.prospecto.nodo,
+      'cuadrante': $scope.prospecto.cuadrante,
+      'fono' : $scope.prospecto.fono,
+      'cable': $scope.prospecto.cable,
+      'inet': $scope.prospecto.inet,
+      'premium': $scope.prospecto.premium,
+      'deuda': $scope.prospecto.deuda,
+      'nombre_comprador': $scope.prospecto.nombre_comprador,
+      'fono_contacto_1': $scope.prospecto.fono_contacto_1,
+      'fono_contacto_2': $scope.prospecto.fono_contacto_2,
+      'email': $scope.prospecto.email,
+      'tipo_tv': $scope.prospecto.tipo_tv,
+      'tipo_fono': $scope.prospecto.tipo_fono,
+      'tipo_inet': $scope.prospecto.tipo_inet,
+      'accion_comercial': $scope.prospecto.accionComercial,
+      'tipo_creacion': $scope.prospecto.tipo_creacion,
+      'tipo_accion': $scope.prospecto.tipo_accion,
+      'tipo_contacto': $scope.prospecto.tipo_contacto,
+      'tienePromocion': $scope.prospecto.tienePromocion,
+      'productosContratados': $scope.prospecto.productosContratados,
+      'empresaServicios': $scope.prospecto.empresaServicios
+    };
     var data = {
       token: sessionStorage.userToken,
       prospecto: prospectoActualizado,
@@ -928,6 +840,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       $scope.modal_3.show();
     }else {
       $scope.modal_4.show();
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador+$scope.prospecto.dv_comprador:null;
     }
   };
 
@@ -941,6 +854,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       $scope.modal_3.hide();
     }else {
       $scope.modal_4.hide();
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length-1):null;
     }
   };
 
