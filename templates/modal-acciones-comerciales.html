@@ -7,11 +7,11 @@
       <div class="item item-divider">
         Listado de Acciones Comerciales
       </div>
-      <ion-item ng-repeat="ac in prospecto.accion_comercial">
+      <ion-item collection-repeat="ac in prospecto.accion_comercial | orderBy:'-timestamp'">
         <div class="row">
           <div class="col">
             <p>Accion: {{ac.accion}}</p>
-            <p>Fecha última actualización: {{ac.timestamp * 1000 | date: 'yyyy/MM/dd HH:mm:ss'}}</p>
+            <p>Última actualización: {{ac.timestamp * 1000 | date: 'yyyy/MM/dd HH:mm:ss'}}</p>
           </div>
         </div>
       </ion-item>

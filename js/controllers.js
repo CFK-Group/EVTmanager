@@ -370,6 +370,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
   $scope.openModal = function(index) {
     if (index === 1){
       $scope.modal_1.show();
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador+$scope.prospecto.dv_comprador:null;
       if($scope.prospecto.nombre_comprador == null){
         $scope.prospecto.nombre_comprador = '';
       }else if($scope.prospecto.email == null){
@@ -388,6 +389,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
 
   $scope.closeModal = function(index) {
     if (index === 1){
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length-1):null;
       $scope.modal_1.hide();
       $scope.step = 'inicio';
     }else{
@@ -424,11 +426,18 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       animation: 'fade-in',
       showBackdrop: true
     });
+
+    var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined && $scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== undefined) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.slice(-1):null;
+    var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.slice(-1):null;
     var prospectoActualizado = {
-      'id': $scope.prospecto.id,
+      'id' : $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
-      'rut_prospecto': $scope.prospecto.rut_prospecto,
-      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'rut_prospecto': rutProspecto,
+      'dv_prospecto': dvProspecto,
+      'rut_comprador': rutComprador,
+      'dv_comprador': dvComprador,
       'calle': $scope.prospecto.calle,
       'numero': $scope.prospecto.numero,
       'comuna' : $scope.prospecto.comuna,
@@ -439,8 +448,6 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       'inet': $scope.prospecto.inet,
       'premium': $scope.prospecto.premium,
       'deuda': $scope.prospecto.deuda,
-      'rut_comprador': $scope.prospecto.rut_comprador,
-      'dv_comprador': $scope.prospecto.dv_comprador,
       'nombre_comprador': $scope.prospecto.nombre_comprador,
       'fono_contacto_1': $scope.prospecto.fono_contacto_1,
       'fono_contacto_2': $scope.prospecto.fono_contacto_2,
@@ -449,13 +456,9 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       'tipo_fono': $scope.prospecto.tipo_fono,
       'tipo_inet': $scope.prospecto.tipo_inet,
       'accion_comercial': $scope.prospecto.accionComercial,
-      'estado': $scope.prospecto.estado,
-      'id_vendedor': $scope.prospecto.id_vendedor,
       'tipo_creacion': $scope.prospecto.tipo_creacion,
       'tipo_accion': $scope.prospecto.tipo_accion,
       'tipo_contacto': $scope.prospecto.tipo_contacto,
-      'create_time': $scope.prospecto.create_time,
-      'update_time': $scope.prospecto.update_time,
       'tienePromocion': $scope.prospecto.tienePromocion,
       'productosContratados': $scope.prospecto.productosContratados,
       'empresaServicios': $scope.prospecto.empresaServicios
@@ -468,8 +471,10 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     console.table(data.prospecto);
     apiConnection.updateProspecto().save(data).$promise.then(
       function (response) {
-      $ionicLoading.hide();
       $rootScope.updateGeoPos('Actualiza prospecto ' + response.id);
+      console.log($rootScope.prospectosDirAsig.indexOf($scope.prospecto));
+      $rootScope.prospectosDirAsig.splice($rootScope.prospectosDirAsig.indexOf($scope.prospecto), 1);
+      $ionicLoading.hide();
       var alert = $ionicPopup.alert({
         title: 'Actualizado',
         template: 'Prospecto actualizado correctamente'
@@ -527,10 +532,18 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
   };
 
   $scope.enviarProspecto = function () {
+
+    var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== undefined) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.slice(-1):null;
+    var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.slice(-1):null;
     var nuevoProspecto = {
+      'id' : $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
-      'rut_prospecto': $scope.prospecto.rut_prospecto,
-      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'rut_prospecto': rutProspecto,
+      'dv_prospecto': dvProspecto,
+      'rut_comprador': rutComprador,
+      'dv_comprador': dvComprador,
       'calle': $scope.prospecto.calle,
       'numero': $scope.prospecto.numero,
       'comuna' : $scope.prospecto.comuna,
@@ -541,8 +554,6 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
       'inet': $scope.prospecto.inet,
       'premium': $scope.prospecto.premium,
       'deuda': $scope.prospecto.deuda,
-      'rut_comprador': $scope.prospecto.rut_comprador,
-      'dv_comprador': $scope.prospecto.dv_comprador,
       'nombre_comprador': $scope.prospecto.nombre_comprador,
       'fono_contacto_1': $scope.prospecto.fono_contacto_1,
       'fono_contacto_2': $scope.prospecto.fono_contacto_2,
@@ -716,11 +727,18 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
   };
 
   $scope.actualizarProspecto = function () {
+    var rutProspecto = ($scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var dvProspecto = (rutProspecto !== null) ? rutProspcto.slice(-1):null;
+    var dvComprador = (rutComprador !== null) ? rutComprador.slice(-1):null;
+    dvComprador = (dvComprador === k) ? 'k':dvComprador;
     var prospectoActualizado = {
-      'id': $scope.prospecto.id,
+      'id' : $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
-      'rut_prospecto': $scope.prospecto.rut_prospecto,
-      'dv_prospecto': $scope.prospecto.dv_prospecto,
+      'rut_prospecto': rutProspecto,
+      'dv_prospecto': dvProspecto,
+      'rut_comprador': rutComprador,
+      'dv_comprador': dvComprador,
       'calle': $scope.prospecto.calle,
       'numero': $scope.prospecto.numero,
       'comuna' : $scope.prospecto.comuna,
@@ -731,8 +749,6 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       'inet': $scope.prospecto.inet,
       'premium': $scope.prospecto.premium,
       'deuda': $scope.prospecto.deuda,
-      'rut_comprador': $scope.prospecto.rut_comprador,
-      'dv_comprador': $scope.prospecto.dv_comprador,
       'nombre_comprador': $scope.prospecto.nombre_comprador,
       'fono_contacto_1': $scope.prospecto.fono_contacto_1,
       'fono_contacto_2': $scope.prospecto.fono_contacto_2,
@@ -741,13 +757,9 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       'tipo_fono': $scope.prospecto.tipo_fono,
       'tipo_inet': $scope.prospecto.tipo_inet,
       'accion_comercial': $scope.prospecto.accionComercial,
-      'estado': $scope.prospecto.estado,
-      'id_vendedor': $scope.prospecto.id_vendedor,
       'tipo_creacion': $scope.prospecto.tipo_creacion,
       'tipo_accion': $scope.prospecto.tipo_accion,
       'tipo_contacto': $scope.prospecto.tipo_contacto,
-      'create_time': $scope.prospecto.create_time,
-      'update_time': $scope.prospecto.update_time,
       'tienePromocion': $scope.prospecto.tienePromocion,
       'productosContratados': $scope.prospecto.productosContratados,
       'empresaServicios': $scope.prospecto.empresaServicios
@@ -828,6 +840,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       $scope.modal_3.show();
     }else {
       $scope.modal_4.show();
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador+$scope.prospecto.dv_comprador:null;
     }
   };
 
@@ -841,6 +854,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       $scope.modal_3.hide();
     }else {
       $scope.modal_4.hide();
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length-1):null;
     }
   };
 
@@ -917,6 +931,7 @@ app.controller('LoadingProspectosCtrl', function ($state, apiConnection, $rootSc
   apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
     function (response) {
       $rootScope.prospectos = JSON.parse(JSON.stringify(response));
+      console.log($rootScope.prospectos);
       $state.go('tabs.cuaderno');
     }, function (err) {
       $ionicLoading.hide();
