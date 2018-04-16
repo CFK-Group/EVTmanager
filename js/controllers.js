@@ -428,7 +428,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     });
 
     var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined && $scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
-    var rutComprador = ($scope.prospecto.rut_comprador !== undefined) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== undefined && $scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
     var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.slice(-1):null;
     var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.slice(-1):null;
     var prospectoActualizado = {
