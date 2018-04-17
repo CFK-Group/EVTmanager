@@ -1569,7 +1569,8 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
         model.longitud = (position.coords.longitude).toString();
       }
     );
-    apiConnection.sendGeoPos().save(sessionStorage.userToken, model.latitud, model.longitud, accion).$promise.then(
+    data = [sessionStorage.userToken, model.latitud, model.longitud, accion];
+    apiConnection.sendGeoPos().save(data).$promise.then(
       function (response) {
         console.log('Updated GeoPos at ' + accion + ' succeed');
       },
