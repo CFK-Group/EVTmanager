@@ -1553,20 +1553,19 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
   $rootScope.decode = function(text) {
     return decodeURIComponent(escape(text));
   };
+  var model = {
+    latitud: '0',
+    longitud: '0'
+  };
   $rootScope.updateGeoPos = function (accion) {
-
-    var posOptions = {
-      timeout: 10000,
-      enableHighAccuracy: false
-    };
-    var model = {
-      latitud: '',
-      longitud: ''
-    };
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
     $cordovaGeolocation.getCurrentPosition(posOptions).then(
       function (position) {
-        model.latitud = (position.coords.latitude).toString();
-        model.longitud = (position.coords.longitude).toString();
+        model.latitud = position.coords.latitude.toString();
+        model.longitud = position.coords.longitude.toString();
+      },
+      function (err) {
+        alert(err.message);
       }
     );
     data = {
@@ -1574,7 +1573,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
         lat: model.latitud,
         lon: model.longitud,
         accion: accion};
-    console.log(data);
+    console.table(data);
     apiConnection.sendGeoPos().save(data).$promise.then(
       function (response) {
         console.log('Updated GeoPos at ' + accion + ' succeed');

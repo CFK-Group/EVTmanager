@@ -32,6 +32,7 @@
 <plugin name="cordova-plugin-splashscreen" source="npm" />
 <plugin name="ionic-plugin-keyboard" source="npm" />
 <plugin name="cordova-plugin-geolocation" source="npm" />
+<plugin name="cordova.plugins.diagnostic" source="npm" />
 
 <!-- Define app icon and splashscreen -->
 <platform name="ios">

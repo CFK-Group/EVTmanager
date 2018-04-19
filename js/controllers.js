@@ -5,7 +5,7 @@ var app = angular.module('evtManager.controllers', []);
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
-    var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
+    var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
     var model = "";
     var uuid = "";
 
@@ -29,6 +29,76 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
         deviceModel: model
       };
     }
+
+    //-------------------------------------------------------------------
+
+    // $scope.checkAvailability = function(){
+    //   cordova.plugins.diagnostic.isGpsLocationAvailable(function(available){
+    //     console.log("GPS está " + (available ? "activado" : "desactivado"));
+    //     if(!available){
+    //       $scope.checkAuthorization();
+    //     }else{
+    //       console.log("GPS listo para usar");
+    //       $scope.login();
+    //     }
+    //   }, function(error){
+    //     console.error("Ocurrió el siguiente error: "+error);
+    //   });
+    // };
+    //
+    // $scope.checkAuthorization = function(){
+    //   cordova.plugins.diagnostic.isLocationAuthorized(function(authorized){
+    //     console.log("Localización está " + (authorized ? "autorizada" : "desautorizada"));
+    //     if(authorized){
+    //       $scope.checkDeviceSetting();
+    //     }else{
+    //       cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
+    //         switch(status){
+    //           case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+    //             console.log("Permiso garantizado");
+    //             $scope.checkDeviceSetting();
+    //             break;
+    //           case cordova.plugins.diagnostic.permissionStatus.DENIED:
+    //             console.log("Permiso denegado");
+    //             // User denied permission
+    //             break;
+    //           case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+    //             console.log("Permiso permanentemente denegado");
+    //             // User denied permission permanently
+    //             break;
+    //         }
+    //       }, function(error){
+    //         console.error(error);
+    //       });
+    //     }
+    //   }, function(error){
+    //     console.error("Ocurrió el siguiente error: "+error);
+    //   });
+    // };
+    //
+    // $scope.checkDeviceSetting = function(){
+    //   cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+    //     console.log("GPS está " + (enabled ? "activado" : "desactivado"));
+    //     if(!enabled){
+    //       cordova.plugins.locationAccuracy.request(function (success){
+    //         console.log("Se solicitó con éxito el modo de ubicación de alta precisión: "+success.message);
+    //       }, function onRequestFailure(error){
+    //         console.error("Error de solicitud de precisión: código de error="+error.code+"; mensaje de error="+error.message);
+    //         if(error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED){
+    //           if(confirm('Error al establecer automáticamente el Modo de ubicación en "Alta precisión". ¿Desea cambiar a la página Configuración de ubicación y hacer esto manualmente?')){
+    //             cordova.plugins.diagnostic.switchToLocationSettings();
+    //           }
+    //         }
+    //       }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+    //     }
+    //   }, function(error){
+    //     console.error("Se produjo el siguiente error: "+error);
+    //   });
+    // };
+    //
+    // $scope.checkAvailability(); // start the check
+
+    //-------------------------------------------------------------------
 
     $scope.login = function () {
       $ionicLoading.show({
