@@ -731,7 +731,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
     var rutComprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
     var dvProspecto = (rutProspecto !== null) ? rutProspcto.slice(-1):null;
     var dvComprador = (rutComprador !== null) ? rutComprador.slice(-1):null;
-    dvComprador = (dvComprador === k) ? 'k':dvComprador;
+    dvComprador = (dvComprador === 'k') ? 'k':dvComprador;
     var prospectoActualizado = {
       'id' : $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
