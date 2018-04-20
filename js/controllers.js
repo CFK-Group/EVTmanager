@@ -802,10 +802,10 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       animation: 'fade-in',
       showBackdrop: true
     });
-    let rutComprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(0, $scope.prospecto.rut_comprador.length - 1):'';
-    let rutProspecto = ($scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.toString().slice(0, $scope.prospecto.rut_prospecto.length - 1):'';
-    let dvProspecto = ($scope.prospecto.dv_prospecto !== null && $scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.toString().slice(-1):'';
-    let dvComprador = ($scope.prospecto.dv_comprador !== null && $scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(-1):'';
+    if ($scope.prospecto.rut_comprador !== null) { rutComprador = $scope.prospecto.rut_comprador.toString().slice(0, $scope.prospecto.rut_comprador.length - 1)}else{rutComprador = ''};
+    if ($scope.prospecto.rut_prospecto !== null) { rutProspecto = $scope.prospecto.rut_prospecto.toString().slice(0, $scope.prospecto.rut_prospecto.length - 1)}else{ rutProspecto = ''};
+    if ($scope.prospecto.dv_prospecto !== null && $scope.prospecto.rut_prospecto !== null){ dvProspecto = $scope.prospecto.rut_prospecto.toString().slice(-1)}else {dvProspecto = ''};
+    if ($scope.prospecto.dv_comprador !== null && $scope.prospecto.rut_comprador !== null){ dvComprador = $scope.prospecto.rut_comprador.toString().slice(-1)}else {dvComprador = ''};
     dvComprador = (dvComprador === 'k') ? 'k':dvComprador;
     let prospectoActualizado = {
       'id' : $scope.prospecto.id,
