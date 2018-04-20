@@ -1579,7 +1579,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
         );
       },
       function (err) {
-        console.log(`Error en geolocalización: ${err.message}`);
+          console.log('Error de geolocalizacion: ',err);
       }
     );
   }
