@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0"
         id          = "com.cfkgroup.evtmanager.cl"
-        version     = "1.0.6" >>
+        version     = "1.0.7" >>
     <name>evtManager</name>
     <description>EVT manager</description>
     <author>CFK Group</author>
@@ -32,6 +32,7 @@
 <plugin name="cordova-plugin-splashscreen" source="npm" />
 <plugin name="ionic-plugin-keyboard" source="npm" />
 <plugin name="cordova-plugin-geolocation" source="npm" />
+<plugin name="cordova.plugins.diagnostic" source="npm" />
 
 <!-- Define app icon and splashscreen -->
 <platform name="ios">

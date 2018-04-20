@@ -5,7 +5,7 @@ var app = angular.module('evtManager.controllers', []);
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
-    var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
+    var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
     var model = "";
     var uuid = "";
 
@@ -29,6 +29,76 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
         deviceModel: model
       };
     }
+
+    //-------------------------------------------------------------------
+
+    // $scope.checkAvailability = function(){
+    //   cordova.plugins.diagnostic.isGpsLocationAvailable(function(available){
+    //     console.log("GPS está " + (available ? "activado" : "desactivado"));
+    //     if(!available){
+    //       $scope.checkAuthorization();
+    //     }else{
+    //       console.log("GPS listo para usar");
+    //       $scope.login();
+    //     }
+    //   }, function(error){
+    //     console.error("Ocurrió el siguiente error: "+error);
+    //   });
+    // };
+    //
+    // $scope.checkAuthorization = function(){
+    //   cordova.plugins.diagnostic.isLocationAuthorized(function(authorized){
+    //     console.log("Localización está " + (authorized ? "autorizada" : "desautorizada"));
+    //     if(authorized){
+    //       $scope.checkDeviceSetting();
+    //     }else{
+    //       cordova.plugins.diagnostic.requestLocationAuthorization(function(status){
+    //         switch(status){
+    //           case cordova.plugins.diagnostic.permissionStatus.GRANTED:
+    //             console.log("Permiso garantizado");
+    //             $scope.checkDeviceSetting();
+    //             break;
+    //           case cordova.plugins.diagnostic.permissionStatus.DENIED:
+    //             console.log("Permiso denegado");
+    //             // User denied permission
+    //             break;
+    //           case cordova.plugins.diagnostic.permissionStatus.DENIED_ALWAYS:
+    //             console.log("Permiso permanentemente denegado");
+    //             // User denied permission permanently
+    //             break;
+    //         }
+    //       }, function(error){
+    //         console.error(error);
+    //       });
+    //     }
+    //   }, function(error){
+    //     console.error("Ocurrió el siguiente error: "+error);
+    //   });
+    // };
+    //
+    // $scope.checkDeviceSetting = function(){
+    //   cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+    //     console.log("GPS está " + (enabled ? "activado" : "desactivado"));
+    //     if(!enabled){
+    //       cordova.plugins.locationAccuracy.request(function (success){
+    //         console.log("Se solicitó con éxito el modo de ubicación de alta precisión: "+success.message);
+    //       }, function onRequestFailure(error){
+    //         console.error("Error de solicitud de precisión: código de error="+error.code+"; mensaje de error="+error.message);
+    //         if(error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED){
+    //           if(confirm('Error al establecer automáticamente el Modo de ubicación en "Alta precisión". ¿Desea cambiar a la página Configuración de ubicación y hacer esto manualmente?')){
+    //             cordova.plugins.diagnostic.switchToLocationSettings();
+    //           }
+    //         }
+    //       }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+    //     }
+    //   }, function(error){
+    //     console.error("Se produjo el siguiente error: "+error);
+    //   });
+    // };
+    //
+    // $scope.checkAvailability(); // start the check
+
+    //-------------------------------------------------------------------
 
     $scope.login = function () {
       $ionicLoading.show({
@@ -370,7 +440,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
   $scope.openModal = function(index) {
     if (index === 1){
       $scope.modal_1.show();
-      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador+$scope.prospecto.dv_comprador:null;
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador+$scope.prospecto.dv_comprador:'';
       if($scope.prospecto.nombre_comprador == null){
         $scope.prospecto.nombre_comprador = '';
       }else if($scope.prospecto.email == null){
@@ -389,7 +459,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
 
   $scope.closeModal = function(index) {
     if (index === 1){
-      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length-1):null;
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(0, $scope.prospecto.rut_comprador.length-1):'';
       $scope.modal_1.hide();
       $scope.step = 'inicio';
     }else{
@@ -427,10 +497,10 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       showBackdrop: true
     });
 
-    var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined && $scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
-    var rutComprador = ($scope.prospecto.rut_comprador !== undefined && $scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
-    var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.slice(-1):null;
-    var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.slice(-1):null;
+    var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined && $scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.toString().slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== undefined && $scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.toString().slice(-1):null;
+    var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(-1):null;
     var prospectoActualizado = {
       'id' : $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
@@ -533,10 +603,10 @@ app.controller('MiCuadernoNuevoProspectoCtrl', function ($rootScope, $state, $sc
 
   $scope.enviarProspecto = function () {
 
-    var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
-    var rutComprador = ($scope.prospecto.rut_comprador !== undefined) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
-    var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.slice(-1):null;
-    var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.slice(-1):null;
+    var rutProspecto = ($scope.prospecto.rut_prospecto !== undefined) ? $scope.prospecto.rut_prospecto.toString().slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
+    var rutComprador = ($scope.prospecto.rut_comprador !== undefined) ? $scope.prospecto.rut_comprador.toString().slice(0, $scope.prospecto.rut_comprador.length - 1):null;
+    var dvProspecto = (rutProspecto !== null) ? $scope.prospecto.rut_prospecto.toString().slice(-1):null;
+    var dvComprador = (rutComprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(-1):null;
     var nuevoProspecto = {
       'id' : $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
@@ -727,12 +797,17 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
   };
 
   $scope.actualizarProspecto = function () {
-    var rutProspecto = ($scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.slice(0, $scope.prospecto.rut_prospecto.length - 1):null;
-    var rutComprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length - 1):null;
-    var dvProspecto = (rutProspecto !== null) ? rutProspcto.slice(-1):null;
-    var dvComprador = (rutComprador !== null) ? rutComprador.slice(-1):null;
+    $ionicLoading.show({
+      template: 'Actualizando prospecto...',
+      animation: 'fade-in',
+      showBackdrop: true
+    });
+    let rutComprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(0, $scope.prospecto.rut_comprador.length - 1):'';
+    let rutProspecto = ($scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.toString().slice(0, $scope.prospecto.rut_prospecto.length - 1):'';
+    let dvProspecto = ($scope.prospecto.dv_prospecto !== null && $scope.prospecto.rut_prospecto !== null) ? $scope.prospecto.rut_prospecto.toString().slice(-1):'';
+    let dvComprador = ($scope.prospecto.dv_comprador !== null && $scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(-1):'';
     dvComprador = (dvComprador === 'k') ? 'k':dvComprador;
-    var prospectoActualizado = {
+    let prospectoActualizado = {
       'id' : $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
       'rut_prospecto': rutProspecto,
@@ -764,7 +839,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       'productosContratados': $scope.prospecto.productosContratados,
       'empresaServicios': $scope.prospecto.empresaServicios
     };
-    var data = {
+    let data = {
       token: sessionStorage.userToken,
       prospecto: prospectoActualizado,
       accionComercial: $scope.prospecto.accionComercial
@@ -774,7 +849,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       function (response) {
         $rootScope.updateGeoPos('Actualiza prospecto ' + response.id);
         $ionicLoading.hide();
-        var alert = $ionicPopup.alert({
+        let alert = $ionicPopup.alert({
           title: 'Actualizado',
           template: 'Prospecto actualizado correctamente'
         });
@@ -785,7 +860,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       }, function (err) {
         console.log("ERROR: ", err);
         $ionicLoading.hide();
-        var alert = $ionicPopup.alert({
+        let alert = $ionicPopup.alert({
           title: 'Ups!',
           template: 'Algo ha pasado, intenta de nuevo más tarde.'
         });
@@ -840,7 +915,8 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       $scope.modal_3.show();
     }else {
       $scope.modal_4.show();
-      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador+$scope.prospecto.dv_comprador:null;
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador+$scope.prospecto.dv_comprador:'';
+      $scope.prospecto.dv_comprador = ($scope.prospecto.dv_comprador !== null) ? $scope.prospecto.dv_comprador: '';
     }
   };
 
@@ -854,7 +930,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       $scope.modal_3.hide();
     }else {
       $scope.modal_4.hide();
-      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.slice(0, $scope.prospecto.rut_comprador.length-1):null;
+      $scope.prospecto.rut_comprador = ($scope.prospecto.rut_comprador !== null) ? $scope.prospecto.rut_comprador.toString().slice(0, $scope.prospecto.rut_comprador.length-1):null;
     }
   };
 
