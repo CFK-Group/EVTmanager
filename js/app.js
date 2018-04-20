@@ -209,7 +209,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
   $urlRouterProvider.otherwise('login');
 })
 
-.run(function ($state, $ionicConfig, $rootScope, geoPos, $cordovaGeolocation, apiConnection) {
+.run(function ($state, $ionicConfig, $rootScope, $cordovaGeolocation, apiConnection) {
   $ionicConfig.tabs.position('bottom');
   $rootScope.comunas = [
     // comunas RM

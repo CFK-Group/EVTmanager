@@ -140,7 +140,12 @@ app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $r
   });
 });
 
-app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup, $rootScope, apiConnection, $ionicLoading) {
+app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup, $rootScope, apiConnection, $ionicLoading, $interval) {
+  $interval(function(){
+      $rootScope.updateGeoPos('update ubicacion');
+    },
+    1000*60
+  );
   $ionicNavBarDelegate.showBackButton(false);
   $ionicHistory.clearHistory();
   $ionicPlatform.registerBackButtonAction(function () {
@@ -365,7 +370,12 @@ app.controller('VentasPendientesCtrl', function ($scope, $ionicNavBarDelegate, $
   };
 });
 
-app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup, apiConnection, $ionicLoading) {
+app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelegate, $ionicHistory, $ionicPlatform, $ionicPopup, apiConnection, $ionicLoading, $interval) {
+  $interval(function(){
+      $rootScope.updateGeoPos('update ubicacion');
+    },
+    1000*60
+  );
   $ionicNavBarDelegate.showBackButton(false);
   $ionicHistory.clearHistory();
   $ionicPlatform.registerBackButtonAction(function () {

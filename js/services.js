@@ -95,37 +95,4 @@ angular.module('evtManager.services', [])
   return apiConnection
 })
 
-.factory('geoPos', function($interval, apiConnection, $cordovaGeolocation) {
-
-  var geoPos = {
-    getGeoPos: $interval(function () {
-      var posOptions = {
-        timeout: 10000,
-        enableHighAccuracy: false
-      };
-      var model = {
-        latitud: '',
-        longitud: ''
-      };
-      $cordovaGeolocation.getCurrentPosition(posOptions).then(
-        function (position) {
-          model.latitud = (position.coords.latitude).toString();
-          model.longitud = (position.coords.longitude).toString();
-        }
-      );
-      apiConnection.sendGeoPos().save(sessionStorage.userToken, model.latitud, model.longitud, 'update ubicacion').$promise.then(
-        function (response) {
-          // console.log(response);
-        },
-        function (err) {
-          console.log('Error: ',err);
-        }
-      );
-    },
-    1000*3600
-    )
-  };
-
-  return geoPos
-
-});
+;
