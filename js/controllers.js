@@ -807,7 +807,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
     if ($scope.prospecto.dv_prospecto !== null && $scope.prospecto.rut_prospecto !== null){ dvProspecto = $scope.prospecto.rut_prospecto.toString().slice(-1)}else {dvProspecto = ''};
     if ($scope.prospecto.dv_comprador !== null && $scope.prospecto.rut_comprador !== null){ dvComprador = $scope.prospecto.rut_comprador.toString().slice(-1)}else {dvComprador = ''};
     dvComprador = (dvComprador === 'k') ? 'k':dvComprador;
-    let prospectoActualizado = {
+    var prospectoActualizado = {
       'id' : $scope.prospecto.id,
       'nombre': $scope.prospecto.nombre,
       'rut_prospecto': rutProspecto,
@@ -839,7 +839,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       'productosContratados': $scope.prospecto.productosContratados,
       'empresaServicios': $scope.prospecto.empresaServicios
     };
-    let data = {
+    var data = {
       token: sessionStorage.userToken,
       prospecto: prospectoActualizado,
       accionComercial: $scope.prospecto.accionComercial
@@ -849,7 +849,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       function (response) {
         $rootScope.updateGeoPos('Actualiza prospecto ' + response.id);
         $ionicLoading.hide();
-        let alert = $ionicPopup.alert({
+        var alert = $ionicPopup.alert({
           title: 'Actualizado',
           template: 'Prospecto actualizado correctamente'
         });
@@ -860,7 +860,7 @@ app.controller('MiCuadernoHistorialCtrl', function ($scope, $ionicNavBarDelegate
       }, function (err) {
         console.log("ERROR: ", err);
         $ionicLoading.hide();
-        let alert = $ionicPopup.alert({
+        var alert = $ionicPopup.alert({
           title: 'Ups!',
           template: 'Algo ha pasado, intenta de nuevo más tarde.'
         });
