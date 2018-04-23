@@ -5,7 +5,7 @@ var app = angular.module('evtManager.controllers', []);
 app.controller('LoginCtrl', function ($scope, $ionicPlatform, $cordovaDevice, $rootScope, $ionicPopup, $ionicLoading, $state, apiConnection) {
   $ionicPlatform.ready(function () {
     //console.log($cordovaDevice.getDevice());
-    var mode = 'produccion'; //cambiar valor entre develop y produccion según corresponda
+    var mode = 'develop'; //cambiar valor entre develop y produccion según corresponda
     var model = "";
     var uuid = "";
 
@@ -543,7 +543,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       'productosContratados': $scope.prospecto.productosContratados,
       'empresaServicios': $scope.prospecto.empresaServicios
     };
-    var data = {
+    let data = {
       token: sessionStorage.userToken,
       prospecto: prospectoActualizado,
       accionComercial: $scope.prospecto.accionComercial
@@ -555,18 +555,26 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       console.log($rootScope.prospectosDirAsig.indexOf($scope.prospecto));
       $rootScope.prospectosDirAsig.splice($rootScope.prospectosDirAsig.indexOf($scope.prospecto), 1);
       $ionicLoading.hide();
-      var alert = $ionicPopup.alert({
+      let alert = $ionicPopup.alert({
         title: 'Actualizado',
         template: 'Prospecto actualizado correctamente'
       });
       alert.then(function () {
+        apiConnection.getProspectos(sessionStorage.userToken).query().$promise.then(
+          function (response) {
+            $rootScope.prospectos = JSON.parse(JSON.stringify(response));
+            console.log($rootScope.prospectos);
+          }, function (err) {
+            $ionicLoading.hide();
+          }
+        );
         $scope.closeModal(1);
       });
       console.table(response);
     }, function (err) {
       console.log("ERROR: ", err);
       $ionicLoading.hide();
-      var alert = $ionicPopup.alert({
+      let alert = $ionicPopup.alert({
         title: 'Ups!',
         template: 'Algo ha pasado, intenta de nuevo más tarde.'
       });
