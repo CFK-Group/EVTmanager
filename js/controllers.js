@@ -543,7 +543,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       'productosContratados': $scope.prospecto.productosContratados,
       'empresaServicios': $scope.prospecto.empresaServicios
     };
-    let data = {
+    var data = {
       token: sessionStorage.userToken,
       prospecto: prospectoActualizado,
       accionComercial: $scope.prospecto.accionComercial
@@ -555,7 +555,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
       console.log($rootScope.prospectosDirAsig.indexOf($scope.prospecto));
       $rootScope.prospectosDirAsig.splice($rootScope.prospectosDirAsig.indexOf($scope.prospecto), 1);
       $ionicLoading.hide();
-      let alert = $ionicPopup.alert({
+      var alert = $ionicPopup.alert({
         title: 'Actualizado',
         template: 'Prospecto actualizado correctamente'
       });
@@ -574,7 +574,7 @@ app.controller('MiCuadernoDireccionesAsignadasCtrl', function ($scope, $ionicNav
     }, function (err) {
       console.log("ERROR: ", err);
       $ionicLoading.hide();
-      let alert = $ionicPopup.alert({
+      var alert = $ionicPopup.alert({
         title: 'Ups!',
         template: 'Algo ha pasado, intenta de nuevo más tarde.'
       });
