@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="scroll">
-      <div class="item row" collection-repeat="venta in ventas | filter: filter.search" ng-click="chooseModal(1, venta)">
+      <div class="item row" collection-repeat="venta in ventas | filter: filter.search | orderBy: '-update_time'" ng-click="chooseModal(1, venta)">
         <div class="col col-25">{{venta.rut_cliente}}</div>
         <div class="col col-25">{{venta.servicio}}</div>
         <div class="col col-10">{{venta.mes_venta}}</div>
