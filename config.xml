@@ -33,6 +33,7 @@
 <plugin name="ionic-plugin-keyboard" source="npm" />
 <plugin name="cordova-plugin-geolocation" source="npm" />
 <plugin name="cordova.plugins.diagnostic" source="npm" />
+<plugin name="cordova-android-support-gradle-release" source="npm" />
 
 <!-- Define app icon and splashscreen -->
 <platform name="ios">
