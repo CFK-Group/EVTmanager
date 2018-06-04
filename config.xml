@@ -12,8 +12,7 @@
 <preference name="DisallowOverscroll" value="true" />
 <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
 <preference name="android-minSdkVersion" value="14" />
-<preference name="android-compileSdkVersion" value="26" />
-<preference name="android-buildToolsVersion " value="26.0.2" />
+<preference name="android-targetSdkVersion" value="26" />
 
 <!-- Define a specific version of PhoneGap to build into your app. -->
 <preference name="disable-push-notifications" value="1" />
