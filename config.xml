@@ -11,7 +11,8 @@
 <!-- Customize your app and platform with the preference element. -->
 <preference name="DisallowOverscroll" value="true" />
 <!-- android: MIN SDK version supported on the target device. MAX version is blank by default. -->
-<preference name="android-minSdkVersion" value="14" />
+<preference name="android-minSdkVersion" value="17" />
+<preference name="android-targetSdkVersion" value="26" />
 
 <!-- Define a specific version of PhoneGap to build into your app. -->
 <preference name="disable-push-notifications" value="1" />
@@ -33,6 +34,7 @@
 <plugin name="ionic-plugin-keyboard" source="npm" />
 <plugin name="cordova-plugin-geolocation" source="npm" />
 <plugin name="cordova.plugins.diagnostic" source="npm" />
+<plugin name="cordova-android-support-gradle-release" source="npm" />
 
 <!-- Define app icon and splashscreen -->
 <platform name="ios">
