@@ -9,15 +9,15 @@
         </label>
       </div>
       <div class="item row amber">
-        <div class="col col-25">Rut</div>
+        <div class="col col-30">Rut</div>
         <div class="col col-25">Servicios</div>
         <div class="col col-10">Mes</div>
         <div class="col">Estado</div>
       </div>
     </div>
     <div class="scroll">
-      <div class="item row" collection-repeat="venta in ventas | filter: filter.search | orderBy: '-update_time'" ng-click="chooseModal(1, venta)">
-        <div class="col col-25">{{venta.rut_cliente}}</div>
+      <div class="item row" collection-repeat="venta in ventas | filter: filter.search | filter: {tipo_carga: 1} | orderBy: '-update_time'" ng-click="chooseModal(1, venta)">
+        <div class="col col-30">{{venta.rut_cliente}}-{{venta.dv_cliente}}</div>
         <div class="col col-25">{{venta.servicio}}</div>
         <div class="col col-10">{{venta.mes_venta}}</div>
         <div class="col">{{venta.estado_tango}}</div>

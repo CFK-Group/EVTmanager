@@ -7,13 +7,13 @@
         <input type="text" placeholder="Búsqueda: permanencia, mes, rut, servicio, etc." ng-model="filter.search">
       </label>
       <label class="item row amber">
-        <div class="col">Rut</div>
-        <div class="col">Servicio</div>
+        <div class="col col-30">Rut</div>
+        <div class="col col-25">Servicio</div>
         <div class="col">Mes</div>
       </label>
       <label class="item row" collection-repeat="venta in ventas | filter: { tipo_carga:4} | filter: filter.search | orderBy: 'comuna'" ng-click="chooseModal(1, venta)">
-        <div class="col">{{venta.rut_cliente}}</div>
-        <div class="col">{{venta.servicio}}</div>
+        <div class="col col-30">{{venta.rut_cliente}}-{{venta.dv_cliente}}</div>
+        <div class="col col-25">{{venta.servicio}}</div>
         <div class="col">{{venta.mes_venta}}</div>
       </label>
     </div>
