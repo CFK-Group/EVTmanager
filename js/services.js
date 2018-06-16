@@ -49,7 +49,7 @@ angular.module('evtManager.services', [])
   };
 })
 
-.constant("apiURL","http://vendedores.xpass.cl/web/vendedors/")
+.constant("apiURL","http://insert.xpass.cl/web/vendedors/")
 
 .constant("apiGobURL","https://apis.modernizacion.cl/dpa/regiones/")
 
