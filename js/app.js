@@ -1558,7 +1558,7 @@ var app = angular.module('evtManager', ['ionic', 'evtManager.controllers', 'evtM
     longitud: '0'
   };
   $rootScope.updateGeoPos = function (accion) {
-    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    var posOptions = {timeout: 40000, enableHighAccuracy: false};
     $cordovaGeolocation.getCurrentPosition(posOptions).then(
       function (position) {
         model.latitud = position.coords.latitude.toString();

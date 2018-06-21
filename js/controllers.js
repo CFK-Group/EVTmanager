@@ -144,7 +144,7 @@ app.controller('VentasCtrl', function($scope, $ionicNavBarDelegate, $ionicHistor
   $interval(function(){
       $rootScope.updateGeoPos('update ubicacion');
     },
-    1000*60
+    1000*60*3
   );
   $ionicNavBarDelegate.showBackButton(false);
   $ionicHistory.clearHistory();
@@ -374,7 +374,7 @@ app.controller('MiCuadernoCtrl', function($scope, $rootScope, $ionicNavBarDelega
   $interval(function(){
       $rootScope.updateGeoPos('update ubicacion');
     },
-    1000*60
+    1000*60*3
   );
   $ionicNavBarDelegate.showBackButton(false);
   $ionicHistory.clearHistory();
