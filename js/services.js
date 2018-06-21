@@ -61,7 +61,7 @@ angular.module('evtManager.services', [])
     },
 
     getVentas: function (sessionToken) {
-      return $resource(apiURL + "getVentas", {sessionToken: sessionToken});
+      return $resource(apiURL + "getVentas", {sessionToken: sessionToken}, {'query': {isArray: true}});
     },
 
     getProspectos: function (sessionToken) {
