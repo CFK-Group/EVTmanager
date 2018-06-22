@@ -30,7 +30,7 @@
       <!--<a class="item">dv_comprador<span class="item-note">{{prospecto.dv_comprador}}</span></a>-->
       <!--<a class="item">Rut_comprador<span class="item-note">{{prospecto.rut_comprador}}</span></a>-->
       <label class="item item-input">
-        <span class="input-label">Nombre</span>
+        <span class="input-label">Nombre <strong class="red-text">(**)</strong></span>
         <input class="text-right" type="text" ng-model="prospecto.nombre_comprador">
       </label>
       <label class="item item-input">
@@ -42,7 +42,7 @@
         <input class="text-right" type="tel" ng-model="prospecto.fono_contacto_2">
       </label>
       <label class="item item-input">
-        <span class="input-label">Email</span>
+        <span class="input-label">Email <strong class="red-text">(**)</strong></span>
         <input class="text-right" type="email" ng-model="prospecto.email">
       </label>
       <div class="item item-divider">
@@ -85,7 +85,7 @@
       </div>
       <label class="item item-input item-select white">
         <div class="input-label">
-          Empresa
+          Empresa<strong class="red-text">(**)</strong>
         </div>
         <select ng-model="prospecto.empresaServicios">
           <option ng-value="'NINGUNO'">NINGUNO</option>
@@ -101,7 +101,7 @@
       </label>
       <label class="item item-input item-select white">
         <div class="input-label">
-          Productos que tiene
+          Productos que tiene<strong class="red-text">(**)</strong>
         </div>
         <select ng-model="prospecto.productosContratados">
           <option ng-value="'NINGUNO'">NINGUNO</option>
