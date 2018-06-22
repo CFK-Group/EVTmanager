@@ -60,3 +60,7 @@ div.loading.row{
 input.text-right{
   padding-right: 16px !important;
 }
+
+ion-item#dir-asig{
+  min-height: 40px;
+}
