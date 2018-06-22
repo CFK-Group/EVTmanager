@@ -7,14 +7,14 @@
     </label>
     <ion-list>
       <ion-item class="row amber">
-        <div class="col">Comuna</div>
-        <div class="col">Calle</div>
-        <div class="col">Número</div>
+        <div class="col col-33">Comuna</div>
+        <div class="col col-33">Calle</div>
+        <div class="col col-33">Número</div>
       </ion-item>
-      <ion-item class="row item-text-wrap" collection-repeat="prospecto in prospectos | filter: {tipo_contacto: 'Toca puerta y si hizo contacto'} | filter: filter.search | orderBy: '-update_time'" ng-click="chooseModal(4, prospecto)">
-        <div class="col">{{prospecto.comuna}}</div>
-        <div class="col">{{prospecto.calle}}</div>
-        <div class="col">{{prospecto.numero}}</div>
+      <ion-item class="row item-text-wrap" ng-repeat="prospecto in prospectos | filter: {tipo_contacto: 'Toca puerta y si hizo contacto'} | filter: filter.search | orderBy: '-update_time'" ng-click="chooseModal(4, prospecto)">
+        <div class="col col-33">{{prospecto.comuna}}</div>
+        <div class="col col-33">{{prospecto.calle}}</div>
+        <div class="col col-33">{{prospecto.numero}}</div>
       </ion-item>
     </ion-list>
   </ion-content>
